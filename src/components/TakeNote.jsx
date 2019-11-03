@@ -54,7 +54,6 @@ export class TakeNote extends Component {
                             placeholder="Title"
                             readOnly="true"
                             className={this.classes.textField}
-                            underline="none"
                             margin="normal"
                             InputProps={{
                                 disableUnderline: true,
@@ -65,7 +64,6 @@ export class TakeNote extends Component {
                             placeholder="Description"
                             readOnly="true"
                             className={this.classes.textField}
-                            underline="none"
                             margin="normal"
                             InputProps={{
                                 disableUnderline: true,

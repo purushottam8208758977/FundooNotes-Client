@@ -28,6 +28,7 @@ export function forgetPassword(forgetData) {
     return axios.post(url + "/forgetPassword", forgetData)
 }
 
+//post requires all the three arguments to be filled
 export function resetPassword(resetData, token) {
     console.log("\n\n\tIn services for reset password API", resetData, token)
     return axios.post(url + "/resetPassword", resetData, {
@@ -37,9 +38,10 @@ export function resetPassword(resetData, token) {
     })
 }
 
-export function allNotes(allNotesData){
-    console.log("\n\n\tIn services for all notes API", allNotesData, authenticationToken)
-    return axios.get(url + "/allNotes", allNotesData, {
+//post requires all the two arguments to be filled
+export function allNotes(){
+    console.log("\n\n\tIn services for all notes API" , authenticationToken)
+    return axios.get(url + "/allNotes",  {
         headers: {
             token: authenticationToken
         }
