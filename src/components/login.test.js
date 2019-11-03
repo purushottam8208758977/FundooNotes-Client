@@ -14,10 +14,12 @@ describe("checking component",()=>{
 
     it("Checking the presence of whole component",()=>{
         component.debug() // passes only when the component exists
-        console.log("\n\n\ttest result--> ",component.debug())
+        component.contains(  <div className="SignIn"> <br /> Sign in </div>)
+    
+        //console.log("\n\n\ttest result--> ",component.debug())
     })
 
-    it("sdds",()=>{
-        component.first()
-    })
+    // it("sdds",()=>{
+    //     component.first()
+    // })
 })

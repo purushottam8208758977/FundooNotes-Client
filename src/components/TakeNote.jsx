@@ -45,7 +45,11 @@ export class TakeNote extends Component {
           id="standard-basic"
           placeholder="Take a note ..."
           className={this.classes.textField}
+          underline="none"
           margin="normal"
+          InputProps={{
+            disableUnderline: true,
+           }}
         />
             </Card>
         )
