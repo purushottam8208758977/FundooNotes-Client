@@ -37,9 +37,9 @@ export function resetPassword(resetData, token) {
     })
 }
 
-export function allNotes(){
-    console.log("\n\n\tIn services for all notes API", resetData, token)
-    return axios.get(url + "/allNotes", resetData, {
+export function allNotes(allNotesData){
+    console.log("\n\n\tIn services for all notes API", allNotesData, authenticationToken)
+    return axios.get(url + "/allNotes", allNotesData, {
         headers: {
             token: authenticationToken
         }
