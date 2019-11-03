@@ -105,18 +105,18 @@ export class Login extends Component {
 
         login(loginObject).then((responseReceived) => {
             if (responseReceived) {
-                console.log("\n\n\t Response ", responseReceived)
                 if (responseReceived.data.success) {
                     toaster.notify(responseReceived.data.message)
                     this.toDashboard()
+                    localStorage.setItem('token',responseReceived.data.data.token)
                 }
             }
             else {
                 toaster.notify("SERVER NOT CONNECTED !")
             }
         }).catch((error) => {
-            console.log("--->", error.response.data.message)
-            toaster.notify(error.response.data.message)
+            //console.log("--->", error.response.data.message)
+            //toaster.notify(error.response.data.message)
         })
     }
     collectEmail = (event) => {

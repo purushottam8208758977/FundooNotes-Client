@@ -1,5 +1,6 @@
 import axios from 'axios'
-const url = "http://localhost:4000"
+const url = "http://localhost:3000"
+const authenticationToken = localStorage.getItem('token')
 
 export function registration(registrationData) {
 
@@ -23,15 +24,25 @@ export function emailVerification(verificationToken) { // blank object is for da
 }
 
 export function forgetPassword(forgetData) {
-    console.log("\n\n\tIN services for forget password API", forgetData)
+    console.log("\n\n\tIn services for forget password API", forgetData)
     return axios.post(url + "/forgetPassword", forgetData)
 }
 
 export function resetPassword(resetData, token) {
-    console.log("\n\n\tIN services for reset password API", resetData, token)
+    console.log("\n\n\tIn services for reset password API", resetData, token)
     return axios.post(url + "/resetPassword", resetData, {
         headers: {
             token: token
         }
     })
+}
+
+export function allNotes(){
+    console.log("\n\n\tIn services for all notes API", resetData, token)
+    return axios.get(url + "/allNotes", resetData, {
+        headers: {
+            token: authenticationToken
+        }
+    })
+
 }
