@@ -13,7 +13,7 @@ describe("checking component",()=>{
     let component = mount(<Login/>)
 
     it("Checking the presence of whole component",()=>{
-        component.debug()
+        component.debug() // passes only when the component exists
         console.log("\n\n\ttest result--> ",component.debug())
     })
 

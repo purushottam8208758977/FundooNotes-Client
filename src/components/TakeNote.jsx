@@ -4,9 +4,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import '../Dashboard.css'
+import TextField from '@material-ui/core/TextField';
 
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme =>({
     card: {
         minWidth: 275,
     },
@@ -21,7 +22,16 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
-});
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap',
+      },
+      textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+      },
+}));
 
 export class TakeNote extends Component {
     constructor() {
@@ -31,10 +41,12 @@ export class TakeNote extends Component {
     render() {
         return (
             <Card id="TakeN" className={this.classes.card}>
-                <input>
-                    label="Read Only"
-              defaultValue="Hello World"
-                </input>
+               <TextField
+          id="standard-basic"
+          placeholder="Take a note ..."
+          className={this.classes.textField}
+          margin="normal"
+        />
             </Card>
         )
     }
