@@ -34,7 +34,7 @@ export class Display extends Component {
             )
         })
         return (
-            <div>
+            <div id="Content">
                  {this.displayContent}
             </div>
         )
