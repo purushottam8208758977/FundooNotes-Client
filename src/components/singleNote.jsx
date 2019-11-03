@@ -10,9 +10,12 @@ export class SingleNote extends Component {
     render() {
         return (
             <div>
-                <Card>
+                <div id="NotesReceived">
+                <Card >
                    {this.props.data.title }
+                   {this.props.data.description}
                 </Card>
+                </div>
             </div>
 
         )
