@@ -32,6 +32,7 @@ import MailIcon from '@material-ui/icons/Mail';
 
 //child components
 import {TakeNote} from './TakeNote'
+
 /**
  * @description - This prop is a inbuilt prop we are modifying it
  */

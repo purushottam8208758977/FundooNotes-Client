@@ -2,12 +2,11 @@
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
 import '../Dashboard.css'
 import TextField from '@material-ui/core/TextField';
+import {IconsList} from './iconsList'
 
-
-const useStyles = makeStyles(theme =>({
+const useStyles = makeStyles(theme => ({
     card: {
         minWidth: 275,
     },
@@ -25,33 +24,74 @@ const useStyles = makeStyles(theme =>({
     container: {
         display: 'flex',
         flexWrap: 'wrap',
-      },
-      textField: {
+    },
+    textField: {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
         width: 200,
-      },
+    },
 }));
 
 export class TakeNote extends Component {
     constructor() {
         super()
+        this.state = {
+            toggle: false,
+        }
         this.classes = useStyles.bind(this);
+    }
+
+    handleTakeNote = () => {
+        this.setState({ toggle: true })
     }
     render() {
         return (
-            <Card id="TakeN" className={this.classes.card}>
-               <TextField
-          id="standard-basic"
-          placeholder="Take a note ..."
-          className={this.classes.textField}
-          underline="none"
-          margin="normal"
-          InputProps={{
-            disableUnderline: true,
-           }}
-        />
-            </Card>
+            <div>
+                {this.state.toggle ?
+                    <Card id="TakeN" className={this.classes.card}>
+                        <TextField
+                            id="standard-basic"
+                            placeholder="Title"
+                            readOnly="true"
+                            className={this.classes.textField}
+                            underline="none"
+                            margin="normal"
+                            InputProps={{
+                                disableUnderline: true,
+                            }}
+                        />
+                        <TextField
+                            id="standard-basic"
+                            placeholder="Description"
+                            readOnly="true"
+                            className={this.classes.textField}
+                            underline="none"
+                            margin="normal"
+                            InputProps={{
+                                disableUnderline: true,
+                            }}
+                        />
+                        <IconsList />
+                    </Card>
+                    
+                    :
+                    <Card id="TakeN" onClick={this.handleTakeNote} className={this.classes.card}>
+                        <TextField
+                            id="standard-basic"
+                            placeholder="Take a note ..."
+                            readOnly="true"
+                            className={this.classes.textField}
+                            underline="none"
+                            margin="normal"
+                            InputProps={{
+                                disableUnderline: true,
+                            }}
+                        />
+                    </Card>
+                }
+
+            </div>
         )
+
     }
 }
