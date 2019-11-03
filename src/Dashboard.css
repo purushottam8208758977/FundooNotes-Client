@@ -1,0 +1,87 @@
+.MainDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.View 
+{
+    position: absolute;
+    top:32%;
+    right: 15%;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+#TakeN
+{
+    margin-top: 20%;
+    width:300px;
+}
+.MenuI{
+position:absolute;
+top:35%;
+left:2%
+}:hover{
+color :#5f6368
+}
+
+
+.View :hover,
+.View :active{
+color:  red;
+}
+
+.KeepIcon{
+  position: absolute;
+  width: 35px;
+  height: 33px;
+  left:5.2%;
+  top:27%;
+  bottom: 10%;
+  cursor: pointer
+}
+.DrawerText{
+    padding-left: 32px;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+   font-size: 13px;
+   font-weight: 400;
+   color: rgb(32, 33, 36)
+}
+
+
+
+.Keep{
+    position: absolute;
+    left: 8.8%;
+    top:31%;
+    font-family: "Product Sans", Arial, sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    color: #5f6368;
+    line-height: 24px;
+    cursor: pointer
+    
+}
+
+.AlignMent{
+    left: 15%;
+}
+
+.CardL{
+    position: absolute;
+    width: 100%;
+    height: 7.6%
+}
+
+
+@media(max-width :600px){
+    .CardL{
+        margin-top: auto;
+        width: 100%;
+        height: 500px
+    }
+    .SearchBar{
+        display: none;
+    }
+}
