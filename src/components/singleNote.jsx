@@ -12,7 +12,7 @@ export class SingleNote extends Component {
             <div>
                 <div id="NotesReceived">
                 <Card >
-                   {this.props.data.title }
+                   {this.props.data.title }<br/>
                    {this.props.data.description}
                 </Card>
                 </div>
