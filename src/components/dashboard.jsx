@@ -217,6 +217,7 @@ export class Dashboard extends Component {
     }
 
     NoteDisplay=()=>{
+        //3
         this.CreatingNoteInstance.current.allNotesDisplaying()
     }
 
@@ -255,9 +256,9 @@ export class Dashboard extends Component {
                     </Card>
                    <DrawerMade openingDrawer={this.state.open}/>
                     <div id="Two">
-                        {/* Taking note component will render here  */}
+                        {/* Taking note component will render here 2  */}
                         <TakeNote refresh={this.NoteDisplay} />
-                        {/* All note will be displayed here using the display component */}
+                        {/* All note will be displayed here using the display component 3*/}
                         <Display ref={this.CreatingNoteInstance}/>
                     </div>
                 </MuiThemeProvider></div>

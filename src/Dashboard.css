@@ -50,6 +50,16 @@
     justify-content: space-between;
 }
 
+#ForLabel{
+    margin-top:12px;
+    margin-left:-192px;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 520;
+    line-height: 16px;
+    color:rgb(95, 99, 104)
+}
+
 #NoteDimensions{
     width: 240px;
     min-height: 100px;

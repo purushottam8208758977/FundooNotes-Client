@@ -82,7 +82,7 @@ export class TakeNote extends Component {
         createNote(noteObject).then((responseReceived)=>{
             if (responseReceived) {
                 if (responseReceived.data.success) {
-                    this.props.refresh()
+                    this.props.refresh()        //1
                     toaster.notify(responseReceived.data.message)
                 }
             }
