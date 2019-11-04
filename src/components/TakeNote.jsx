@@ -46,7 +46,7 @@ export class TakeNote extends Component {
     }
     render() {
         return (
-            <div>
+            <div id="NoteDiv">
                 {this.state.toggle ?
                     <Card id="TakeN" className={this.classes.card}>
                         <TextField
@@ -70,6 +70,7 @@ export class TakeNote extends Component {
                             }}
                         />
                         <IconsList />
+                        {/* <Button /> */}
                     </Card>
                     
                     :

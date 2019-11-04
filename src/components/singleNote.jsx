@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-
 
 export class SingleNote extends Component {
     constructor() {
@@ -9,14 +7,14 @@ export class SingleNote extends Component {
     }
     render() {
         return (
-            <div>
+            
                 <div id="NotesReceived">
-                <Card >
+                <Card id="NoteDimensions">
                    {this.props.data.title }<br/>
                    {this.props.data.description}
                 </Card>
                 </div>
-            </div>
+            
 
         )
     }

@@ -1,6 +1,6 @@
 .MainDiv{
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     justify-content: center;
 }
 
@@ -13,20 +13,37 @@
     color: white;
     text-decoration: none;
 }
+#NoteDiv{
+    height:100%;
+    display: flex;
+    justify-content: center;
+}
 #Icons{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-
+#Two{
+    display: flex;
+    flex-direction: column;
+}
+#Content{
+   
+    display: flex;
+}
 
 #NotesReceived{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 80px;
+    padding-right: 3%;
 }
 
+#NoteDimensions{
+    width: 240px;
+    min-height: 100px;
+}
 #TakeN
 {
     margin-top: 16.5%;
