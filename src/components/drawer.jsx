@@ -1,3 +1,14 @@
+/*************************************************************************
+ * Execution        : 1. default node       cmd> 
+ * 
+ * Purpose          : Contains the drawer which will br drawn out to the right ... this drawer acts as
+ *                    the child to the drawer component.
+ * @author          : Purushottam
+ * @version         : 1.0
+ * @since           : 3-11-2019
+ * 
+ **************************************************************************/
+
 import React, { Component } from 'react'
 import Drawer from '@material-ui/core/Drawer';
 import { makeStyles, useTheme } from '@material-ui/core/styles';

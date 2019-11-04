@@ -99,7 +99,7 @@ export class TakeNote extends Component {
         return (
             <div id="NoteDiv">
                 {this.state.toggle ?
-                    <Card id="TakeN" className={this.classes.card}>
+                    <Card id="TakeN2" className={this.classes.card}>
                         <TextField
                             id="standard-basic"
                             placeholder="Title"

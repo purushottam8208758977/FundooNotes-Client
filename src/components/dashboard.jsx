@@ -255,7 +255,9 @@ export class Dashboard extends Component {
                     </Card>
                    <DrawerMade openingDrawer={this.state.open}/>
                     <div id="Two">
+                        {/* Taking note component will render here  */}
                         <TakeNote refresh={this.NoteDisplay} />
+                        {/* All note will be displayed here using the display component */}
                         <Display ref={this.CreatingNoteInstance}/>
                     </div>
                 </MuiThemeProvider></div>
