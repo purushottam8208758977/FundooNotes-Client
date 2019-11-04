@@ -19,14 +19,14 @@ export class Display extends Component {
      */
     componentDidMount() {
         allNotes().then((responseReceived) => {
-            console.log("\n\n\tResponse received ---->", responseReceived.data.data)
+            //console.log("\n\n\tResponse received ---->", responseReceived.data.data)
             this.setState({ notes: responseReceived.data.data })
-            console.log("-->",this.notes)
+            //console.log("-->",this.notes)
         })
     }
     render() {
          this.displayContent = this.state.notes.map((data, index) => {
-            console.log("\n\n\tdata of note -->",data)
+            //console.log("\n\n\tdata of note -->",data)
             return(
                 <SingleNote key={index}
                             data={data}

@@ -89,6 +89,9 @@ export class TakeNote extends Component {
             else {
                 toaster.notify("SERVER NOT CONNECTED !")
             }
+        }).catch((error)=>{
+            // console.log(error.response.data.message)
+            toaster.notify(error.response.data.message)
         })
 
     }
