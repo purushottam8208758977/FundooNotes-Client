@@ -18,6 +18,9 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
 
+//child componenet
+import {IndividualLabel} from './individualLabel'
+
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
     container: {
@@ -101,13 +104,31 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export class DrawerMade extends Component {
-    mapLabels
+    mappingLabels
     constructor() {
         super()
+        this.state={
+            labels:[]
+        }
         this.classes = useStyles.bind(this);
     }
-    render() {
 
+    componentWillMount(){
+        this.loadLabels()
+    }
+
+    loadLabels=()=>{
+
+    }
+
+    render() {
+        this.mappingLabels=this.state.labels.map((data,index)=>{
+            return(
+                <IndividualLabel key={index}
+                            data={data}
+                            />
+            )
+        })
         return (
             <div>
                 <Drawer
@@ -135,10 +156,8 @@ export class DrawerMade extends Component {
                         <Divider/><br/>
                         <label id="ForLabel">LABELS</label><br/>
 
-                        <ListItem button key="Labels">
-                            <ListItemIcon>
-                            </ListItemIcon>
-                        </ListItem>
+                        {this.mappingLabels}
+
                         <Divider/>
                     </List>
                 </Drawer>

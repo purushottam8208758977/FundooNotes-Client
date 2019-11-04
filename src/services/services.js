@@ -57,3 +57,7 @@ export function createNote(creationData) {
         }
     })
 }
+
+export function createLabel(labelData){
+    
+}
