@@ -29,9 +29,10 @@
     flex-direction: column;
 }
 #Content{
-   
     display: flex;
-    margin-left: 90px;
+    margin-left: 91px;
+    width: 792px;
+    flex-wrap: wrap;
 }
 
 #NotesReceived{

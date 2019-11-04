@@ -51,9 +51,9 @@ export function allNotes(){
 
 export function createNote(creationData) {
     console.log("\n\n\tIn services for creating a note API", creationData,authenticationToken)
-    return axios.post(url + "/resetPassword", resetData, {
+    return axios.post(url + "/createNote", creationData, {
         headers: {
-            token: token
+            token: authenticationToken
         }
     })
 }

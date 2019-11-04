@@ -276,7 +276,6 @@ export class Dashboard extends Component {
                     </Drawer>
                     <div id="Two">
                     <TakeNote />
-
                     <Display /> 
                     </div>
                 </MuiThemeProvider></div>

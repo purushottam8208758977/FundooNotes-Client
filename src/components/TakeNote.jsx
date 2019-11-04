@@ -6,6 +6,12 @@ import '../Dashboard.css'
 import TextField from '@material-ui/core/TextField';
 import { IconsList } from './iconsList'
 import Button from '@material-ui/core/Button';
+import toaster from "toasted-notes";
+import "toasted-notes/src/styles.css";
+
+
+//hitting api
+import {createNote} from '../services/services'
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -53,20 +59,38 @@ export class TakeNote extends Component {
         this.setState({
             title: fetchedTitle
         })
-        console.log("\n\nTitle-->", title);
+        console.log("\n\nTitle-->", fetchedTitle);
 
     }
 
-    fetchingDescription=()=>{
+    fetchingDescription=(event)=>{
         let fetchedDescription = event.target.value
         this.setState({
             description: fetchedDescription
         })
-        console.log("\n\nDescription-->", description);
+        console.log("\n\nDescription-->", fetchedDescription);
     }
-    
+
     creatingNote = () => {
         console.log("\n\nCreating a note ... data to be sent -->")
+
+        let noteObject={}
+        noteObject.title=this.state.title
+        noteObject.description=this.state.description
+
+        console.log("\n\n\tObject ready to be sent --->", noteObject)
+
+        createNote(noteObject).then((responseReceived)=>{
+            if (responseReceived) {
+                if (responseReceived.data.success) {
+                    toaster.notify(responseReceived.data.message)
+                }
+            }
+            else {
+                toaster.notify("SERVER NOT CONNECTED !")
+            }
+        })
+
     }
     render() {
         return (
@@ -98,7 +122,7 @@ export class TakeNote extends Component {
                             }}
                         />
                         <div id="IconsList"> <IconsList />
-                            <Button >close</Button></div>
+                            <Button onClick={this.creatingNote} >close</Button></div>
                     </Card>
 
                     :
