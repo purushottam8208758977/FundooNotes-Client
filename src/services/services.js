@@ -58,6 +58,11 @@ export function createNote(creationData) {
     })
 }
 
-export function createLabel(labelData){
-    
+export function allLabels(){
+    console.log("\n\n\tIn services for loading all labels API", authenticationToken)
+    return axios.get(url + "/allLabels",  {
+        headers: {
+            token: authenticationToken
+        }
+    })
 }

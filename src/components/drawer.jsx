@@ -18,6 +18,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import List from '@material-ui/core/List';
 
+import {allLabels} from '../services/services'
+
 //child componenet
 import {IndividualLabel} from './individualLabel'
 
@@ -119,6 +121,11 @@ export class DrawerMade extends Component {
 
     loadLabels=()=>{
 
+        allLabels().then((responseReceived) => {
+            console.log("\n\n\tResponse received ---->", responseReceived.data.data)
+            this.setState({ labels: responseReceived.data.data })
+            console.log("-->",this.labels)
+        })
     }
 
     render() {
