@@ -18,6 +18,10 @@ export class Display extends Component {
      * @description- This method is invoked just after the component is invoked
      */
     componentDidMount() {
+        this.allNotesDisplaying()
+    }
+
+    allNotesDisplaying=()=>{
         allNotes().then((responseReceived) => {
             //console.log("\n\n\tResponse received ---->", responseReceived.data.data)
             this.setState({ notes: responseReceived.data.data })

@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 import toaster from "toasted-notes";
 import "toasted-notes/src/styles.css";
 
-
 //hitting api
 import {createNote} from '../services/services'
 
@@ -83,6 +82,7 @@ export class TakeNote extends Component {
         createNote(noteObject).then((responseReceived)=>{
             if (responseReceived) {
                 if (responseReceived.data.success) {
+                    this.props.refresh()
                     toaster.notify(responseReceived.data.message)
                 }
             }
@@ -125,7 +125,7 @@ export class TakeNote extends Component {
                             }}
                         />
                         <div id="IconsList"> <IconsList />
-                            <Button onClick={this.creatingNote} >close</Button></div>
+                            <Button onClick={this.creatingNote} ><b>close</b></Button></div>
                     </Card>
 
                     :

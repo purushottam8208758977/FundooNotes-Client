@@ -8,7 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import KeepIcon from '../assets/keep.jpg'
-import bulb from '../assets/bulb.png'
 import '../Dashboard.css'
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
@@ -22,8 +21,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 //child components
-import {TakeNote} from './TakeNote'
-import {Display} from './display'
+import { TakeNote } from './TakeNote'
+import { Display } from './display'
 /**
  * @description - This prop is a inbuilt prop we are modifying it
  */
@@ -93,7 +92,7 @@ const theme = createMuiTheme({
             "paperAnchorDockedLeft": {
                 top: "8%",
                 width: "22%", // width of the drawer
-                borderRight:" 0px solid" // 0px vanishes the border of the drawer
+                borderRight: " 0px solid" // 0px vanishes the border of the drawer
             }
         }
 
@@ -201,6 +200,8 @@ export class Dashboard extends Component {
         }
         this.classes = useStyles.bind(this);
 
+        //creating a reference
+        this.CreatingNoteInstance = React.createRef()
     }
     handleDrawerOpen = () => {
         //  this.setOpen(true);
@@ -218,7 +219,10 @@ export class Dashboard extends Component {
         this.setState({ toggle: false })
     }
 
-    
+    NoteDisplay=()=>{
+        this.CreatingNoteInstance.current.allNotesDisplaying()
+    }
+
     render() {
         return (
             <div className="MainDiv">
@@ -275,8 +279,8 @@ export class Dashboard extends Component {
                         </ListItem>
                     </Drawer>
                     <div id="Two">
-                    <TakeNote />
-                    <Display /> 
+                        <TakeNote refresh={this.NoteDisplay} />
+                        <Display ref={this.CreatingNoteInstance}/>
                     </div>
                 </MuiThemeProvider></div>
         )
