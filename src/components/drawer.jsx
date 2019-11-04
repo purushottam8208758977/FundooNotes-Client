@@ -1,13 +1,97 @@
 import React, { Component } from 'react'
 import Drawer from '@material-ui/core/Drawer';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
+const drawerWidth = 240;
+const useStyles = makeStyles(theme => ({
+    container: {
+        display: 'flex',
+        flexWrap: 'wrap'
+    },
+    textField: {
+        height: "20px",
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+    }, dense: {
+        marginTop: theme.spacing(2),
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
+    avatar: {
+        margin: 10,
+    },
+    
+    list: {
+        width: 250,
+    },
+    fullList: {
+        width: 'auto',
+    },
+    root: {
+        display: 'flex',
+    },
+    appBar: {
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+    },
+    appBarShift: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        transition: theme.transitions.create(['margin', 'width'], {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    hide: {
+        display: 'none',
+    },
+    drawer: {
+        width: drawerWidth,
+        flexShrink: 0,
+    },
+    drawerPaper: {
+        width: drawerWidth,
+    },
+    drawerHeader: {
+        display: 'flex',
+        alignItems: 'center',
+        padding: theme.spacing(0, 1),
+        ...theme.mixins.toolbar,
+        justifyContent: 'flex-end',
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.leavingScreen,
+        }),
+        marginLeft: -drawerWidth,
+    },
+    contentShift: {
+        transition: theme.transitions.create('margin', {
+            easing: theme.transitions.easing.easeOut,
+            duration: theme.transitions.duration.enteringScreen,
+        }),
+        marginLeft: 0,
+    },
+
+}));
+
 export class DrawerMade extends Component{
     constructor(){
         super()
+        this.classes = useStyles.bind(this);
     }
     render(){
         return(
@@ -16,7 +100,7 @@ export class DrawerMade extends Component{
                         className={this.classes.drawer}
                         variant="persistent"
                         anchor="left"
-                        open={this.state.open} //opens only when rhs true
+                        open={this.props.openingDrawer} //opens only when rhs true
                         classes={{
                             paper: this.classes.drawerPaper,
                         }}

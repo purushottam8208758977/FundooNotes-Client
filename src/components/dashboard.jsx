@@ -97,6 +97,7 @@ const theme = createMuiTheme({
 
 const drawerWidth = 240;
 
+
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
@@ -252,7 +253,7 @@ export class Dashboard extends Component {
                             <Avatar className={this.classes.orangeAvatar}>N</Avatar>
                         </Grid></div>
                     </Card>
-                   <Drawer />
+                   <DrawerMade openingDrawer={this.state.open}/>
                     <div id="Two">
                         <TakeNote refresh={this.NoteDisplay} />
                         <Display ref={this.CreatingNoteInstance}/>
