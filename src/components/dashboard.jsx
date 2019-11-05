@@ -18,7 +18,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 //child components
 import { TakeNote } from './TakeNote'
 import { Display } from './display'
-import {DrawerMade} from './drawer'
+import { DrawerMade } from './drawer'
 /**
  * @description - This prop is a inbuilt prop we are modifying it
  */
@@ -193,7 +193,8 @@ export class Dashboard extends Component {
         super()
         this.state = {
             toggle: false,
-            open: false
+            open: false,
+            displayNotes:false
         }
         this.classes = useStyles.bind(this);
 
@@ -216,18 +217,21 @@ export class Dashboard extends Component {
         this.setState({ toggle: false })
     }
 
-    NoteDisplay=()=>{
+    NoteDisplay = () => {
         //3
         this.CreatingNoteInstance.current.allNotesDisplaying()
     }
 
+    displayNotes = (booleanValue) => {//whether to display notes or not
+        this.setState({displayNotes:booleanValue})
+    }
     render() {
         return (
             <div className="MainDiv">
                 <MuiThemeProvider theme={theme}>
                     <Card className="CardL">
                         {this.state.toggle ?
-                            <img className="View" src={require('../assets/grid.svg') } alt="grid" onClick={this.spoilView} />
+                            <img className="View" src={require('../assets/grid.svg')} alt="grid" onClick={this.spoilView} />
                             :
                             <img className="View" src={require('../assets/otherGrid.svg')} alt="grid" onClick={this.handleView} />
                         }
@@ -254,12 +258,13 @@ export class Dashboard extends Component {
                             <Avatar className={this.classes.orangeAvatar}>N</Avatar>
                         </Grid></div>
                     </Card>
-                   <DrawerMade openingDrawer={this.state.open}/>
+                    <DrawerMade openingDrawer={this.state.open} notesArray={this.displayNotes}
+                     />
                     <div id="Two">
                         {/* Taking note component will render here 2  */}
                         <TakeNote refresh={this.NoteDisplay} />
                         {/* All note will be displayed here using the display component 3*/}
-                        <Display ref={this.CreatingNoteInstance}/>
+                        <Display ref={this.CreatingNoteInstance} />
                     </div>
                 </MuiThemeProvider></div>
         )
