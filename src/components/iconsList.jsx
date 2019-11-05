@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
+import {updateNote} from '../services/services'
 
 const noteMenuItems = ['Delete Note', 'Add Label']
 
@@ -25,9 +26,15 @@ export class IconsList extends Component {
     }
 
     handleNoteEvents = (event, index) => {
-        if(index==0){
-            //starting trashing process
+        if(index===0){
+            //initiating trashing process
+            let deletionObject={}
+            deletionObject.noteId=this.props.individualNoteData._id
+            deletionObject.updating={trash:true}
             
+            updateNote(deletionObject).then((responseReceived)=>{
+                console.log("\n\n\tIcons list --> trash response--->",responseReceived)
+            })
         }
     }
     render() {
@@ -45,10 +52,10 @@ export class IconsList extends Component {
                     open={open}
                     onClose={this.closeMenu}
                 >
-                    {noteMenuItems.map((option, index) => (
+                    {noteMenuItems.map((choice, index) => (
                         <MenuItem onClick={(event) => this.handleNoteEvents(event, index)} key={index}
                             id="dropMenu">
-                            {option}
+                            {choice}
                         </MenuItem>
                     ))}
                 </Menu>

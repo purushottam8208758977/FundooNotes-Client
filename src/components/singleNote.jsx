@@ -10,7 +10,7 @@ export class SingleNote extends Component {
                 <Card id="NoteDimensions">
                    {this.props.data.title }<br/>
                    {this.props.data.description}
-                   <IconsList operationOnNotes={this.props.data} />
+                   <IconsList individualNoteData={this.props.data} />
                 </Card>
                 </div>
             

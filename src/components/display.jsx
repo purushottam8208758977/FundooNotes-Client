@@ -14,7 +14,6 @@ export class Display extends Component {
             reminders: [],
             trash: []
         }
-
     }
 
     /**

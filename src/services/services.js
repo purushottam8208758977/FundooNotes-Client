@@ -95,3 +95,12 @@ export function allLabels(){
         }
     })
 }
+
+export function updateNote(updationData){
+    console.log("\n\n\tIn services for updating note API", authenticationToken)
+    return axios.post(url + "/updateNote",updationData,  {
+        headers: {
+            token: authenticationToken
+        }
+    })
+}
