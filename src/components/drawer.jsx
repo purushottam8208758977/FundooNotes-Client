@@ -120,7 +120,6 @@ export class DrawerMade extends Component {
     }
 
     loadLabels=()=>{
-
         allLabels().then((responseReceived) => {
             console.log("\n\n\tResponse received ---->", responseReceived.data.data)
             this.setState({ labels: responseReceived.data.data })
@@ -128,6 +127,9 @@ export class DrawerMade extends Component {
         })
     }
 
+    loadNotes=()=>{
+        
+    }
     render() {
         this.mappingLabels=this.state.labels.map((data,index)=>{
             return(

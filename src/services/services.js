@@ -49,6 +49,35 @@ export function allNotes(){
 
 }
 
+export function allArchives(){
+    console.log("\n\n\tIn services for all archives API" , authenticationToken)
+    return axios.get(url + "/allArchives",  {
+        headers: {
+            token: authenticationToken
+        }
+    })
+
+}
+
+export function allReminders(){
+    console.log("\n\n\tIn services for all Reminders notes API" , authenticationToken)
+    return axios.get(url + "/allReminders",  {
+        headers: {
+            token: authenticationToken
+        }
+    })
+}
+
+export function allTrash(){
+    console.log("\n\n\tIn services for all Trash notes API" , authenticationToken)
+    return axios.get(url + "/allTrash",  {
+        headers: {
+            token: authenticationToken
+        }
+    })
+}
+
+
 export function createNote(creationData) {
     console.log("\n\n\tIn services for creating a note API", creationData,authenticationToken)
     return axios.post(url + "/createNote", creationData, {
