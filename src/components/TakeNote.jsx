@@ -4,13 +4,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import '../Dashboard.css'
 import TextField from '@material-ui/core/TextField';
-import { IconsList } from './iconsList'
 import Button from '@material-ui/core/Button';
 import toaster from "toasted-notes";
 import "toasted-notes/src/styles.css";
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import Menu from '@material-ui/core/Menu';
 
 //hitting api
-import {createNote} from '../services/services'
+import { createNote } from '../services/services'
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -38,10 +39,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const menuItems = ['Add Label']
+
 export class TakeNote extends Component {
     constructor() {
         super()
         this.state = {
+            anchorEl: null,
             toggle: false,
             title: "",
             description: ""
@@ -62,7 +66,7 @@ export class TakeNote extends Component {
 
     }
 
-    fetchingDescription=(event)=>{
+    fetchingDescription = (event) => {
         let fetchedDescription = event.target.value
         this.setState({
             description: fetchedDescription
@@ -70,16 +74,24 @@ export class TakeNote extends Component {
         console.log("\n\nDescription-->", fetchedDescription);
     }
 
+    handleMenu = (event) => {
+        this.setState({ anchorEl: event.currentTarget })
+    }
+
+    closeMenu = () => {
+        this.setState({anchorEl:null})
+    }
+
     creatingNote = () => {
         console.log("\n\nCreating a note ... data to be sent -->")
 
-        let noteObject={}
-        noteObject.title=this.state.title
-        noteObject.description=this.state.description
+        let noteObject = {}
+        noteObject.title = this.state.title
+        noteObject.description = this.state.description
 
         console.log("\n\n\tObject ready to be sent --->", noteObject)
 
-        createNote(noteObject).then((responseReceived)=>{
+        createNote(noteObject).then((responseReceived) => {
             if (responseReceived) {
                 if (responseReceived.data.success) {
                     this.props.refresh()        //1
@@ -89,13 +101,18 @@ export class TakeNote extends Component {
             else {
                 toaster.notify("SERVER NOT CONNECTED !")
             }
-        }).catch((error)=>{
+        }).catch((error) => {
             // console.log(error.response.data.message)
             toaster.notify(error.response.data.message)
         })
 
     }
     render() {
+        const { anchorEl } = this.state;
+
+
+        const open = Boolean(anchorEl)
+
         return (
             <div id="NoteDiv">
                 {this.state.toggle ?
@@ -124,7 +141,13 @@ export class TakeNote extends Component {
                                 disableUnderline: true,
                             }}
                         />
-                        <div id="IconsList"> <IconsList />
+                        <div id="IconsList">
+                            <div id="Icons">
+                                <Button><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button>
+                                <Button> <img src={require('../assets/pallete.svg')} alt="pallete pic"></img>  </Button>
+                                <Button> <img src={require('../assets/archive.svg')} alt="archive pic "></img> </Button>
+                                <Button onClick={(event) => this.handleMenu(event)}><MoreVertIcon></MoreVertIcon></Button>
+                            </div>
                             <Button onClick={this.creatingNote} ><b>close</b></Button></div>
                     </Card>
 
@@ -144,6 +167,18 @@ export class TakeNote extends Component {
                     </Card>
                 }
 
+                <Menu
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={this.closeMenu}
+                >
+                    {menuItems.map((option, index) => (
+                        <Button key={index}
+                            id="dropMenu">
+                            {option}
+                        </Button>
+                    ))}
+                </Menu>
             </div>
         )
 
