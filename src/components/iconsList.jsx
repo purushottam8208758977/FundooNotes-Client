@@ -23,6 +23,13 @@ export class IconsList extends Component {
     closeMenu = () => {
         this.setState({ anchorEl: null })
     }
+
+    handleNoteEvents = (event, index) => {
+        if(index==0){
+            //starting trashing process
+            
+        }
+    }
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl)
@@ -39,7 +46,7 @@ export class IconsList extends Component {
                     onClose={this.closeMenu}
                 >
                     {noteMenuItems.map((option, index) => (
-                        <MenuItem key={index}
+                        <MenuItem onClick={(event) => this.handleNoteEvents(event, index)} key={index}
                             id="dropMenu">
                             {option}
                         </MenuItem>

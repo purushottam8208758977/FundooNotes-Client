@@ -65,7 +65,7 @@ export class Display extends Component {
                 //console.log("\n\n\tdata of notes -->",data)
                 return (
                     <SingleNote key={index}
-                        data={data}
+                        data={data}//props data sent to Single note component to access further 
                     />
                 )
             })
