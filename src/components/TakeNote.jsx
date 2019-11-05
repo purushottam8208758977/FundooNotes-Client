@@ -95,7 +95,10 @@ export class TakeNote extends Component {
         createNote(noteObject).then((responseReceived) => {
             if (responseReceived) {
                 if (responseReceived.data.success) {
-                    this.props.refresh()        //1
+                    this.props.refresh() 
+                    this.setState({ title: "" })
+                    this.setState({ description: "" })
+                    this.setState({ toggle: false }) 
                     toaster.notify(responseReceived.data.message)
                 }
             }

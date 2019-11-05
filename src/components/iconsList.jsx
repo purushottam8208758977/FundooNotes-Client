@@ -38,6 +38,9 @@ export class IconsList extends Component {
                 console.log("\n\n\tIcons list --> trash response--->",responseReceived)
             })
         }
+        else{
+            this.setState({ anchorEl: null }) // for closing the pop up
+        }
     }
     render() {
         const { anchorEl } = this.state;
