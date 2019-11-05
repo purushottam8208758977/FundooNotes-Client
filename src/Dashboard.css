@@ -57,7 +57,16 @@
     line-height: 20px;
     color: rgb(60, 64, 67)
 }
+#deleteForever{
+    height:24px;
+    width:24px
+}
 
+#deleteButton{
+    height:24px;
+    width:2px
+
+}
 #ForLabel{
     margin-top:12px;
     margin-left:-192px;
