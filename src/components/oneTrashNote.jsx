@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
-import {IconsList} from './iconsList';
-
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 export class OneTrashNote extends Component {
 
     handleRefresh=()=>{
@@ -9,12 +8,11 @@ export class OneTrashNote extends Component {
     }
     render() {
         return (
-            
                 <div id="NotesReceived">
                 <Card id="NoteDimensions">
                    {this.props.data.title }<br/>
                    {this.props.data.description}
-                   {/* <IconsList individualNoteData={this.props.data} refreshingAfterTrashing={this.handleRefresh}/> */}
+                   <div><DeleteForeverIcon /></div>
                 </Card>
                 </div>
             

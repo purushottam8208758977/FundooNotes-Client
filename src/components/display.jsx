@@ -4,6 +4,7 @@ import { allNotes,allReminders,allArchives,allTrash } from '../services/services
 //child component
 import { SingleNote } from './singleNote'
 import {OneTrashNote} from './oneTrashNote'
+import {OneArchiveNote} from './oneArchiveNote'
 
 export class Display extends Component {
     displayContent;
@@ -86,7 +87,7 @@ export class Display extends Component {
             this.displayContent = this.state.archives.map((data, index) => {
                 //console.log("\n\n\tdata of archives -->",data)
                 return (
-                    <SingleNote key={index}
+                    <OneArchiveNote key={index}
                         data={data}
                         refreshDisplay={this.allNotesDisplaying}
                     />
