@@ -3,6 +3,7 @@ import { allNotes,allReminders,allArchives,allTrash } from '../services/services
 
 //child component
 import { SingleNote } from './singleNote'
+import {OneTrashNote} from './oneTrashNote'
 
 export class Display extends Component {
     displayContent;
@@ -96,7 +97,7 @@ export class Display extends Component {
             this.displayContent = this.state.trash.map((data, index) => {
                 //console.log("\n\n\tdata of trash -->",data)
                 return (
-                    <SingleNote key={index}
+                    <OneTrashNote key={index}
                         data={data}
                         refreshDisplay={this.allNotesDisplaying}
                     />
