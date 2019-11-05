@@ -50,7 +50,9 @@
     justify-content: space-between;
 }
 
-
+#ItemText{
+    
+}
 #ForLabel{
     margin-top:12px;
     margin-left:-192px;
@@ -62,6 +64,10 @@
 }
 
 #NoteDimensions{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
     width: 240px;
     min-height: 100px;
 }

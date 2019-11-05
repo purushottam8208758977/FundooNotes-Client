@@ -3,9 +3,6 @@ import Card from '@material-ui/core/Card';
 import {IconsList} from './iconsList';
 
 export class SingleNote extends Component {
-    constructor() {
-        super()
-    }
     render() {
         return (
             

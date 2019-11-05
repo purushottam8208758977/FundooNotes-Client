@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import TextField from '@material-ui/core/TextField';
@@ -227,9 +227,9 @@ export class Dashboard extends Component {
                 <MuiThemeProvider theme={theme}>
                     <Card className="CardL">
                         {this.state.toggle ?
-                            <img className="View" src={require('../assets/grid.svg')} onClick={this.spoilView} />
+                            <img className="View" src={require('../assets/grid.svg') } alt="grid" onClick={this.spoilView} />
                             :
-                            <img className="View" src={require('../assets/otherGrid.svg')} onClick={this.handleView} />
+                            <img className="View" src={require('../assets/otherGrid.svg')} alt="grid" onClick={this.handleView} />
                         }
                         <div className="MenuI" onClick={this.handleDrawerOpen}><MenuIcon /></div>
                         <TextField className="SearchBar"
