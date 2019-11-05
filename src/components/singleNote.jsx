@@ -3,6 +3,10 @@ import Card from '@material-ui/core/Card';
 import {IconsList} from './iconsList';
 
 export class SingleNote extends Component {
+
+    handleRefresh=()=>{
+        this.props.refreshDisplay()
+    }
     render() {
         return (
             
@@ -10,7 +14,7 @@ export class SingleNote extends Component {
                 <Card id="NoteDimensions">
                    {this.props.data.title }<br/>
                    {this.props.data.description}
-                   <IconsList individualNoteData={this.props.data} />
+                   <IconsList individualNoteData={this.props.data} refreshingAfterTrashing={this.handleRefresh}/>
                 </Card>
                 </div>
             

@@ -65,6 +65,7 @@ export class Display extends Component {
                 return (
                     <SingleNote key={index}
                         data={data}//props data sent to Single note component to access further 
+                        refreshDisplay={this.allNotesDisplaying}
                     />
                 )
             })
@@ -75,6 +76,7 @@ export class Display extends Component {
                 return (
                     <SingleNote key={index}
                         data={data}
+                        refreshDisplay={this.allNotesDisplaying}
                     />
                 )
             })
@@ -85,6 +87,7 @@ export class Display extends Component {
                 return (
                     <SingleNote key={index}
                         data={data}
+                        refreshDisplay={this.allNotesDisplaying}
                     />
                 )
             })
@@ -95,6 +98,7 @@ export class Display extends Component {
                 return (
                     <SingleNote key={index}
                         data={data}
+                        refreshDisplay={this.allNotesDisplaying}
                     />
                 )
             })

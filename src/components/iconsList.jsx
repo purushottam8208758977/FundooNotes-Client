@@ -28,10 +28,12 @@ export class IconsList extends Component {
     handleNoteEvents = (event, index) => {
         if(index===0){
             //initiating trashing process
+            this.setState({ anchorEl: null }) // for closing the pop up
             let deletionObject={}
             deletionObject.noteId=this.props.individualNoteData._id
             deletionObject.updating={trash:true}
-            
+
+            this.props.refreshingAfterTrashing()
             updateNote(deletionObject).then((responseReceived)=>{
                 console.log("\n\n\tIcons list --> trash response--->",responseReceived)
             })
