@@ -9,6 +9,7 @@ import toaster from "toasted-notes";
 import "toasted-notes/src/styles.css";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 //hitting api
 import { createNote } from '../services/services'
@@ -109,10 +110,7 @@ export class TakeNote extends Component {
     }
     render() {
         const { anchorEl } = this.state;
-
-
         const open = Boolean(anchorEl)
-
         return (
             <div id="NoteDiv">
                 {this.state.toggle ?
@@ -173,10 +171,10 @@ export class TakeNote extends Component {
                     onClose={this.closeMenu}
                 >
                     {menuItems.map((option, index) => (
-                        <Button key={index}
+                        <MenuItem key={index}
                             id="dropMenu">
                             {option}
-                        </Button>
+                        </MenuItem>
                     ))}
                 </Menu>
             </div>
