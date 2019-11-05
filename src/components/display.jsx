@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { allNotes } from '../services/services'
+import { allNotes,allReminders,allArchives,allTrash } from '../services/services'
 
 //child component
 import { SingleNote } from './singleNote'
@@ -22,20 +22,47 @@ export class Display extends Component {
      */
     componentDidMount() {
         this.allNotesDisplaying()
+        this.allRemindersDisplaying()
+        this.allArchivesDisplaying()
+        this.allTrashDisplaying()
     }
 
     allNotesDisplaying = () => {
         //4
         allNotes().then((responseReceived) => {
-            //console.log("\n\n\tResponse received ---->", responseReceived.data.data)
+            console.log("\n\n\tAll notes received ---->", responseReceived.data.data)
             this.setState({ notes: responseReceived.data.data })
             //console.log("-->",this.notes)
         })
     }
+    allRemindersDisplaying = () => {
+        //4
+        allReminders().then((responseReceived) => {
+            console.log("\n\n\tAll Reminders received ---->", responseReceived.data.data)
+            this.setState({ reminders: responseReceived.data.data })
+            //console.log("-->",this.reminders)
+        })
+    }
+    allArchivesDisplaying = () => {
+        //4
+        allArchives().then((responseReceived) => {
+            console.log("\n\n\tAll archives received ---->", responseReceived.data.data)
+            this.setState({ archives: responseReceived.data.data })
+            //console.log("-->",this.archives)
+        })
+    }
+    allTrashDisplaying = () => {
+        //4
+        allTrash().then((responseReceived) => {
+            console.log("\n\n\t All Trash received ---->", responseReceived.data.data)
+            this.setState({ trash: responseReceived.data.data })
+            //console.log("-->",this.trash)
+        })
+    }
     render() {
-        if (this.state.notes) {
+        if (this.props.fetchNotes) {
             this.displayContent = this.state.notes.map((data, index) => {
-                //console.log("\n\n\tdata of note -->",data)
+                //console.log("\n\n\tdata of notes -->",data)
                 return (
                     <SingleNote key={index}
                         data={data}
@@ -43,14 +70,35 @@ export class Display extends Component {
                 )
             })
         }
-        else if (this.state.archives) {
-
+        else if (this.props.fetchReminders) {
+            this.displayContent = this.state.reminders.map((data, index) => {
+                //console.log("\n\n\tdata of reminders -->",data)
+                return (
+                    <SingleNote key={index}
+                        data={data}
+                    />
+                )
+            })
         }
-        else if (this.state.reminders) {
-
+        else if (this.props.fetchArchives) {
+            this.displayContent = this.state.archives.map((data, index) => {
+                //console.log("\n\n\tdata of archives -->",data)
+                return (
+                    <SingleNote key={index}
+                        data={data}
+                    />
+                )
+            })
         }
-        else {//trash
-
+        else {//trash fetchtrash : true
+            this.displayContent = this.state.trash.map((data, index) => {
+                //console.log("\n\n\tdata of trash -->",data)
+                return (
+                    <SingleNote key={index}
+                        data={data}
+                    />
+                )
+            })
         }
 
         return (

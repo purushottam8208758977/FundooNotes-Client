@@ -194,7 +194,10 @@ export class Dashboard extends Component {
         this.state = {
             toggle: false,
             open: false,
-            displayNotes:false
+            displayNotes: true,
+            displayReminders: false,
+            displayArchives: false,
+            displayTrash: false
         }
         this.classes = useStyles.bind(this);
 
@@ -223,8 +226,41 @@ export class Dashboard extends Component {
     }
 
     displayNotes = (booleanValue) => {//whether to display notes or not
-        this.setState({displayNotes:booleanValue})
+        console.log("\n\n\t dashboard--> notes --> boolean value-->",booleanValue)
+        this.setState({
+            displayNotes: true,
+            displayReminders: false,
+            displayArchives: false,
+            displayTrash: false
+        })
     }
+    displayReminders = (booleanValue) => {//whether to display notes or not
+        console.log("\n\n\t dashboard--> reminders --> boolean value-->",booleanValue)
+        this.setState({
+            displayNotes: false,
+            displayReminders: true,
+            displayArchives: false,
+            displayTrash: false
+        })
+    }
+    displayArchives = (booleanValue) => {//whether to display notes or not
+        this.setState({
+            displayNotes: false,
+            displayReminders: false,
+            displayArchives: true,
+            displayTrash: false
+        })
+    }
+    displayTrash = (booleanValue) => {//whether to display notes or not
+        this.setState({
+            displayNotes: false,
+            displayReminders: false,
+            displayArchives: false,
+            displayTrash: booleanValue
+        })
+    }
+
+
     render() {
         return (
             <div className="MainDiv">
@@ -259,12 +295,17 @@ export class Dashboard extends Component {
                         </Grid></div>
                     </Card>
                     <DrawerMade openingDrawer={this.state.open} notesArray={this.displayNotes}
-                     />
+                        remindersArray={this.displayReminders}
+                        archivesArray={this.displayArchives}
+                        trashArray={this.displayTrash} />
                     <div id="Two">
                         {/* Taking note component will render here 2  */}
                         <TakeNote refresh={this.NoteDisplay} />
                         {/* All note will be displayed here using the display component 3*/}
-                        <Display ref={this.CreatingNoteInstance} />
+                        <Display ref={this.CreatingNoteInstance} fetchNotes={this.state.displayNotes}
+                            fetchReminders={this.state.displayReminders}
+                            fetchArchives={this.state.displayArchives}
+                            fetchTrash={this.state.displayTrash} />
                     </div>
                 </MuiThemeProvider></div>
         )
