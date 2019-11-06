@@ -104,3 +104,12 @@ export function updateNote(updationData){
         }
     })
 }
+
+export function deleteNote(deletionData){
+    console.log("\n\n\tIn services for deleting note API", authenticationToken)
+    return axios.post(url + "/deleteNote",deletionData,  {
+        headers: {
+            token: authenticationToken
+        }
+    })
+}

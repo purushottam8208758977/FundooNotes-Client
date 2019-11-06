@@ -31,9 +31,10 @@ export class IconsList extends Component {
         archiveObject.noteId = this.props.individualNoteData._id
         archiveObject.updating = { archive: true }
 
-        this.props.refreshing()
+        
         updateNote(archiveObject).then((responseReceived) => {
             console.log("\n\n\tIcons list --> archive response--->", responseReceived)
+            this.props.refreshing()
         })
     }
 
@@ -45,10 +46,10 @@ export class IconsList extends Component {
             deletionObject.noteId = this.props.individualNoteData._id
             deletionObject.updating = { trash: true }
 
-            this.props.refreshing()
+           
             updateNote(deletionObject).then((responseReceived) => {
                 console.log("\n\n\tIcons list --> trash response--->", responseReceived)
-
+                this.props.refreshing()
             })
         }
         else {//clicked on idex ===1 a-->Add label

@@ -90,8 +90,10 @@ export class Login extends Component {
     }
 
     toDashboard = () => {
+        
         let path = '/home'
         this.props.history.push(path)
+
     }
     handleLogin = () => {
 

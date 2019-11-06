@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
-import {updateNote} from './services/services'
+import {updateNote} from '../services/services'
 
 export class OneArchiveNote extends Component {
 
-    componentDidMount(){ // this will enable the trash notes to refresh everytime  they are clicked
+    componentDidMount(){ // this will enable the arvhive notes to refresh everytime  they are clicked
         this.handleRefresh()
     }
     handleRefresh = () => {
@@ -14,8 +14,15 @@ export class OneArchiveNote extends Component {
 
     unarchiveTheNote=()=>{
         //initiating unarchiving process
+        let unarchiveObject = {}
+        unarchiveObject.noteId = this.props.data._id
+        unarchiveObject.updating = { archive: false }
 
-        
+       
+        updateNote(unarchiveObject).then((responseReceived) => {
+            console.log("\n\n\t oneArchiveNote --> unarchive response--->", responseReceived)
+            this.props.refreshDisplay()
+        })
     }
 
     render() {
