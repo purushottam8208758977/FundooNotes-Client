@@ -28,12 +28,11 @@ export class SingleNote extends Component {
                 <Card id="NoteDimensions" >
                    <div onClick={this.handleClickOpen}> {this.props.data.title}<br />
                     {this.props.data.description}</div>
-                    <IconsList individualNoteData={this.props.data} refreshingAfterTrashing={this.handleRefresh} />
+                    <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
                 </Card>
                 <Dialog 
                     open={this.state.open}
                     onClose={this.handleClose}
-                   
                 >
             <DialogNote dialogData={this.props.data} closeDialog={this.handleClose} refreshAfterEditing={this.handleRefresh}/>
             </Dialog>
