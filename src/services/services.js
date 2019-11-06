@@ -40,10 +40,14 @@ export function resetPassword(resetData, token) {
 
 //post requires all the two arguments to be filled
 export function allNotes(){
+    const tryToken = localStorage.getItem('token')
+
+    console.log("\n\n\t---> authentication token -->",tryToken);
+    
     console.log("\n\n\tIn services for all notes API" , authenticationToken)
     return axios.get(url + "/allNotes",  {
         headers: {
-            token: authenticationToken
+            token: tryToken
         }
     })
 

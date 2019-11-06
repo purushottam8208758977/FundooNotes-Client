@@ -8,6 +8,7 @@ import { login } from '../services/services'
 import toaster from "toasted-notes";
 import "toasted-notes/src/styles.css";
 import '../Login.css'
+import { log } from 'util';
 /**
  * @description - This prop is a inbuilt prop we are modifying it
  */
@@ -90,10 +91,8 @@ export class Login extends Component {
     }
 
     toDashboard = () => {
-        
         let path = '/home'
         this.props.history.push(path)
-
     }
     handleLogin = () => {
 
@@ -108,9 +107,12 @@ export class Login extends Component {
         login(loginObject).then((responseReceived) => {
             if (responseReceived) {
                 if (responseReceived.data.success) {
+                    
                     toaster.notify(responseReceived.data.message)
-                    this.toDashboard()
+                   
+                    console.log("\n\n\t after login token",responseReceived.data.data.token)
                     localStorage.setItem('token',responseReceived.data.data.token)
+                    this.toDashboard()
                 }
             }
             else {

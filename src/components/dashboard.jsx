@@ -200,6 +200,8 @@ export class Dashboard extends Component {
         //creating a reference
         this.CreatingNoteInstance = React.createRef()
     }
+
+
     handleDrawerOpen = () => {
         //  this.setOpen(true);
         this.setState(state => ({ open: !state.open }))  //negate the state of open field
