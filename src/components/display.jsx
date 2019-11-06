@@ -5,7 +5,7 @@ import { allNotes,allReminders,allArchives,allTrash } from '../services/services
 import { SingleNote } from './singleNote'
 import {OneTrashNote} from './oneTrashNote'
 import {OneArchiveNote} from './oneArchiveNote'
-
+import {OneReminderNote} from './oneReminderNote'
 export class Display extends Component {
     displayContent;
     constructor() {
@@ -76,9 +76,9 @@ export class Display extends Component {
             this.displayContent = this.state.reminders.map((data, index) => {
                 //console.log("\n\n\tdata of reminders -->",data)
                 return (
-                    <SingleNote key={index}
+                    <OneReminderNote key={index}
                         data={data}
-                        refreshDisplay={this.allNotesDisplaying}
+                        refreshDisplay={this.allRemindersDisplaying}
                     />
                 )
             })
@@ -89,7 +89,7 @@ export class Display extends Component {
                 return (
                     <OneArchiveNote key={index}
                         data={data}
-                        refreshDisplay={this.allNotesDisplaying}
+                        refreshDisplay={this.allArchivesDisplaying}
                     />
                 )
             })
@@ -100,12 +100,11 @@ export class Display extends Component {
                 return (
                     <OneTrashNote key={index}
                         data={data}
-                        refreshDisplay={this.allNotesDisplaying}
+                        refreshDisplay={this.allTrashDisplaying}
                     />
                 )
             })
         }
-
         return (
             <div id="Content">
                 {this.displayContent}

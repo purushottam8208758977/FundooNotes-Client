@@ -14,7 +14,6 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 
-
 //child components
 import { TakeNote } from './TakeNote'
 import { Display } from './display'
@@ -94,10 +93,7 @@ const theme = createMuiTheme({
 
     }
 })
-
 const drawerWidth = 240;
-
-
 const useStyles = makeStyles(theme => ({
     container: {
         display: 'flex',
@@ -208,20 +204,16 @@ export class Dashboard extends Component {
         //  this.setOpen(true);
         this.setState(state => ({ open: !state.open }))  //negate the state of open field
     };
-
     handleDrawerClose = () => {
         this.setState({ open: false })
     };
-
     handleView = () => {
         this.setState({ toggle: true })
     }
     spoilView = () => {
         this.setState({ toggle: false })
     }
-
     NoteDisplay = () => {
-        //3
         this.CreatingNoteInstance.current.allNotesDisplaying()
     }
 
@@ -259,8 +251,6 @@ export class Dashboard extends Component {
             displayTrash: booleanValue
         })
     }
-
-
     render() {
         return (
             <div className="MainDiv">

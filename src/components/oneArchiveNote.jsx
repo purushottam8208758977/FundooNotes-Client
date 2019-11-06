@@ -4,6 +4,9 @@ import Button from '@material-ui/core/Button';
 
 export class OneArchiveNote extends Component {
 
+    componentDidMount(){ // this will enable the trash notes to refresh everytime  they are clicked
+        this.handleRefresh()
+    }
     handleRefresh = () => {
         this.props.refreshDisplay()
     }

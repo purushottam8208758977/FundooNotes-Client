@@ -36,6 +36,7 @@ export class IconsList extends Component {
             this.props.refreshingAfterTrashing()
             updateNote(deletionObject).then((responseReceived)=>{
                 console.log("\n\n\tIcons list --> trash response--->",responseReceived)
+                
             })
         }
         else{//clicked on idex ===1 a-->Add label

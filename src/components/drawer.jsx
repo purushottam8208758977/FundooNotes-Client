@@ -111,7 +111,6 @@ export class DrawerMade extends Component {
         super(props)
         this.state = {
             labels: []
-
         }
         this.classes = useStyles.bind(this);
     }
@@ -122,26 +121,22 @@ export class DrawerMade extends Component {
 
     loadLabels = () => {
         allLabels().then((responseReceived) => {
-            console.log("\n\n\tResponse received ---->", responseReceived.data.data)
+            console.log("\n\n\tLabels --->", responseReceived.data.data)
             this.setState({ labels: responseReceived.data.data })
             console.log("-->", this.labels)
         })
     }
 
     loadNotes = (booleanValue) => {
-        console.log("notes -->boolean value ", booleanValue)
         this.props.notesArray(booleanValue)
     }
     loadReminders = (booleanValue) => {
-        console.log("reminders --->boolean value ", booleanValue)
         this.props.remindersArray(booleanValue)
     }
     loadArchives = (booleanValue) => {
-
         this.props.archivesArray(booleanValue)
     }
     loadTrash = (booleanValue) => {
-
         this.props.trashArray(booleanValue)
     }
     render() {
