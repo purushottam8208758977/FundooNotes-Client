@@ -22,6 +22,7 @@ export class OneArchiveNote extends Component {
         updateNote(unarchiveObject).then((responseReceived) => {
             console.log("\n\n\t oneArchiveNote --> unarchive response--->", responseReceived)
             this.props.refreshDisplay()
+            this.props.refreshNotes()
         })
     }
 

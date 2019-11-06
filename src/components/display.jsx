@@ -90,6 +90,7 @@ export class Display extends Component {
                     <OneArchiveNote key={index}
                         data={data}
                         refreshDisplay={this.allArchivesDisplaying}
+                        refreshNotes={this.allNotesDisplaying}
                     />
                 )
             })
@@ -101,6 +102,7 @@ export class Display extends Component {
                     <OneTrashNote key={index}
                         data={data}//passing the note data
                         refreshDisplay={this.allTrashDisplaying}
+                        refreshNotes={this.allNotesDisplaying}
                     />
                 )
             })
