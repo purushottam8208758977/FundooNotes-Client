@@ -8,6 +8,9 @@ import Menu from '@material-ui/core/Menu';
 
 import { updateNote } from '../services/services'
 
+//child components
+import { ColorPopover } from './colorPopover'
+
 const noteMenuItems = ['Delete Note', 'Add Label']
 
 export class IconsList extends Component {
@@ -15,7 +18,10 @@ export class IconsList extends Component {
         super()
         this.state = {
             anchorEl: null,
+            colorPallete: false
         }
+
+        this.ColorPopover=React.createRef()
     }
     handleMenu = (event) => {
         this.setState({ anchorEl: event.currentTarget })
@@ -31,7 +37,7 @@ export class IconsList extends Component {
         archiveObject.noteId = this.props.individualNoteData._id
         archiveObject.updating = { archive: true }
 
-        
+
         updateNote(archiveObject).then((responseReceived) => {
             console.log("\n\n\tIcons list --> archive response--->", responseReceived)
             this.props.refreshing()
@@ -46,7 +52,6 @@ export class IconsList extends Component {
             deletionObject.noteId = this.props.individualNoteData._id
             deletionObject.updating = { trash: true }
 
-           
             updateNote(deletionObject).then((responseReceived) => {
                 console.log("\n\n\tIcons list --> trash response--->", responseReceived)
                 this.props.refreshing()
@@ -56,13 +61,24 @@ export class IconsList extends Component {
             this.setState({ anchorEl: null }) // for closing the pop up
         }
     }
+
+    openColorPallete = (event) => {
+        console.log("\n\n\tOn color icon")
+        this.ColorPopover.current.handlePopoverOpen(event)
+    }
+
+    closeColorPallete=(event)=>{
+        console.log("\n\n\tLeaving color icon")
+        this.ColorPopover.current.handlePopoverClose(event)
+
+    }
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl)
         return (
             <div id="Icons">
                 <Button><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button>
-                <Button> <img src={require('../assets/pallete.svg')} alt="pallete pic"></img>  </Button>
+                <Button onMouseEnter={(event)=>this.openColorPallete(event)}  onMouseLeave={(event)=>{this.closeColorPallete(event)}}> <img  src={require('../assets/pallete.svg')} alt="pallete pic"></img>  </Button>
                 <Button onClick={this.archiveTheNote}> <img src={require('../assets/archive.svg')} alt="archive pic "></img> </Button>
                 <Button onClick={(event) => this.handleMenu(event)}><MoreVertIcon></MoreVertIcon></Button>
 
@@ -78,6 +94,9 @@ export class IconsList extends Component {
                         </MenuItem>
                     ))}
                 </Menu>
+
+                <ColorPopover ref={this.ColorPopover} openPallete={this.state.colorPallete} />
+
             </div>
         )
     }

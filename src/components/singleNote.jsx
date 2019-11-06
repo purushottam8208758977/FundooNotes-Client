@@ -6,7 +6,14 @@ import Dialog from '@material-ui/core/Dialog';
 //child components
 import  {DialogNote}  from './dialogNote'
 
+
 export class SingleNote extends Component {
+    
+    constructor(){
+        super()
+       
+
+    }
     state = {
         open: false,
     };

@@ -1,6 +1,5 @@
 import axios from 'axios'
 const url = "http://localhost:3000"
-const authenticationToken = localStorage.getItem('token')
 
 export function registration(registrationData) {
 
