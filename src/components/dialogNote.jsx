@@ -80,6 +80,7 @@ export class DialogNote extends Component {
 
         updateNote(noteObject).then((responseReceived)=>{
             console.log("\n\n\tDialog note--> updating response--->",responseReceived)
+            this.props.refreshAfterEditing()
         })
 
     }

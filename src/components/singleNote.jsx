@@ -35,7 +35,7 @@ export class SingleNote extends Component {
                     onClose={this.handleClose}
                    
                 >
-            <DialogNote dialogData={this.props.data} closeDialog={this.handleClose}/>
+            <DialogNote dialogData={this.props.data} closeDialog={this.handleClose} refreshAfterEditing={this.handleRefresh}/>
             </Dialog>
             </div>
         )
