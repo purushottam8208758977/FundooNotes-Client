@@ -77,7 +77,14 @@
     color:rgb(95, 99, 104)
 }
 
-
+#dialog{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+    width: 840px;
+    min-height: 100px;
+}
 #NoteDimensions{
     display: flex;
     flex-direction: column;
