@@ -99,7 +99,7 @@ export class Display extends Component {
                 //console.log("\n\n\tdata of trash -->",data)
                 return (
                     <OneTrashNote key={index}
-                        data={data}
+                        data={data}//passing the note data
                         refreshDisplay={this.allTrashDisplaying}
                     />
                 )

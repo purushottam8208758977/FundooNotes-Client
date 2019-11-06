@@ -123,7 +123,6 @@ export class DrawerMade extends Component {
         allLabels().then((responseReceived) => {
             console.log("\n\n\tLabels --->", responseReceived.data.data)
             this.setState({ labels: responseReceived.data.data })
-            console.log("-->", this.labels)
         })
     }
 
