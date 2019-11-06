@@ -18,6 +18,13 @@
     display: flex;
     justify-content: center;
 }
+
+#dialogIcons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 86%;
+}
 #Icons{
     display: flex;
     flex-direction: row;
@@ -84,6 +91,7 @@
     border-radius: 10px;
     width: 840px;
     min-height: 100px;
+    border-radius: 12px;;
 }
 #NoteDimensions{
     display: flex;
