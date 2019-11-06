@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
+import {updateNote} from './services/services'
 
 export class OneArchiveNote extends Component {
 
@@ -10,6 +11,13 @@ export class OneArchiveNote extends Component {
     handleRefresh = () => {
         this.props.refreshDisplay()
     }
+
+    unarchiveTheNote=()=>{
+        //initiating unarchiving process
+
+        
+    }
+
     render() {
         return (
             <div id="NotesReceived">
@@ -19,6 +27,7 @@ export class OneArchiveNote extends Component {
                     <div id="icons">
                         <Button><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button>
                         <Button> <img src={require('../assets/pallete.svg')} alt="pallete pic"></img>  </Button>
+                        <Button onClick={this.unarchiveTheNote}> <img src={require('../assets/unarchive.svg')} alt="unarchive pic"></img>  </Button>
                     </div></Card>
             </div>
 
