@@ -40,7 +40,6 @@ export class IconsList extends Component {
         archiveObject.noteId = this.props.individualNoteData._id
         archiveObject.updating = { archive: true }
 
-
         updateNote(archiveObject).then((responseReceived) => {
             console.log("\n\n\tIcons list --> archive response--->", responseReceived)
             this.refreshBoth()

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import {deleteNote} from '../services/services'
+import Tooltip from '@material-ui/core/Tooltip';
 
 export class OneTrashNote extends Component {
 
@@ -28,7 +29,7 @@ export class OneTrashNote extends Component {
                 <Card id="NoteDimensions">
                    {this.props.data.title }<br/>
                    {this.props.data.description}
-                   <Button onClick={this.deleteNoteForever} id="deleteButton"><img id="deleteForever" src={require('../assets/deleteforever.png')} alt="delete pic"></img> </Button>
+                   <Tooltip title="Delete Forever"><IconButton onClick={this.deleteNoteForever} id="deleteButton"><img id="deleteForever" src={require('../assets/deleteforever.png')} alt="delete pic"></img> </IconButton></Tooltip>
                 </Card>
                 </div>
             

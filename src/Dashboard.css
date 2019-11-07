@@ -65,11 +65,14 @@
     color: rgb(60, 64, 67)
 }
 #deleteForever{
-    height:24px;
-    width:24px
+    margin-left: 20px;
+    height: 24px;
+    width: 24px;
+    margin-top: -12px;
 }
 
 #deleteButton{
+    margin-left:10px;
     height:35px;
     width:2px
 
