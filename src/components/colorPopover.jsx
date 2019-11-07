@@ -1,8 +1,11 @@
+//changing color of note 
+
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core' // overiding default css properties
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const theme = createMuiTheme({
     overrides: {
@@ -22,16 +25,16 @@ const theme = createMuiTheme({
                 left: "80%"
             }
         },
-        'MuiPopover':{
-        'paper':{
-            minWidth:"0px",
-            maxWidth:"1000px",
-            display:"flex",
-            flexDirection:"row",
-            flexWrap:"wrap",
-            width:"75%"
+        'MuiPopover': {
+            'paper': {
+                minWidth: "0px",
+                maxWidth: "1000px",
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                width: "75%"
+            }
         }
-    }
     }
 })
 const useStyles = makeStyles(theme => ({
@@ -41,11 +44,24 @@ const useStyles = makeStyles(theme => ({
     paper: {
         padding: theme.spacing(1),
     },
-    
 }));
 
+const colorsPallete = [{colorName:"White",
+                        colorCode:"#ffffff"},
+                        {colorName:"Pink",
+                        colorCode:"#fdcfe8"},
+                        {colorName:"Gray",
+                        colorCode:"#e8eaed"},
+                        {colorName:"Dark blue",
+                        colorCode:"#aecbfa"},
+                        {colorName:"Blue",
+                        colorCode:"#cbf0f8"},
+                        {colorName:"Teal",
+                        colorCode:"#a7ffeb"},
+                        {colorName:"Teal",
+                        colorCode:"#a7ffeb"},
 
-const colorsPallete = ["#ffffff", "#fdcfe8", "#f0deca", "#e8eaed","#aecbfa", "#cbf0f8", "#a7ffeb", "#ccff90","#fff475", "#fbbc04", "#f28b82", "#d7adfb"]
+                        , , "#f0deca", , , , , "#ccff90", "#fff475", "#fbbc04", "#f28b82", "#d7adfb"]
 
 export class ColorPopover extends Component {
     constructor() {
@@ -60,35 +76,31 @@ export class ColorPopover extends Component {
         this.setState({ anchorEl: event.currentTarget })
     }
     handlePopoverClose = () => {
-
         this.setState({ anchorEl: null })
     }
-    changingColorOfNote = (event,index) => {
+    changingColorOfNote = (event, index) => {
         console.log("\n\n\tInitiating color change -->");
-        
     }
     render() {
         const { anchorEl } = this.state
         const open = Boolean(anchorEl)
-
         return (
-
             <div >
-                 <MuiThemeProvider theme={theme}>
-                <Menu
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={this.handlePopoverClose}
-                    id="HandleMenu"
-                >
-                   
-                    {colorsPallete.map((choice, index) => (
-                        <IconButton style={{margin:"2px",borderRadius:"40px", backgroundColor:choice}}onClick={(event) => this.changingColorOfNote(event, index)} key={index}
-                            id="dropMenu">
-                           {/* <IconButton style={{backgroundColor:choice}} />  */}
-                        </IconButton>
-                    ))}
-                </Menu>
+                <MuiThemeProvider theme={theme}>
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={open}
+                        onClose={this.handlePopoverClose}
+                        id="HandleMenu"
+                    >
+                        {colorsPallete.map((choice, index) => (
+                            <Tooltip title="colors">
+                            <IconButton style={{ margin: "2px", borderRadius: "40px", backgroundColor: choice }} onClick={(event) => this.changingColorOfNote(event, index)} key={index}
+                                id="dropMenu">
+                            </IconButton>
+                            </Tooltip>
+                        ))}
+                    </Menu>
                 </MuiThemeProvider>
             </div>
         )

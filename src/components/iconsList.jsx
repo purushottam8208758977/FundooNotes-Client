@@ -67,11 +67,6 @@ export class IconsList extends Component {
         this.ColorPopover.current.handlePopoverOpen(event)
     }
 
-    closeColorPallete = () => {
-        console.log("\n\n\tLeaving color icon")
-        this.ColorPopover.current.handlePopoverClose()
-
-    }
     render() {
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl)

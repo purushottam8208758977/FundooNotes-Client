@@ -58,6 +58,7 @@ export class Display extends Component {
             this.setState({ trash: responseReceived.data.data })
             //console.log("-->",this.trash)
         })
+        console.log("any...->")
     }
     render() {
         if (this.props.fetchNotes) {

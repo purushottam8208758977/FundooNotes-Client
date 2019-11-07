@@ -13,7 +13,7 @@ export class OneTrashNote extends Component {
     }
 
     deleteNoteForever=()=>{
-        //initiating deleteing process
+        //initiating deleting process
         let deleteObject = {}
         deleteObject.noteId = this.props.data._id
         deleteNote(deleteObject).then((responseReceived) => {
