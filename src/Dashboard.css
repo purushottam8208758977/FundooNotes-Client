@@ -145,7 +145,7 @@
 .MenuI{
 position:absolute;
 top:35%;
-left:2%
+left:1.9%
 }:hover{
 color :#5f6368
 }
@@ -160,7 +160,7 @@ color:  red;
   position: absolute;
   width: 35px;
   height: 33px;
-  left:5.2%;
+  left:4.5%;
   top:27%;
   bottom: 10%;
   cursor: pointer
@@ -177,7 +177,7 @@ color:  red;
 
 .Keep{
     position: absolute;
-    left: 8.2%;
+    left: 8.0%;
     top:31%;
     font-family: "Product Sans", Arial, sans-serif;
     font-size: 22px;
