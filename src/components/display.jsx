@@ -29,8 +29,6 @@ export class Display extends Component {
     }
 
     allNotesDisplaying = () => {
-        //4
-        
         allNotes().then((responseReceived) => {
             console.log("\n\n\tAll notes received ---->", responseReceived.data.data)
             this.setState({ notes: responseReceived.data.data })

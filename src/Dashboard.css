@@ -74,6 +74,12 @@
     width:2px
 
 }
+#HandleMenu{
+    display: flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    width:150px
+}
 #adjust{
     display: flex;
     flex-direction: row;
