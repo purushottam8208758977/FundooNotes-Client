@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-
+const colorsPallete = [#d7adfb, '#fdcfe8',#f0deca,#e8eaed,#aecbfa,#cbf0f8,#a7ffeb,#ccff90,#fff475,#fbbc04,#f28b82]
 
 
 export class ColorPopover extends Component {
