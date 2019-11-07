@@ -31,6 +31,9 @@ export class IconsList extends Component {
         this.setState({ anchorEl: null })
     }
 
+    refreshBoth=()=>{
+        this.props.refreshing()
+    }
     archiveTheNote = () => {
         //initiating archiving process
         let archiveObject = {}
@@ -40,7 +43,7 @@ export class IconsList extends Component {
 
         updateNote(archiveObject).then((responseReceived) => {
             console.log("\n\n\tIcons list --> archive response--->", responseReceived)
-            this.props.refreshing()
+            this.refreshBoth()
         })
     }
 
@@ -89,7 +92,7 @@ export class IconsList extends Component {
                         </MenuItem>
                     ))}
                 </Menu>
-                <ColorPopover ref={this.ColorPopover} openPallete={this.state.colorPallete} />
+                <ColorPopover refreshPostColorChange={this.refreshBoth} settingColor={this.props.individualNoteData} ref={this.ColorPopover} openPallete={this.state.colorPallete} />
 
             </div>
         )

@@ -97,6 +97,10 @@
     color:rgb(95, 99, 104)
 }
 
+#SingleNote{
+    margin-top: 10px;
+}
+
 #dialog{
     display: flex;
     flex-direction: column;

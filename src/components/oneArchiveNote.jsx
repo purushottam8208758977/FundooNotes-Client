@@ -29,7 +29,7 @@ export class OneArchiveNote extends Component {
     render() {
         return (
             <div id="NotesReceived">
-                <Card id="NoteDimensions">
+                <Card id="NoteDimensions" style={{backgroundColor:this.props.data.color}}>
                     {this.props.data.title}<br />
                     {this.props.data.description}
                     <div id="icons">

@@ -4,14 +4,14 @@ import { IconsList } from './iconsList';
 import Dialog from '@material-ui/core/Dialog';
 
 //child components
-import  {DialogNote}  from './dialogNote'
+import { DialogNote } from './dialogNote'
 
 
 export class SingleNote extends Component {
-    
-    constructor(){
+
+    constructor() {
         super()
-       
+
 
     }
     state = {
@@ -32,17 +32,18 @@ export class SingleNote extends Component {
     render() {
         return (
             <div id="NotesReceived">
-                <Card id="NoteDimensions" >
-                   <div onClick={this.handleClickOpen}> {this.props.data.title}<br />
-                    {this.props.data.description}</div>
+                <Card id="NoteDimensions" style={{backgroundColor:this.props.data.color}}>
+                    <div onClick={this.handleClickOpen} id="SingleNote">
+                        {this.props.data.title}<br />
+                        {this.props.data.description}</div>
                     <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
                 </Card>
-                <Dialog 
+                <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
                 >
-            <DialogNote dialogData={this.props.data} closeDialog={this.handleClose} refreshAfterEditing={this.handleRefresh}/>
-            </Dialog>
+                    <DialogNote dialogData={this.props.data} closeDialog={this.handleClose} refreshAfterEditing={this.handleRefresh} />
+                </Dialog>
             </div>
         )
     }
