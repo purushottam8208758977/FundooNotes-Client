@@ -281,7 +281,7 @@ export class Dashboard extends Component {
                             }}
                         />
                         <img className="KeepIcon" src={KeepIcon} alt="keep pic"></img>
-                        <div className="Keep">fundooNotes</div>
+                        <div className="Keep">Fundoo Notes</div>
                         <div className="AlignMent">  <Grid container justify="flex-end" alignItems="flex-end">
                             <Avatar className={this.classes.orangeAvatar}>N</Avatar>
                         </Grid></div>

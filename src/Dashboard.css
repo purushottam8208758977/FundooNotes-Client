@@ -64,6 +64,10 @@
     line-height: 20px;
     color: rgb(60, 64, 67)
 }
+#adjustContent{
+    display:flex;
+    justify-content: space-between;
+}
 #deleteForever{
     margin-left: 20px;
     height: 24px;
@@ -173,7 +177,7 @@ color:  red;
 
 .Keep{
     position: absolute;
-    left: 8.8%;
+    left: 8.2%;
     top:31%;
     font-family: "Product Sans", Arial, sans-serif;
     font-size: 22px;
