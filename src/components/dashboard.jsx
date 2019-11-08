@@ -57,8 +57,8 @@ const theme = createMuiTheme({
                 "boxShadow": "2px",
                 "transition": "background 100ms ease-in,width 100ms ease-out"
             },
-            "adornedEnd":{
-                "paddingRight":"-7px"
+            "adornedEnd": {
+                "paddingRight": "-7px"
             }
 
         },
@@ -206,7 +206,6 @@ export class Dashboard extends Component {
         this.CreatingNoteInstance = React.createRef()
     }
 
-
     handleDrawerOpen = () => {
         //  this.setOpen(true);
         this.setState(state => ({ open: !state.open }))  //negate the state of open field
@@ -260,7 +259,6 @@ export class Dashboard extends Component {
     }
     render() {
         return (
-            
             <div className="MainDiv">
                 <MuiThemeProvider theme={theme}>
                     <Card className="CardL">
@@ -276,7 +274,6 @@ export class Dashboard extends Component {
                             hiddenLabel
                             variant="filled"
                             placeholder="Search"
-                            
                             InputProps={{ "disable-underline": true }, {
                                 endAdornment: (
                                     <InputAdornment position="10%">
@@ -298,10 +295,12 @@ export class Dashboard extends Component {
                         archivesArray={this.displayArchives}
                         trashArray={this.displayTrash} />
                     <div id="Two">
-                        {/* Taking note component will render here 2  */}
+                        {/* Taking note component will render here   */}
                         <TakeNote refresh={this.NoteDisplay} />
                         {/* All note will be displayed here using the display component 3*/}
-                        <Display ref={this.CreatingNoteInstance} fetchNotes={this.state.displayNotes}
+                        <Display 
+                            ref={this.CreatingNoteInstance}
+                            fetchNotes={this.state.displayNotes}
                             fetchReminders={this.state.displayReminders}
                             fetchArchives={this.state.displayArchives}
                             fetchTrash={this.state.displayTrash} />
