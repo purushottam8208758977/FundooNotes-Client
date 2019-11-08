@@ -91,7 +91,9 @@ export class IconsList extends Component {
         labelObject.labelId=this.state.labels[index]._id
         addLabelOnNote(labelObject).then((reponseOfAddingLabel)=>{
             console.log("\n\n\tResponse of adding label on note",reponseOfAddingLabel)
+            this.props.refreshing()
         })
+
     }
     render() {
         const { anchorEl } = this.state;
@@ -123,11 +125,7 @@ export class IconsList extends Component {
                     ))}
                 </Menu>
                 <ColorPopover refreshPostColorChange={this.refreshBoth} settingColor={this.props.individualNoteData} ref={this.ColorPopover} openPallete={this.state.colorPallete} />
-                {/* <Menu
-                        anchorEl={anchorEl}
-                        open={this.state.childMenu}
-                        onClose={this.closeMenu}
-                    ><List>{this.mappingLabels}</List></Menu> */}
+                
                 <Menu
                     anchorEl={anchorEl}
                     open={this.state.childMenu}

@@ -16,13 +16,21 @@ export class SingleNote extends Component {
     }
     state = {
         open: false,
+        labelName: null
     };
+
+    componentDidMount() {
+        if (this.props.data.label[0].labelName) {
+            this.setState({ checkLabel:true,labelName: this.props.data.label[0].labelName })
+        }
+    }
 
     handleRefresh = () => {
         this.props.refreshDisplay()
     }
 
     handleClickOpen = () => {
+        //console.log("label name--->",this.props.data.label[0].labelName)
         this.setState({ open: true });
     };
 
@@ -32,11 +40,16 @@ export class SingleNote extends Component {
     render() {
         return (
             <div id="NotesReceived">
-                <Card id="NoteDimensions" style={{backgroundColor:this.props.data.color}}>
+                <Card id="NoteDimensions" style={{ backgroundColor: this.props.data.color }}>
                     <div onClick={this.handleClickOpen} id="SingleNote">
                         {this.props.data.title}<br />
                         {this.props.data.description}</div>
                     <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
+                    {this.state.checkLabel ?
+                        <div>{this.state.labelName}</div>
+                        :
+                        <div></div>
+                    }
                 </Card>
                 <Dialog
                     open={this.state.open}
@@ -44,6 +57,8 @@ export class SingleNote extends Component {
                 >
                     <DialogNote dialogData={this.props.data} closeDialog={this.handleClose} refreshAfterEditing={this.handleRefresh} />
                 </Dialog>
+
+
             </div>
         )
     }
