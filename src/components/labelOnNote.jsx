@@ -7,8 +7,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 export class LabelOnNote extends Component {
     render() {
         return (
-            <div ><ListItem  button key="L">
-                <ListItemIcon id="adjust">
+            <div ><ListItem id="" button key="L">
+                <ListItemIcon >
                     <ListItemText id="ItemText">
                     {this.props.data.labelName}
                     </ListItemText>

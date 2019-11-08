@@ -202,7 +202,7 @@ export class Dashboard extends Component {
         }
         this.classes = useStyles.bind(this);
 
-        //creating a reference
+        //creating a reference ... reference is made to invoke the method of another component
         this.CreatingNoteInstance = React.createRef()
     }
 

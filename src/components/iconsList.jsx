@@ -5,12 +5,10 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-
 import { updateNote, allLabels } from '../services/services'
 
 //child components
 import { ColorPopover } from './colorPopover'
-import { IndividualLabel } from './individualLabel'
 import { LabelOnNote } from './labelOnNote'
 import List from '@material-ui/core/List';
 
@@ -80,12 +78,10 @@ export class IconsList extends Component {
 
         }
     }
-
     openColorPallete = (event) => {
         console.log("\n\n\tOn color icon")
         this.ColorPopover.current.handlePopoverOpen(event)
     }
-
     render() {
         const { anchorEl } = this.state;
 
