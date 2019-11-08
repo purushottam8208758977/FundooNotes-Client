@@ -8,7 +8,8 @@ import { login } from '../services/services'
 import toaster from "toasted-notes";
 import "toasted-notes/src/styles.css";
 import '../Login.css'
-import Loader from 'react-loader-spinner'
+// import Loader from 'react-loader-spinner'
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import { log } from 'util';
 /**
@@ -76,6 +77,9 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         margin: theme.spacing(1),
+    },
+    root:{
+        flexGrow:1
     }
 }));
 
@@ -99,8 +103,8 @@ export class Login extends Component {
     }
     handleLogin = () => {
 
-        this.setState({toggleLoad:true})
-       
+        this.setState({ toggleLoad: true })
+
         console.log(`\n\n\t In handle login email - ${this.state.email}  password - ${this.state.password}`);
 
         let loginObject = {}
@@ -116,13 +120,13 @@ export class Login extends Component {
 
                     console.log("\n\n\t after login token", responseReceived.data.data.token)
                     localStorage.setItem('token', responseReceived.data.data.token)
-                   
-                    setTimeout(()=>{
+
+                    setTimeout(() => {
                         toaster.notify(responseReceived.data.message)
                         this.toDashboard()
-                    },4000);
+                    }, 4000);
 
-                   
+
                 }
             }
             else {
@@ -202,16 +206,10 @@ export class Login extends Component {
                                     autoComplete="email"
                                     margin="normal"
                                     variant="outlined" /> <br />
-
-
                                 {this.state.toggleLoad ?
-                                    <Loader className="Loader"
-                                        type="Puff"
-                                        color="#00BFFF"
-                                        height={100}
-                                        width={100}
-                                        timeout={3000} //3 secs
-                                    />
+                                    <div className={this.classes.root} className="Loader">
+                                        <LinearProgress />
+                                    </div>
                                     :
                                     <div className="HandleSubmit" onClick={this.handleLogin}>
                                         <BootstrapButton variant="contained" color="primary" disableRipple className={this.classes.margin}>
