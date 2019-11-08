@@ -21,21 +21,24 @@ export class IconsList extends Component {
     constructor() {
         super()
         this.state = {
-            anchorEl: null,
-            openMenu:false,
+            anchorEl: null, // determines the position menu bar ...where to open
+            parentMenu:false,// first menu's key ---> opens delete note and add label menu
             colorPallete: false,
-            openLabelMenu: false,
+            childMenu: false,
             labels: []
         }
 
         this.ColorPopover = React.createRef()
     }
+    /**
+     * @description - This method is invoked after clicking to more vert icon ...it opens a menu
+     */
     handleMenu = (event) => {
-        this.setState({ anchorEl: event.currentTarget ,openMenu:true})
+        this.setState({ anchorEl: event.currentTarget ,parentMenu:true})
     }
 
     closeMenu = () => {
-        this.setState({ openMenu:false ,anchorEl:null,openLabelMenu:false})
+        this.setState({ parentMenu:false ,anchorEl:null,childMenu:false})
     }
 
     refreshBoth = () => {
@@ -68,7 +71,7 @@ export class IconsList extends Component {
         }
         else {//clicked on index ===1 a-->Add label
             //this.setState({ anchorEl: null }) // for closing the pop up
-            this.setState({ openLabelMenu: true ,openMenu:false})
+            this.setState({ childMenu: true ,parentMenu:false})
             //adding a label (displaying labels list)
             allLabels().then((responseReceived) => {
                 console.log("\n\n\tIcons list --> Labels --->", responseReceived.data.data)
@@ -103,7 +106,7 @@ export class IconsList extends Component {
 
                 <Menu
                     anchorEl={anchorEl}
-                    open={this.state.openMenu}
+                    open={this.state.parentMenu}
                     onClose={this.closeMenu}
                 >
                     {noteMenuItems.map((choice, index) => (
@@ -114,13 +117,11 @@ export class IconsList extends Component {
                     ))}
                 </Menu>
                 <ColorPopover refreshPostColorChange={this.refreshBoth} settingColor={this.props.individualNoteData} ref={this.ColorPopover} openPallete={this.state.colorPallete} />
-
                     <Menu
                         anchorEl={anchorEl}
-                        open={this.state.openLabelMenu}
+                        open={this.state.childMenu}
                         onClose={this.closeMenu}
                     ><List>{this.mappingLabels}</List></Menu>
-
             </div>
         )
     }
