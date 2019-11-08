@@ -2,13 +2,11 @@ import axios from 'axios'
 const url = "http://localhost:3000"
 
 export function registration(registrationData) {
-
     console.log("\n\n\tIn services for registration --->", registrationData)
     return axios.post(url + "/registration", registrationData)
 }
 
 export function login(loginData) { // login component
-
     console.log("\n\n\tIn service for login--->", loginData)
     return axios.post(url + "/login", loginData)
 }
@@ -40,9 +38,7 @@ export function resetPassword(resetData, token) {
 //post requires all the two arguments to be filled
 export function allNotes(){
     const authenticationToken = localStorage.getItem('token')
-
     console.log("\n\n\t---> authentication token -->",authenticationToken);
-    
     console.log("\n\n\tIn services for all notes API" , authenticationToken)
     return axios.get(url + "/allNotes",  {
         headers: {
@@ -54,7 +50,6 @@ export function allNotes(){
 
 export function allArchives(){
     const authenticationToken = localStorage.getItem('token')
-
     console.log("\n\n\tIn services for all archives API" , authenticationToken)
     return axios.get(url + "/allArchives",  {
         headers: {
@@ -66,7 +61,6 @@ export function allArchives(){
 
 export function allReminders(){
     const authenticationToken = localStorage.getItem('token')
-
     console.log("\n\n\tIn services for all Reminders notes API" , authenticationToken)
     return axios.get(url + "/allReminders",  {
         headers: {
@@ -77,7 +71,6 @@ export function allReminders(){
 
 export function allTrash(){
     const authenticationToken = localStorage.getItem('token')
-
     console.log("\n\n\tIn services for all Trash notes API" , authenticationToken)
     return axios.get(url + "/allTrash",  {
         headers: {
@@ -89,7 +82,6 @@ export function allTrash(){
 
 export function createNote(creationData) {
     const authenticationToken = localStorage.getItem('token')
-
     console.log("\n\n\tIn services for creating a note API", creationData,authenticationToken)
     return axios.post(url + "/createNote", creationData, {
         headers: {
@@ -100,7 +92,6 @@ export function createNote(creationData) {
 
 export function allLabels(){
     const authenticationToken = localStorage.getItem('token')
-
     console.log("\n\n\tIn services for loading all labels API", authenticationToken)
     return axios.get(url + "/allLabels",  {
         headers: {
@@ -111,7 +102,6 @@ export function allLabels(){
 
 export function updateNote(updationData){
     const authenticationToken = localStorage.getItem('token')
-
     console.log("\n\n\tIn services for updating note API", authenticationToken)
     return axios.post(url + "/updateNote",updationData,  {
         headers: {
@@ -122,7 +112,6 @@ export function updateNote(updationData){
 
 export function deleteNote(deletionData){
     const authenticationToken = localStorage.getItem('token')
-
     console.log("\n\n\tIn services for deleting note API", authenticationToken)
     return axios.post(url + "/deleteNote",deletionData,  {
         headers: {

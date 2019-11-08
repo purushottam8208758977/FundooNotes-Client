@@ -6,32 +6,39 @@ import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 
-import { updateNote } from '../services/services'
+import { updateNote, allLabels } from '../services/services'
 
 //child components
 import { ColorPopover } from './colorPopover'
+import { IndividualLabel } from './individualLabel'
+import { LabelOnNote } from './labelOnNote'
+import List from '@material-ui/core/List';
 
 const noteMenuItems = ['Delete Note', 'Add Label']
 
 export class IconsList extends Component {
+    mappinglabels;
     constructor() {
         super()
         this.state = {
             anchorEl: null,
-            colorPallete: false
+            openMenu:false,
+            colorPallete: false,
+            openLabelMenu: false,
+            labels: []
         }
 
         this.ColorPopover = React.createRef()
     }
     handleMenu = (event) => {
-        this.setState({ anchorEl: event.currentTarget })
+        this.setState({ anchorEl: event.currentTarget ,openMenu:true})
     }
 
     closeMenu = () => {
-        this.setState({ anchorEl: null })
+        this.setState({ openMenu:false ,anchorEl:null,openLabelMenu:false})
     }
 
-    refreshBoth=()=>{
+    refreshBoth = () => {
         this.props.refreshing()
     }
     archiveTheNote = () => {
@@ -59,8 +66,15 @@ export class IconsList extends Component {
                 this.props.refreshing()
             })
         }
-        else {//clicked on idex ===1 a-->Add label
-            this.setState({ anchorEl: null }) // for closing the pop up
+        else {//clicked on index ===1 a-->Add label
+            //this.setState({ anchorEl: null }) // for closing the pop up
+            this.setState({ openLabelMenu: true ,openMenu:false})
+            //adding a label (displaying labels list)
+            allLabels().then((responseReceived) => {
+                console.log("\n\n\tIcons list --> Labels --->", responseReceived.data.data)
+                this.setState({ labels: responseReceived.data.data })
+            })
+
         }
     }
 
@@ -71,7 +85,15 @@ export class IconsList extends Component {
 
     render() {
         const { anchorEl } = this.state;
-        const open = Boolean(anchorEl)
+
+        this.mappingLabels = this.state.labels.map((data, index) => {
+            console.log("\n\n\tData to be sent ot individual label", data)
+            return (
+                <LabelOnNote key={index}
+                    data={data}
+                />
+            )
+        })
         return (
             <div id="Icons">
                 <Button><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button>
@@ -81,7 +103,7 @@ export class IconsList extends Component {
 
                 <Menu
                     anchorEl={anchorEl}
-                    open={open}
+                    open={this.state.openMenu}
                     onClose={this.closeMenu}
                 >
                     {noteMenuItems.map((choice, index) => (
@@ -92,6 +114,12 @@ export class IconsList extends Component {
                     ))}
                 </Menu>
                 <ColorPopover refreshPostColorChange={this.refreshBoth} settingColor={this.props.individualNoteData} ref={this.ColorPopover} openPallete={this.state.colorPallete} />
+
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={this.state.openLabelMenu}
+                        onClose={this.closeMenu}
+                    ><List>{this.mappingLabels}</List></Menu>
 
             </div>
         )
