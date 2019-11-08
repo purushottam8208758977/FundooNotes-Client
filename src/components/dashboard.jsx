@@ -14,6 +14,8 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 
+
+
 //child components
 import { TakeNote } from './TakeNote'
 import { Display } from './display'
@@ -220,7 +222,7 @@ export class Dashboard extends Component {
     }
 
     displayNotes = (booleanValue) => {//whether to display notes or not
-        console.log("\n\n\t dashboard--> notes --> boolean value-->",booleanValue)
+        console.log("\n\n\t dashboard--> notes --> boolean value-->", booleanValue)
         this.setState({
             displayNotes: true,
             displayReminders: false,
@@ -229,7 +231,7 @@ export class Dashboard extends Component {
         })
     }
     displayReminders = (booleanValue) => {//whether to display notes or not
-        console.log("\n\n\t dashboard--> reminders --> boolean value-->",booleanValue)
+        console.log("\n\n\t dashboard--> reminders --> boolean value-->", booleanValue)
         this.setState({
             displayNotes: false,
             displayReminders: true,
@@ -255,7 +257,9 @@ export class Dashboard extends Component {
     }
     render() {
         return (
+            
             <div className="MainDiv">
+                
                 <MuiThemeProvider theme={theme}>
                     <Card className="CardL">
                         {this.state.toggle ?

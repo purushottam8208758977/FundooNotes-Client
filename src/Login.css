@@ -86,6 +86,13 @@
     left: 50%;
 }
 
+.Loader{
+    position: absolute;
+    top: 230%;
+    left: 70%;
+    height:100px;
+    width: 10px;;
+}
 .HandleNext{
     position: absolute;
     top: 270%;

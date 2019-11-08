@@ -8,6 +8,8 @@ import { login } from '../services/services'
 import toaster from "toasted-notes";
 import "toasted-notes/src/styles.css";
 import '../Login.css'
+import Loader from 'react-loader-spinner'
+
 import { log } from 'util';
 /**
  * @description - This prop is a inbuilt prop we are modifying it
@@ -85,7 +87,8 @@ export class Login extends Component {
         this.state = {
             toggle: false,
             email: "",
-            password: ""
+            password: "",
+            toggleLoad: false
         }
         this.classes = useStyles.bind(this);
     }
@@ -96,6 +99,8 @@ export class Login extends Component {
     }
     handleLogin = () => {
 
+        this.setState({toggleLoad:true})
+       
         console.log(`\n\n\t In handle login email - ${this.state.email}  password - ${this.state.password}`);
 
         let loginObject = {}
@@ -107,12 +112,17 @@ export class Login extends Component {
         login(loginObject).then((responseReceived) => {
             if (responseReceived) {
                 if (responseReceived.data.success) {
-                    
-                    toaster.notify(responseReceived.data.message)
+
+
+                    console.log("\n\n\t after login token", responseReceived.data.data.token)
+                    localStorage.setItem('token', responseReceived.data.data.token)
                    
-                    console.log("\n\n\t after login token",responseReceived.data.data.token)
-                    localStorage.setItem('token',responseReceived.data.data.token)
-                    this.toDashboard()
+                    setTimeout(()=>{
+                        toaster.notify(responseReceived.data.message)
+                        this.toDashboard()
+                    },4000);
+
+                   
                 }
             }
             else {
@@ -192,11 +202,22 @@ export class Login extends Component {
                                     autoComplete="email"
                                     margin="normal"
                                     variant="outlined" /> <br />
-                                <div className="HandleSubmit" onClick={this.handleLogin}>
-                                    <BootstrapButton variant="contained" color="primary" disableRipple className={this.classes.margin}>
-                                        <b> Submit</b>
-                                    </BootstrapButton>
-                                </div>
+
+
+                                {this.state.toggleLoad ?
+                                    <Loader className="Loader"
+                                        type="Puff"
+                                        color="#00BFFF"
+                                        height={100}
+                                        width={100}
+                                        timeout={3000} //3 secs
+                                    />
+                                    :
+                                    <div className="HandleSubmit" onClick={this.handleLogin}>
+                                        <BootstrapButton variant="contained" color="primary" disableRipple className={this.classes.margin}>
+                                            <b> Submit</b>
+                                        </BootstrapButton>  </div>
+                                }
                                 <br /><br />
 
                                 <div className="Forgot" onClick={this.forgetPassword} > Forgot password ? </div>
