@@ -20,7 +20,7 @@ export class SingleNote extends Component {
     };
 
     componentDidMount() {
-        if (this.props.data.label[0].labelName) {
+        if (this.props.data.label.length>0) {
             this.setState({ checkLabel:true,labelName: this.props.data.label[0].labelName })
         }
     }
