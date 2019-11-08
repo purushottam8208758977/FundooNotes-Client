@@ -60,6 +60,15 @@
     justify-content: space-between;
 }
 
+#LabelOnNote{
+    background-color:transparent;
+    padding: 10px ;
+    border-radius: 5px;
+    height: 10px;
+    width: 80px;
+    cursor: pointer;
+    margin: 10px auto
+}
 #dropMenu{
     font-family: Roboto, Arial, sans-serif;
     font-size:  13px;

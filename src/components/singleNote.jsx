@@ -20,8 +20,8 @@ export class SingleNote extends Component {
     };
 
     componentDidMount() {
-        if (this.props.data.label.length>0) {
-            this.setState({ checkLabel:true,labelName: this.props.data.label[0].labelName })
+        if (this.props.data.label.length > 0) {
+            this.setState({ checkLabel: true, labelName: this.props.data.label[0].labelName })
         }
     }
 
@@ -44,12 +44,12 @@ export class SingleNote extends Component {
                     <div onClick={this.handleClickOpen} id="SingleNote">
                         {this.props.data.title}<br />
                         {this.props.data.description}</div>
-                    <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
                     {this.state.checkLabel ?
-                        <div>{this.state.labelName}</div>
+                        <div id="LabelOnNote" style={{marginRight:"165px"}}>{this.state.labelName}</div>
                         :
                         <div></div>
                     }
+                    <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
                 </Card>
                 <Dialog
                     open={this.state.open}
