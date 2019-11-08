@@ -57,6 +57,9 @@ const theme = createMuiTheme({
                 "boxShadow": "2px",
                 "transition": "background 100ms ease-in,width 100ms ease-out"
             },
+            "adornedEnd":{
+                "paddingRight":"-7px"
+            }
 
         },
         "MuiSvgIcon": {
@@ -259,7 +262,6 @@ export class Dashboard extends Component {
         return (
             
             <div className="MainDiv">
-                
                 <MuiThemeProvider theme={theme}>
                     <Card className="CardL">
                         {this.state.toggle ?
@@ -274,7 +276,8 @@ export class Dashboard extends Component {
                             hiddenLabel
                             variant="filled"
                             placeholder="Search"
-                            InputProps={{ 'aria-label': 'hidden label' }, {
+                            
+                            InputProps={{ "disable-underline": true }, {
                                 endAdornment: (
                                     <InputAdornment position="10%">
                                         <IconButton>
