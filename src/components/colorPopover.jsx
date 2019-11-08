@@ -6,7 +6,7 @@ import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core'
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
 import { updateNote } from '../services/services'
 
 
@@ -113,6 +113,7 @@ export class ColorPopover extends Component {
     handlePopoverClose = () => {
         this.setState({ anchorEl: null })
     }
+
     changingColorOfNote = (event, index) => {
         console.log("\n\n\tInitiating color change -->");
 
