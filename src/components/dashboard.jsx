@@ -190,7 +190,7 @@ export class Dashboard extends Component {
         this.state = {
             toggle: false,
             open: false,
-            displayNotes: true,
+            displayNotes: true,  //when dashboard is going to open notes should be displayed 
             displayReminders: false,
             displayArchives: false,
             displayTrash: false
