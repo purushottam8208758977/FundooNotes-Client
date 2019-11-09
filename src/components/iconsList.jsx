@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { updateNote, allLabels,addLabelOnNote } from '../services/services'
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -124,10 +125,10 @@ export class IconsList extends Component {
         })
         return (
             <div id="Icons">
-                <Button><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button>
-                <Button onClick={(event) => this.openColorPallete(event)}><img src={require('../assets/pallete.svg')} alt="pallete pic"></img></Button>
-                <Button onClick={this.archiveTheNote}> <img src={require('../assets/archive.svg')} alt="archive pic "></img> </Button>
-                <Button onClick={(event) => this.handleMenu(event)}><MoreVertIcon></MoreVertIcon></Button>
+                <Tooltip title="Reminder"><Button><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button></Tooltip>
+                <Tooltip title="Change color"><Button onClick={(event) => this.openColorPallete(event)}><img src={require('../assets/pallete.svg')} alt="pallete pic"></img></Button></Tooltip>
+                <Tooltip title="Archive"><Button onClick={this.archiveTheNote}> <img src={require('../assets/archive.svg')} alt="archive pic "></img> </Button></Tooltip>
+                <Tooltip title="More"><Button onClick={(event) => this.handleMenu(event)}><MoreVertIcon></MoreVertIcon></Button></Tooltip>
                 <Menu
                     anchorEl={anchorEl}
                     open={this.state.parentMenu}
