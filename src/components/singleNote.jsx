@@ -67,17 +67,15 @@ export class SingleNote extends Component {
         //initiating removing label process on note 
 
     }
-
     render() {
         return (
-
             <div id="NotesReceived">
                 <MuiThemeProvider theme={theme}>
                     <Card id="NoteDimensions" style={{ backgroundColor: this.props.data.color }}>
                         <div onClick={this.handleClickOpen} id="SingleNote">
                             {this.props.data.title}<br />
                             {this.props.data.description}</div>
-                        {this.props.data.label.map((label, index) => (
+                       <div id="manageLabels"> {this.props.data.label.map((label, index) => (
                             <div id="LabelOnNote" style={{ marginRight: "165px" }}>
                                 <Chip
                                     className={this.classes.root}
@@ -88,7 +86,7 @@ export class SingleNote extends Component {
                                     deleteIcon={<CloseIcon />}
                                 />
                             </div>
-                            ))}
+                            ))}</div>
                             <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
                     </Card>
                     <Dialog
@@ -97,7 +95,6 @@ export class SingleNote extends Component {
                     >
                         <DialogNote dialogData={this.props.data} closeDialog={this.handleClose} refreshAfterEditing={this.handleRefresh} />
                     </Dialog>
-
                 </MuiThemeProvider>
             </div >
         )

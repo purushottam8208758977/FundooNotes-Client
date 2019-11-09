@@ -14,6 +14,14 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 
+import classNames from 'classnames';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { green } from '@material-ui/core/colors';
+import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import CheckIcon from '@material-ui/icons/Check';
+import SaveIcon from '@material-ui/icons/Save';
+
 
 
 //child components
@@ -135,6 +143,7 @@ const useStyles = makeStyles(theme => ({
     },
     root: {
         display: 'flex',
+        alignItems: 'center'
     },
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
@@ -186,6 +195,31 @@ const useStyles = makeStyles(theme => ({
         }),
         marginLeft: 0,
     },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+    },
+    buttonSuccess: {
+        backgroundColor: green[500],
+        '&:hover': {
+            backgroundColor: green[700],
+        },
+    },
+    fabProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: -6,
+        left: -6,
+        zIndex: 1,
+    },
+    buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+    }
 
 }));
 
@@ -198,13 +232,37 @@ export class Dashboard extends Component {
             displayNotes: true,  //when dashboard is going to open notes should be displayed 
             displayReminders: false,
             displayArchives: false,
-            displayTrash: false
+            displayTrash: false,
+            loading: false,
+            success: false
         }
         this.classes = useStyles.bind(this);
 
         //creating a reference ... reference is made to invoke the method of another component
         this.CreatingNoteInstance = React.createRef()
     }
+
+    componentWillUnmount() {
+        clearTimeout(this.timer);
+    }
+    handleButtonClick = () => {
+        if (!this.state.loading) {
+            this.setState(
+                {
+                    success: false,
+                    loading: true,
+                },
+                () => {
+                    this.timer = setTimeout(() => {
+                        this.setState({
+                            loading: false,
+                            success: true,
+                        });
+                    }, 2000);
+                },
+            );
+        }
+    };
 
     handleDrawerOpen = () => {
         //  this.setOpen(true);
@@ -258,6 +316,11 @@ export class Dashboard extends Component {
         })
     }
     render() {
+        const { loading, success } = this.state;
+        const { classes } = this.props;
+        const buttonClassname = classNames({
+          [this.classes.buttonSuccess]: success,
+        });
         return (
             <div className="MainDiv">
                 <MuiThemeProvider theme={theme}>
@@ -298,7 +361,7 @@ export class Dashboard extends Component {
                         {/* Taking note component will render here   */}
                         <TakeNote refresh={this.NoteDisplay} />
                         {/* All note will be displayed here using the display component 3*/}
-                        <Display 
+                        <Display
                             ref={this.CreatingNoteInstance}
                             fetchNotes={this.state.displayNotes}
                             fetchReminders={this.state.displayReminders}

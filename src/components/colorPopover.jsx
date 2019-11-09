@@ -2,11 +2,10 @@
 
 import React, { Component } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core' // overiding default css properties
+import { createMuiTheme, MuiThemeProvider} from '@material-ui/core' // overiding default css properties
 import Menu from '@material-ui/core/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
-import CheckCircleOutlineRoundedIcon from '@material-ui/icons/CheckCircleOutlineRounded';
 import { updateNote } from '../services/services'
 
 
