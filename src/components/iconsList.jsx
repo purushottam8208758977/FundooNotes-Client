@@ -7,6 +7,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { updateNote, allLabels,addLabelOnNote } from '../services/services'
 
+import { makeStyles } from '@material-ui/core/styles';
+
 //child components
 import { ColorPopover } from './colorPopover'
 import { LabelOnNote } from './labelOnNote'
@@ -14,6 +16,16 @@ import List from '@material-ui/core/List';
 
 const noteMenuItems = ['Delete Note', 'Add Label']
 
+const useStyles = makeStyles(theme => ({
+    root: {
+      display: 'flex',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      '& > *': {
+        margin: theme.spacing(0.5),
+      },
+    },
+  }));
 export class IconsList extends Component {
     mappinglabels;
     constructor() {
@@ -27,6 +39,8 @@ export class IconsList extends Component {
         }
 
         this.ColorPopover = React.createRef()
+        this.classes = useStyles.bind(this);
+
     }
     /**
      * @description - This method is invoked after clicking to more vert icon ...it opens a menu
@@ -68,12 +82,14 @@ export class IconsList extends Component {
             })
         }
         else {//clicked on index ===1 a-->Add label
-            //this.setState({ anchorEl: null }) // for closing the pop up
+            //close the parent menu first and open the child menu
             this.setState({ childMenu: true, parentMenu: false })
             //adding a label (displaying labels list)
             allLabels().then((responseReceived) => {
+                
                 console.log("\n\n\tIcons list --> Labels --->", responseReceived.data.data)
                 this.setState({ labels: responseReceived.data.data })
+
             })
 
         }
@@ -91,7 +107,7 @@ export class IconsList extends Component {
         labelObject.labelId=this.state.labels[index]._id
         addLabelOnNote(labelObject).then((reponseOfAddingLabel)=>{
             console.log("\n\n\tResponse of adding label on note",reponseOfAddingLabel)
-            this.props.refreshing()
+            this.refreshBoth()
         })
 
     }
