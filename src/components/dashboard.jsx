@@ -13,6 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
+import DoneAll from 'react-ionicons/lib/MdCheckmark'
 
 
 
@@ -80,9 +81,11 @@ const theme = createMuiTheme({
         "MuiAvatar": {
             "root": {
                 position: "absolute",
-                left: "40%",
+                left: "93%",
+                top:"24%",
                 display: "flex",
-                justifyContent: "flex-end"
+                justifyContent: "flex-end",
+                cursor:"pointer"
             },
             "colorDefault": {
                 left: "95%",
@@ -214,6 +217,7 @@ export class Dashboard extends Component {
         //creating a reference ... reference is made to invoke the method of another component
         this.CreatingNoteInstance = React.createRef()
     }
+
     handleDrawerOpen = () => {
         //  this.setOpen(true);
         this.setState(state => ({ open: !state.open }))  //negate the state of open field
@@ -235,6 +239,7 @@ export class Dashboard extends Component {
     }
     displayNotes = (booleanValue) => {//whether to display notes or not
         console.log("\n\n\t dashboard--> notes --> boolean value-->", booleanValue)
+        //this.displayLoader(true)
         this.setState({
             displayNotes: true,
             displayReminders: false,
@@ -298,12 +303,12 @@ export class Dashboard extends Component {
                         <img className="KeepIcon" src={KeepIcon} alt="keep pic"></img>
                         <div className="Keep">Fundoo Notes</div>
                         <div className="AlignMent">  <Grid container justify="flex-end" alignItems="flex-end">
-                            <Avatar className={this.classes.orangeAvatar}>N</Avatar>
+                            <Avatar style={{cursor:"pointer"}}className={this.classes.orangeAvatar} src="https://fundooimages.s3.us-east-2.amazonaws.com/2019-11-04.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZ57TOXDSXSS7TFVP%2F20191109%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20191109T123353Z&X-Amz-Expires=900&X-Amz-Signature=9e579a30838a6be0fe589f1bdbaff6b82ff72fef84c66269b1c8f5a14fd992dc&X-Amz-SignedHeaders=host"></Avatar>
                         </Grid></div>
                         {this.state.load ?
                             <CircularIndeterminate />
                             :
-                            <div></div>}
+                            <div id="Correct" onClick={this.displayNotes}><DoneAll fontSize="25px" color=" rgb(60, 64, 67)" rotate={false} /></div>}
                     </Card>
                     <DrawerMade openingDrawer={this.state.open} notesArray={this.displayNotes}
                         remindersArray={this.displayReminders}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import IosRefresh from 'react-ionicons/lib/IosRefresh'
 
 const styles = theme => ({
   progress: {
@@ -13,7 +13,9 @@ function CircularIndeterminate(props) {
   const { classes } = props;
   return (
     <div id="LoaderCircle">
-      <CircularProgress className={classes.progress} />
+      {/* <CircularProgress className={classes.progress} /> */}
+      <IosRefresh fontSize="40px" color="rgb(60, 64, 67)" rotate={true} />
+
     </div>
   );
 }

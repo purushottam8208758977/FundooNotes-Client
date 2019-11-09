@@ -37,7 +37,7 @@ export class Display extends Component {
             setTimeout(() => {
                 this.setState({openLoader:false})
                 this.props.loadingInitiated(false) //end loading
-            }, 1700);
+            }, 1600);
             //console.log("-->",this.notes)
         })
     }
@@ -51,7 +51,7 @@ export class Display extends Component {
             setTimeout(() => {
                 this.setState({openLoader:false})
                 this.props.loadingInitiated(false) //end loading
-            }, 1700);
+            }, 1600);
         })
     }
     allArchivesDisplaying = () => {
@@ -64,7 +64,7 @@ export class Display extends Component {
             setTimeout(() => {
                 this.setState({openLoader:false})
                 this.props.loadingInitiated(false) //end loading
-            }, 1700);
+            }, 1600);
         })
     }
     allTrashDisplaying = () => {
@@ -77,7 +77,7 @@ export class Display extends Component {
             setTimeout(() => {
                 this.setState({openLoader:false})
                 this.props.loadingInitiated(false) //end loading
-            }, 1700);
+            }, 1600);
         })
         console.log("any...->")
     }
