@@ -13,6 +13,11 @@
     color: white;
     text-decoration: none;
 }
+
+#LoaderCircle{
+width: 159%;    
+margin-top :-3.5%
+}
 #NoteDiv{
     height:100%;
     display: flex;
@@ -60,9 +65,6 @@
     justify-content: space-between;
 }
 
-#manageLabels{
-    
-}
 #LabelOnNote{
     background-color:transparent;
     padding: 10px ;

@@ -14,10 +14,10 @@ export class Display extends Component {
             notes: [],
             archives: [],
             reminders: [],
-            trash: []
+            trash: [],
+            openLoader:false
         }
     }
-
     /**
      * @description- This method is invoked just after the component is invoked
      */
@@ -29,34 +29,55 @@ export class Display extends Component {
     }
 
     allNotesDisplaying = () => {
+        this.setState({openLoader:true})
+        this.props.loadingInitiated(true) //start loading
         allNotes().then((responseReceived) => {
             console.log("\n\n\tAll notes received ---->", responseReceived.data.data)
             this.setState({ notes: responseReceived.data.data })
+            setTimeout(() => {
+                this.setState({openLoader:false})
+                this.props.loadingInitiated(false) //end loading
+            }, 1700);
             //console.log("-->",this.notes)
         })
     }
     allRemindersDisplaying = () => {
-        //4
+        this.setState({openLoader:true})
+        this.props.loadingInitiated(true) //start loading
         allReminders().then((responseReceived) => {
             console.log("\n\n\tAll Reminders received ---->", responseReceived.data.data)
             this.setState({ reminders: responseReceived.data.data })
             //console.log("-->",this.reminders)
+            setTimeout(() => {
+                this.setState({openLoader:false})
+                this.props.loadingInitiated(false) //end loading
+            }, 1700);
         })
     }
     allArchivesDisplaying = () => {
-        //4
+        this.setState({openLoader:true})
+        this.props.loadingInitiated(true) //start loading
         allArchives().then((responseReceived) => {
             console.log("\n\n\tAll archives received ---->", responseReceived.data.data)
             this.setState({ archives: responseReceived.data.data })
             //console.log("-->",this.archives)
+            setTimeout(() => {
+                this.setState({openLoader:false})
+                this.props.loadingInitiated(false) //end loading
+            }, 1700);
         })
     }
     allTrashDisplaying = () => {
-        //4
+        this.setState({openLoader:true})
+        this.props.loadingInitiated(true) //start loading
         allTrash().then((responseReceived) => {
             console.log("\n\n\t All Trash received ---->", responseReceived.data.data)
             this.setState({ trash: responseReceived.data.data })
             //console.log("-->",this.trash)
+            setTimeout(() => {
+                this.setState({openLoader:false})
+                this.props.loadingInitiated(false) //end loading
+            }, 1700);
         })
         console.log("any...->")
     }

@@ -14,20 +14,13 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 
-import classNames from 'classnames';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { green } from '@material-ui/core/colors';
-import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
-import CheckIcon from '@material-ui/icons/Check';
-import SaveIcon from '@material-ui/icons/Save';
-
 
 
 //child components
 import { TakeNote } from './TakeNote'
 import { Display } from './display'
 import { DrawerMade } from './drawer'
+import CircularIndeterminate from "./loader"
 /**
  * @description - This prop is a inbuilt prop we are modifying it
  */
@@ -106,6 +99,7 @@ const theme = createMuiTheme({
 
     }
 })
+
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
     container: {
@@ -199,28 +193,6 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(1),
         position: 'relative',
     },
-    buttonSuccess: {
-        backgroundColor: green[500],
-        '&:hover': {
-            backgroundColor: green[700],
-        },
-    },
-    fabProgress: {
-        color: green[500],
-        position: 'absolute',
-        top: -6,
-        left: -6,
-        zIndex: 1,
-    },
-    buttonProgress: {
-        color: green[500],
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        marginTop: -12,
-        marginLeft: -12,
-    }
-
 }));
 
 export class Dashboard extends Component {
@@ -234,36 +206,14 @@ export class Dashboard extends Component {
             displayArchives: false,
             displayTrash: false,
             loading: false,
-            success: false
+            success: false,
+            load: false
         }
         this.classes = useStyles.bind(this);
 
         //creating a reference ... reference is made to invoke the method of another component
         this.CreatingNoteInstance = React.createRef()
     }
-
-    componentWillUnmount() {
-        clearTimeout(this.timer);
-    }
-    handleButtonClick = () => {
-        if (!this.state.loading) {
-            this.setState(
-                {
-                    success: false,
-                    loading: true,
-                },
-                () => {
-                    this.timer = setTimeout(() => {
-                        this.setState({
-                            loading: false,
-                            success: true,
-                        });
-                    }, 2000);
-                },
-            );
-        }
-    };
-
     handleDrawerOpen = () => {
         //  this.setOpen(true);
         this.setState(state => ({ open: !state.open }))  //negate the state of open field
@@ -280,7 +230,9 @@ export class Dashboard extends Component {
     NoteDisplay = () => {
         this.CreatingNoteInstance.current.allNotesDisplaying()
     }
-
+    displayLoader = (booleanValue) => {
+        this.setState({load:booleanValue})
+    }
     displayNotes = (booleanValue) => {//whether to display notes or not
         console.log("\n\n\t dashboard--> notes --> boolean value-->", booleanValue)
         this.setState({
@@ -316,11 +268,7 @@ export class Dashboard extends Component {
         })
     }
     render() {
-        const { loading, success } = this.state;
-        const { classes } = this.props;
-        const buttonClassname = classNames({
-          [this.classes.buttonSuccess]: success,
-        });
+
         return (
             <div className="MainDiv">
                 <MuiThemeProvider theme={theme}>
@@ -352,6 +300,10 @@ export class Dashboard extends Component {
                         <div className="AlignMent">  <Grid container justify="flex-end" alignItems="flex-end">
                             <Avatar className={this.classes.orangeAvatar}>N</Avatar>
                         </Grid></div>
+                        {this.state.load ?
+                            <CircularIndeterminate />
+                            :
+                            <div></div>}
                     </Card>
                     <DrawerMade openingDrawer={this.state.open} notesArray={this.displayNotes}
                         remindersArray={this.displayReminders}
@@ -366,7 +318,8 @@ export class Dashboard extends Component {
                             fetchNotes={this.state.displayNotes}
                             fetchReminders={this.state.displayReminders}
                             fetchArchives={this.state.displayArchives}
-                            fetchTrash={this.state.displayTrash} />
+                            fetchTrash={this.state.displayTrash} 
+                            loadingInitiated={this.displayLoader}/>
                     </div>
                 </MuiThemeProvider></div>
         )
