@@ -82,10 +82,10 @@ const theme = createMuiTheme({
             "root": {
                 position: "absolute",
                 left: "93%",
-                top:"24%",
+                top: "24%",
                 display: "flex",
                 justifyContent: "flex-end",
-                cursor:"pointer"
+                cursor: "pointer"
             },
             "colorDefault": {
                 left: "95%",
@@ -225,17 +225,19 @@ export class Dashboard extends Component {
     handleDrawerClose = () => {
         this.setState({ open: false })
     };
-    handleView = () => {
+    columnView = () => {
+        console.log("\n\n\tColumn view--->",this.state.toggle)
         this.setState({ toggle: true })
     }
-    spoilView = () => {
+    rowView = () => {
+        console.log("\n\n\tRow view--->",this.state.toggle)
         this.setState({ toggle: false })
     }
     NoteDisplay = () => {
         this.CreatingNoteInstance.current.allNotesDisplaying()
     }
     displayLoader = (booleanValue) => {
-        this.setState({load:booleanValue})
+        this.setState({ load: booleanValue })
     }
     displayNotes = (booleanValue) => {//whether to display notes or not
         console.log("\n\n\t dashboard--> notes --> boolean value-->", booleanValue)
@@ -279,9 +281,9 @@ export class Dashboard extends Component {
                 <MuiThemeProvider theme={theme}>
                     <Card className="CardL">
                         {this.state.toggle ?
-                            <img className="View" src={require('../assets/grid.svg')} alt="grid" onClick={this.spoilView} />
+                            <img className="View" src={require('../assets/grid.svg')} alt="grid" onClick={this.rowView} />
                             :
-                            <img className="View" src={require('../assets/otherGrid.svg')} alt="grid" onClick={this.handleView} />
+                            <img className="View" src={require('../assets/otherGrid.svg')} alt="grid" onClick={this.columnView} />
                         }
                         <div className="MenuI" onClick={this.handleDrawerOpen}><MenuIcon /></div>
                         <TextField className="SearchBar"
@@ -303,7 +305,7 @@ export class Dashboard extends Component {
                         <img className="KeepIcon" src={KeepIcon} alt="keep pic"></img>
                         <div className="Keep">Fundoo Notes</div>
                         <div className="AlignMent">  <Grid container justify="flex-end" alignItems="flex-end">
-                            <Avatar style={{cursor:"pointer"}}className={this.classes.orangeAvatar} src="https://fundooimages.s3.us-east-2.amazonaws.com/2019-11-04.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZ57TOXDSXSS7TFVP%2F20191109%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20191109T123353Z&X-Amz-Expires=900&X-Amz-Signature=9e579a30838a6be0fe589f1bdbaff6b82ff72fef84c66269b1c8f5a14fd992dc&X-Amz-SignedHeaders=host"></Avatar>
+                            <Avatar style={{ cursor: "pointer" }} className={this.classes.orangeAvatar} src="https://fundooimages.s3.us-east-2.amazonaws.com/2019-11-04.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZ57TOXDSXSS7TFVP%2F20191109%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20191109T123353Z&X-Amz-Expires=900&X-Amz-Signature=9e579a30838a6be0fe589f1bdbaff6b82ff72fef84c66269b1c8f5a14fd992dc&X-Amz-SignedHeaders=host"></Avatar>
                         </Grid></div>
                         {this.state.load ?
                             <CircularIndeterminate />
@@ -323,8 +325,9 @@ export class Dashboard extends Component {
                             fetchNotes={this.state.displayNotes}
                             fetchReminders={this.state.displayReminders}
                             fetchArchives={this.state.displayArchives}
-                            fetchTrash={this.state.displayTrash} 
-                            loadingInitiated={this.displayLoader}/>
+                            fetchTrash={this.state.displayTrash}
+                            loadingInitiated={this.displayLoader}
+                            notesView={this.state.toggle} />
                     </div>
                 </MuiThemeProvider></div>
         )

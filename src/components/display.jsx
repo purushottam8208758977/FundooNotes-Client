@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { allNotes,allReminders,allArchives,allTrash } from '../services/services'
+import { allNotes, allReminders, allArchives, allTrash } from '../services/services'
 
 //child component
 import { SingleNote } from './singleNote'
-import {OneTrashNote} from './oneTrashNote'
-import {OneArchiveNote} from './oneArchiveNote'
-import {OneReminderNote} from './oneReminderNote'
+import { OneTrashNote } from './oneTrashNote'
+import { OneArchiveNote } from './oneArchiveNote'
+import { OneReminderNote } from './oneReminderNote'
 export class Display extends Component {
     displayContent;
     constructor() {
@@ -15,7 +15,7 @@ export class Display extends Component {
             archives: [],
             reminders: [],
             trash: [],
-            openLoader:false
+            openLoader: false
         }
     }
     /**
@@ -29,53 +29,53 @@ export class Display extends Component {
     }
 
     allNotesDisplaying = () => {
-        this.setState({openLoader:true})
+        this.setState({ openLoader: true })
         this.props.loadingInitiated(true) //start loading
         allNotes().then((responseReceived) => {
             console.log("\n\n\tAll notes received ---->", responseReceived.data.data)
             this.setState({ notes: responseReceived.data.data })
             setTimeout(() => {
-                this.setState({openLoader:false})
+                this.setState({ openLoader: false })
                 this.props.loadingInitiated(false) //end loading
             }, 1600);
             //console.log("-->",this.notes)
         })
     }
     allRemindersDisplaying = () => {
-        this.setState({openLoader:true})
+        this.setState({ openLoader: true })
         this.props.loadingInitiated(true) //start loading
         allReminders().then((responseReceived) => {
             console.log("\n\n\tAll Reminders received ---->", responseReceived.data.data)
             this.setState({ reminders: responseReceived.data.data })
             //console.log("-->",this.reminders)
             setTimeout(() => {
-                this.setState({openLoader:false})
+                this.setState({ openLoader: false })
                 this.props.loadingInitiated(false) //end loading
             }, 1600);
         })
     }
     allArchivesDisplaying = () => {
-        this.setState({openLoader:true})
+        this.setState({ openLoader: true })
         this.props.loadingInitiated(true) //start loading
         allArchives().then((responseReceived) => {
             console.log("\n\n\tAll archives received ---->", responseReceived.data.data)
             this.setState({ archives: responseReceived.data.data })
             //console.log("-->",this.archives)
             setTimeout(() => {
-                this.setState({openLoader:false})
+                this.setState({ openLoader: false })
                 this.props.loadingInitiated(false) //end loading
             }, 1600);
         })
     }
     allTrashDisplaying = () => {
-        this.setState({openLoader:true})
+        this.setState({ openLoader: true })
         this.props.loadingInitiated(true) //start loading
         allTrash().then((responseReceived) => {
             console.log("\n\n\t All Trash received ---->", responseReceived.data.data)
             this.setState({ trash: responseReceived.data.data })
             //console.log("-->",this.trash)
             setTimeout(() => {
-                this.setState({openLoader:false})
+                this.setState({ openLoader: false })
                 this.props.loadingInitiated(false) //end loading
             }, 1600);
         })
@@ -89,6 +89,7 @@ export class Display extends Component {
                     <SingleNote key={index}
                         data={data}//props data sent to Single note component to access further 
                         refreshDisplay={this.allNotesDisplaying}
+                        notesView={this.props.notesView}
                     />
                 )
             })
@@ -129,8 +130,15 @@ export class Display extends Component {
             })
         }
         return (
-            <div id="Content">
-                {this.displayContent}
+            <div>
+                {this.props.notesView ?
+                    <div id="ContentO">
+                        {this.displayContent}
+                    </div>
+                    :
+                    <div id="Content">
+                        {this.displayContent}
+                    </div>}
             </div>
         )
     }

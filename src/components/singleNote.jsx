@@ -40,15 +40,11 @@ export class SingleNote extends Component {
     state = {
         open: false,
         labelName: null,
-        checkLabel: false
+        checkLabel: false,
+
     };
 
-    // componentDidMount() {
-    //     if (this.props.data.label.length > 0) {
-    //         console.log(`\n\n\tNote ${this.props.data.title} has '${this.props.data.label[0].labelName}' label`)
-    //         this.setState({ checkLabel: true, labelName: this.props.data.label[0].labelName })
-    //     }
-    // }
+
 
     handleRefresh = () => {
         this.props.refreshDisplay()
@@ -71,24 +67,45 @@ export class SingleNote extends Component {
         return (
             <div id="NotesReceived">
                 <MuiThemeProvider theme={theme}>
-                    <Card id="NoteDimensions" style={{ backgroundColor: this.props.data.color }}>
-                        <div onClick={this.handleClickOpen} id="SingleNote">
-                            {this.props.data.title}<br />
-                            {this.props.data.description}</div>
-                       <div id="manageLabels"> {this.props.data.label.map((label, index) => (
-                            <div id="LabelOnNote" style={{ marginRight: "165px" }}>
-                                <Chip
-                                    className={this.classes.root}
-                                    label={label.labelName}
-                                    variant="outlined"
-                                    onClick={this.clickedLabel}
-                                    onDelete={this.removingLabelOnNote}
-                                    deleteIcon={<CloseIcon />}
-                                />
-                            </div>
+                    {this.props.notesView ?
+                        <Card id="NoteDimensionsO" style={{ backgroundColor: this.props.data.color }}>
+                            <div onClick={this.handleClickOpen} id="SingleNote">
+                                {this.props.data.title}<br />
+                                {this.props.data.description}</div>
+                            <div id="manageLabels"> {this.props.data.label.map((label, index) => (
+                                <div id="LabelOnNote" style={{ marginRight: "165px" }}>
+                                    <Chip
+                                        className={this.classes.root}
+                                        label={label.labelName}
+                                        variant="outlined"
+                                        onClick={this.clickedLabel}
+                                        onDelete={this.removingLabelOnNote}
+                                        deleteIcon={<CloseIcon />}
+                                    />
+                                </div>
                             ))}</div>
                             <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
-                    </Card>
+                        </Card> 
+                        :
+                        <Card id="NoteDimensions" style={{ backgroundColor: this.props.data.color }}>
+                            <div onClick={this.handleClickOpen} id="SingleNote">
+                                {this.props.data.title}<br />
+                                {this.props.data.description}</div>
+                            <div id="manageLabels"> {this.props.data.label.map((label, index) => (
+                                <div id="LabelOnNote" style={{ marginRight: "165px" }}>
+                                    <Chip
+                                        className={this.classes.root}
+                                        label={label.labelName}
+                                        variant="outlined"
+                                        onClick={this.clickedLabel}
+                                        onDelete={this.removingLabelOnNote}
+                                        deleteIcon={<CloseIcon />}
+                                    />
+                                </div>
+                            ))}</div>
+                            <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
+                        </Card>}
+
                     <Dialog
                         open={this.state.open}
                         onClose={this.handleClose}
