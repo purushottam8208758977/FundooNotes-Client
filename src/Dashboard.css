@@ -140,7 +140,29 @@ cursor: pointer;
 #SingleNote{
     margin-top: 10px;
 }
+#Remind{
+    display:flex
+}
 
+#ForFont{
+    font-family:Roboto, arial, sans-serif;
+    font-size:15px;
+    font-weight:400;
+    line-height: normal;
+    color: rgb(60, 64, 67)
+}
+#ReminderItems{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+#ForFontOther{
+    font-family:Roboto, arial, sans-serif;
+    font-size:12px;
+    font-weight:400;
+    line-height: normal;
+    color: rgb(60, 64, 67)
+}
 #dialog{
     display: flex;
     flex-direction: column;

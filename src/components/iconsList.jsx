@@ -7,7 +7,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { updateNote, allLabels, addLabelOnNote } from '../services/services'
 import Tooltip from '@material-ui/core/Tooltip';
-
+import MDtime from 'react-ionicons/lib/MdTime'
 import { makeStyles } from '@material-ui/core/styles';
 
 //child components
@@ -37,7 +37,7 @@ export class IconsList extends Component {
             parentMenu: false,// parent menu's key ---> opens delete note and add label menu
             colorPallete: false,// key to open color pallete
             childMenu: false, // childe menu which opens after parent menu closed 
-            reminderMenu=false,
+            reminderMenu:false,
             labels: []
         }
         this.ColorPopover = React.createRef()
@@ -52,7 +52,7 @@ export class IconsList extends Component {
     }
 
     closeMenu = () => {
-        this.setState({ parentMenu: false, anchorEl: null, childMenu: false })
+        this.setState({ parentMenu: false, anchorEl: null, childMenu: false ,reminderMenu:false})
     }
 
     refreshBoth = () => {
@@ -99,8 +99,9 @@ export class IconsList extends Component {
         this.ColorPopover.current.handlePopoverOpen(event)
     }
 
-    openReminderMenu = () => {
+    openReminderMenu = (event) => {
         //opening reminder menu
+        console.log("\n\n\tOpening reminder menu")
         this.setState({ anchorEl: event.currentTarget, reminderMenu: true })
     }
 
@@ -129,7 +130,7 @@ export class IconsList extends Component {
         })
         return (
             <div id="Icons">
-                <Tooltip title="Reminder"><Button onClick={this.openReminderMenu}><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button></Tooltip>
+                <Tooltip title="Reminder"><Button onClick={(event) => this.openReminderMenu(event)}><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button></Tooltip>
                 <Tooltip title="Change color"><Button onClick={(event) => this.openColorPallete(event)}><img src={require('../assets/pallete.svg')} alt="pallete pic"></img></Button></Tooltip>
                 <Tooltip title="Archive"><Button onClick={this.archiveTheNote}> <img src={require('../assets/archive.svg')} alt="archive pic "></img> </Button></Tooltip>
                 <Tooltip title="More"><Button onClick={(event) => this.handleMenu(event)}><MoreVertIcon></MoreVertIcon></Button></Tooltip>
@@ -165,19 +166,21 @@ export class IconsList extends Component {
                     open={this.state.reminderMenu}
                     onClose={this.closeMenu}
                 >
-                    <MenuItem>
+                    <MenuItem id="ForFont">
                         Reminder :
                     </MenuItem>
-                    <MenuItem>
-                        Later today <Typography>8.00 PM</Typography>
+                    <MenuItem id="ForFontOther">
+                       <div id="ReminderItems"> Later today <span><Typography id="ForFontOther"> 8.00 PM</Typography></span></div>
                     </MenuItem>
-                    <MenuItem>
-                        Tommorrow <Typography>8.00 AM</Typography>
+                    <MenuItem id="ForFontOther">
+                       <div id="ReminderItems"> Tommorrow <span><Typography id="ForFontOther"> 8.00 AM</Typography></span></div>
                     </MenuItem>
-                    <MenuItem>
-                        Next week <Typography>Mon, 8:00 AM</Typography>
+                    <MenuItem id="ForFontOther">
+                        <div id="ReminderItems">Next week <span><Typography id="ForFontOther">  Mon, 8:00 AM</Typography></span></div>
                     </MenuItem>
-                    ))}
+                    <MenuItem id="ForFontOther">
+                        <div id="Remind"><MDtime/>  <span id="ForFontOther">Pick date & time</span> </div> 
+                    </MenuItem>
                 </Menu>
             </div>
         )

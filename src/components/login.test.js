@@ -16,7 +16,7 @@ describe("checking component",()=>{
         component.debug() // passes only when the component exists
         component.contains(  <div className="SignIn"> <br /> Sign in </div>)
     
-        //console.log("\n\n\ttest result--> ",component.debug())
+        console.log("\n\n\ttest result--> ",component.debug())
     })
 
     // it("sdds",()=>{

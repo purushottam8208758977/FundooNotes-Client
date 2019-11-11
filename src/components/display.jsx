@@ -86,11 +86,11 @@ export class Display extends Component {
             this.displayContent = this.state.notes.map((data, index) => {
                 //console.log("\n\n\tdata of notes -->",data)
                 return (
-                    <SingleNote key={index}
+                   <div> <SingleNote key={index}
                         data={data}//props data sent to Single note component to access further 
                         refreshDisplay={this.allNotesDisplaying}
                         notesView={this.props.notesView}
-                    />
+                    /></div>
                 )
             })
         }
