@@ -198,6 +198,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const TITLE_ARRAY = ['Reminders', 'Archive', 'Trash']
+
 export class Dashboard extends Component {
     constructor() {
         super()
@@ -208,9 +210,11 @@ export class Dashboard extends Component {
             displayReminders: false,
             displayArchives: false,
             displayTrash: false,
+            otherTitle:false,  // this will let the dom know that a new title has to be added 
             loading: false,
             success: false,
-            load: false
+            load: false,
+            titleArrayIndex: 0
         }
         this.classes = useStyles.bind(this);
 
@@ -226,11 +230,11 @@ export class Dashboard extends Component {
         this.setState({ open: false })
     };
     columnView = () => {
-        console.log("\n\n\tColumn view--->",this.state.toggle)
+        console.log("\n\n\tColumn view--->", this.state.toggle)
         this.setState({ toggle: true })
     }
     rowView = () => {
-        console.log("\n\n\tRow view--->",this.state.toggle)
+        console.log("\n\n\tRow view--->", this.state.toggle)
         this.setState({ toggle: false })
     }
     NoteDisplay = () => {
@@ -245,6 +249,7 @@ export class Dashboard extends Component {
         this.setState({
             displayNotes: true,
             displayReminders: false,
+            otherTitle:false,  // this will let the dom know that a title has to be only notes now
             displayArchives: false,
             displayTrash: false
         })
@@ -254,6 +259,8 @@ export class Dashboard extends Component {
         this.setState({
             displayNotes: false,
             displayReminders: true,
+            titleArrayIndex: 0,
+            otherTitle:true,  // this will let the dom know that a new title has to be added 
             displayArchives: false,
             displayTrash: false
         })
@@ -262,6 +269,8 @@ export class Dashboard extends Component {
         this.setState({
             displayNotes: false,
             displayReminders: false,
+            titleArrayIndex: 1,
+            otherTitle:true,  // this will let the dom know that a new title has to be added 
             displayArchives: true,
             displayTrash: false
         })
@@ -270,6 +279,8 @@ export class Dashboard extends Component {
         this.setState({
             displayNotes: false,
             displayReminders: false,
+            titleArrayIndex: 2,
+            otherTitle:true,  // this will let the dom know that a new title has to be added 
             displayArchives: false,
             displayTrash: booleanValue
         })
@@ -302,8 +313,13 @@ export class Dashboard extends Component {
                                 )
                             }}
                         />
-                        <img className="KeepIcon" src={KeepIcon} alt="keep pic"></img>
-                        <div className="Keep">Fundoo Notes</div>
+                        {this.state.otherTitle ?
+                            <div className="Keep">{TITLE_ARRAY[this.state.titleArrayIndex]}</div>
+                            :
+                            <div>  <img className="KeepIcon" src={KeepIcon} alt="keep pic"></img>
+                                <div className="Keep">Fundoo Notes</div>
+                            </div>
+                        }
                         <div className="AlignMent">  <Grid container justify="flex-end" alignItems="flex-end">
                             <Avatar style={{ cursor: "pointer" }} className={this.classes.orangeAvatar} src="https://fundooimages.s3.us-east-2.amazonaws.com/2019-11-04.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZ57TOXDSXSS7TFVP%2F20191109%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20191109T123353Z&X-Amz-Expires=900&X-Amz-Signature=9e579a30838a6be0fe589f1bdbaff6b82ff72fef84c66269b1c8f5a14fd992dc&X-Amz-SignedHeaders=host"></Avatar>
                         </Grid></div>
