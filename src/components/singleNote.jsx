@@ -44,8 +44,6 @@ export class SingleNote extends Component {
 
     };
 
-
-
     handleRefresh = () => {
         this.props.refreshDisplay()
     }

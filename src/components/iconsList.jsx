@@ -5,7 +5,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { updateNote, allLabels,addLabelOnNote } from '../services/services'
+import { updateNote, allLabels, addLabelOnNote } from '../services/services'
 import Tooltip from '@material-ui/core/Tooltip';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,26 +19,26 @@ const noteMenuItems = ['Delete Note', 'Add Label']
 
 const useStyles = makeStyles(theme => ({
     root: {
-      display: 'flex',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      '& > *': {
-        margin: theme.spacing(0.5),
-      },
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        '& > *': {
+            margin: theme.spacing(0.5),
+        },
     },
-  }));
+}));
 export class IconsList extends Component {
     mappinglabels;
     constructor() {
         super()
         this.state = {
             anchorEl: null, // determines the position menu bar ...where to open
-            parentMenu: false,// first menu's key ---> opens delete note and add label menu
-            colorPallete: false,
-            childMenu: false,
+            parentMenu: false,// parent menu's key ---> opens delete note and add label menu
+            colorPallete: false,// key to open color pallete
+            childMenu: false, // childe menu which opens after parent menu closed 
+            reminderMenu=false,
             labels: []
         }
-
         this.ColorPopover = React.createRef()
         this.classes = useStyles.bind(this);
 
@@ -76,7 +76,6 @@ export class IconsList extends Component {
             let deletionObject = {}
             deletionObject.noteId = this.props.individualNoteData._id
             deletionObject.updating = { trash: true }
-
             updateNote(deletionObject).then((responseReceived) => {
                 console.log("\n\n\tIcons list --> trash response--->", responseReceived)
                 this.props.refreshing()
@@ -87,7 +86,6 @@ export class IconsList extends Component {
             this.setState({ childMenu: true, parentMenu: false })
             //adding a label (displaying labels list)
             allLabels().then((responseReceived) => {
-                
                 console.log("\n\n\tIcons list --> Labels --->", responseReceived.data.data)
                 this.setState({ labels: responseReceived.data.data })
 
@@ -100,14 +98,18 @@ export class IconsList extends Component {
         this.ColorPopover.current.handlePopoverOpen(event)
     }
 
-    addingLabelOnNote=(event,index)=>{
-        this.closeMenu() 
-        let labelObject={}
-        console.log("\n\n\tIndex received  labels ->",this.state.labels[index]._id)
-        labelObject.noteId=this.props.individualNoteData._id
-        labelObject.labelId=this.state.labels[index]._id
-        addLabelOnNote(labelObject).then((reponseOfAddingLabel)=>{
-            console.log("\n\n\tResponse of adding label on note",reponseOfAddingLabel)
+    openReminderMenu = () => {
+
+    }
+
+    addingLabelOnNote = (event, index) => {
+        this.closeMenu()
+        let labelObject = {}
+        console.log("\n\n\tIndex received  labels ->", this.state.labels[index]._id)
+        labelObject.noteId = this.props.individualNoteData._id
+        labelObject.labelId = this.state.labels[index]._id
+        addLabelOnNote(labelObject).then((reponseOfAddingLabel) => {
+            console.log("\n\n\tResponse of adding label on note", reponseOfAddingLabel)
             this.refreshBoth()
         })
 
@@ -125,10 +127,11 @@ export class IconsList extends Component {
         })
         return (
             <div id="Icons">
-                <Tooltip title="Reminder"><Button><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button></Tooltip>
+                <Tooltip title="Reminder"><Button onClick={this.openReminderMenu}><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button></Tooltip>
                 <Tooltip title="Change color"><Button onClick={(event) => this.openColorPallete(event)}><img src={require('../assets/pallete.svg')} alt="pallete pic"></img></Button></Tooltip>
                 <Tooltip title="Archive"><Button onClick={this.archiveTheNote}> <img src={require('../assets/archive.svg')} alt="archive pic "></img> </Button></Tooltip>
                 <Tooltip title="More"><Button onClick={(event) => this.handleMenu(event)}><MoreVertIcon></MoreVertIcon></Button></Tooltip>
+                {/* PARENT MENU */}
                 <Menu
                     anchorEl={anchorEl}
                     open={this.state.parentMenu}
@@ -142,7 +145,7 @@ export class IconsList extends Component {
                     ))}
                 </Menu>
                 <ColorPopover refreshPostColorChange={this.refreshBoth} settingColor={this.props.individualNoteData} ref={this.ColorPopover} openPallete={this.state.colorPallete} />
-                
+                {/* CHILD MENU */}
                 <Menu
                     anchorEl={anchorEl}
                     open={this.state.childMenu}
@@ -152,6 +155,16 @@ export class IconsList extends Component {
                         <List onClick={(event) => this.addingLabelOnNote(event, index)} key={index}>
                             {currentLabel.labelName}
                         </List>
+                    ))}
+                </Menu>
+                {/* REMINDER MENU */}
+                <Menu
+                    anchorEl={anchorEl}
+                    open={this.state.reminderMenu}
+                    onClose={this.closeMenu}
+                >
+                    <MenuItem>
+                    </MenuItem>
                     ))}
                 </Menu>
             </div>
