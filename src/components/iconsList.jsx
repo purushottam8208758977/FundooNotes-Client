@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ColorPopover } from './colorPopover'
 import { LabelOnNote } from './labelOnNote'
 import List from '@material-ui/core/List';
+import { Typography } from '@material-ui/core';
 
 const noteMenuItems = ['Delete Note', 'Add Label']
 
@@ -41,12 +42,12 @@ export class IconsList extends Component {
         }
         this.ColorPopover = React.createRef()
         this.classes = useStyles.bind(this);
-
     }
     /**
      * @description - This method is invoked after clicking to more vert icon ...it opens a menu
      */
     handleMenu = (event) => {
+        //opens the parent menu and the anchor el sets a specific position on the screen
         this.setState({ anchorEl: event.currentTarget, parentMenu: true })
     }
 
@@ -99,7 +100,8 @@ export class IconsList extends Component {
     }
 
     openReminderMenu = () => {
-
+        //opening reminder menu
+        this.setState({ anchorEl: event.currentTarget, reminderMenu: true })
     }
 
     addingLabelOnNote = (event, index) => {
@@ -164,6 +166,16 @@ export class IconsList extends Component {
                     onClose={this.closeMenu}
                 >
                     <MenuItem>
+                        Reminder :
+                    </MenuItem>
+                    <MenuItem>
+                        Later today <Typography>8.00 PM</Typography>
+                    </MenuItem>
+                    <MenuItem>
+                        Tommorrow <Typography>8.00 AM</Typography>
+                    </MenuItem>
+                    <MenuItem>
+                        Next week <Typography>Mon, 8:00 AM</Typography>
                     </MenuItem>
                     ))}
                 </Menu>
