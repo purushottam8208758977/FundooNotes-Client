@@ -143,6 +143,8 @@ cursor: pointer;
 
 #SingleNote{
     margin-top: 10px;
+    padding: 0px 11px;
+    display: flex;
 }
 #Remind{
     display:flex

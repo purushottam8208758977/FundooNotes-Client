@@ -14,7 +14,7 @@ import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import DoneAll from 'react-ionicons/lib/MdCheckmark'
-
+import { searchInNotes } from '../services/services'
 
 //child components
 import { TakeNote } from './TakeNote'
@@ -214,7 +214,8 @@ export class Dashboard extends Component {
             success: false,
             load: false,
             titleArrayIndex: 0,
-            enableSearching: false
+            enableSearching: false,
+            search: ""
         }
         this.classes = useStyles.bind(this);
 
@@ -252,7 +253,7 @@ export class Dashboard extends Component {
             otherTitle: false,  // this will let the dom know that a title has to be only notes now
             displayArchives: false,
             displayTrash: false,
-            enableSearching:false
+            enableSearching: false
         })
     }
     displayReminders = (booleanValue) => {//whether to display notes or not
@@ -264,8 +265,39 @@ export class Dashboard extends Component {
             otherTitle: true,  // this will let the dom know that a new title has to be added 
             displayArchives: false,
             displayTrash: false,
-            enableSearching:false
+            enableSearching: false,
+            search: "",
+            displaySearch: []
         })
+    }
+
+    collectSearchQuery = (event) => {
+        if (event.target.value.length >= 1) {
+            this.setState({
+                search: event.target.value,
+                enableSearching: true
+            })
+            console.log("\n\n\tsearch value --->", this.state.search)
+        }
+        else {
+            this.setState({ search: event.target.value, enableSearching: false })
+
+        }
+    }
+
+    initiateSearching = (event) => {
+        console.log("\n\n\tIn initiate search ", event.key)
+
+        if (event.key === "Enter") {
+            let searchObject = {}
+            searchObject.search = this.state.search
+            console.log("\n\n\t search object", searchObject)
+            searchInNotes(searchObject).then((searchResponse) => {
+                console.log("\n\n\tResponse received", searchResponse.data.data)
+                 //this.setState({displaySearch:})
+            })
+        }
+
     }
     displayArchives = (booleanValue) => {//whether to display notes or not
         this.setState({
@@ -289,8 +321,8 @@ export class Dashboard extends Component {
     }
     searchNotes = (event) => {
         //initiating searching notes process
+        this.setState({ search: event.target.value, enableSearching: true })
         console.log("\n\n\tsearching ....")
-        this.setState({ enableSearching: true })
     }
     render() {
 
@@ -310,7 +342,18 @@ export class Dashboard extends Component {
                             hiddenLabel
                             variant="filled"
                             placeholder="Search"
-                            onClick={(event) => this.searchNotes(event)}
+                            // onClick={(event) => this.searchNotes(event)}
+                            onChange={this.collectSearchQuery}
+                            // onKeyDown={function (e) {
+                            //     if (e.key === 'Enter') {
+                            //         console.log('start searching');
+                            //        {this.initiateSearching}
+                            //     }
+                            // }}
+                            onKeyDown={this.initiateSearching}
+
+
+                            value={this.state.search}
                             InputProps={{ "disable-underline": true }, {
                                 endAdornment: (
                                     <InputAdornment position="10%">
@@ -342,16 +385,13 @@ export class Dashboard extends Component {
                         trashArray={this.displayTrash} />
 
                     {this.state.enableSearching ?
-                        <div  id="holdingCards">
+                        <div id="holdingCards">
                             <Display
                                 ref={this.CreatingNoteInstance}
-                                // fetchNotes={this.state.displayNotes}
-                                // fetchReminders={this.state.displayReminders}
-                                // fetchArchives={this.state.displayArchives}
-                                // fetchTrash={this.state.displayTrash}
-                                 loadingInitiated={this.displayLoader}
-                                 notesView={this.state.toggle}
-                                 />
+                                loadingInitiated={this.displayLoader}
+                                notesView={this.state.toggle}
+                                searchNotes={this.state.displaySearch}
+                            />
                         </div>
                         :
                         <div id="Two">
