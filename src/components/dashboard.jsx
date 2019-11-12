@@ -204,7 +204,7 @@ export class Dashboard extends Component {
         super()
         this.state = {
             toggle: false,
-            open: false,
+            open: true,
             displayNotes: true,  //when dashboard is going to open notes should be displayed 
             displayReminders: false,
             displayArchives: false,
@@ -222,6 +222,8 @@ export class Dashboard extends Component {
         //creating a reference ... reference is made to invoke the method of another component
         this.CreatingNoteInstance = React.createRef()
     }
+
+   
 
     handleDrawerOpen = () => {
         //  this.setOpen(true);
@@ -324,7 +326,7 @@ export class Dashboard extends Component {
         console.log("\n\n\tsearching ....")
     }
     render() {
-
+      let movement = this.state.open ? "movementOn" : "movementOff";
         return (
             <div className="MainDiv">
                 <MuiThemeProvider theme={theme}>
@@ -384,7 +386,7 @@ export class Dashboard extends Component {
                             />
                         </div>
                         :
-                        <div id="Two">
+                        <div id={movement} >
                             {/* Taking note component will render here   */}
                             <TakeNote refresh={this.NoteDisplay} />
                             {/* All note will be displayed here using the display component 3*/}
