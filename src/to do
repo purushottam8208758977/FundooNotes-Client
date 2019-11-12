@@ -1,0 +1,22 @@
+masonry
+add reminder on existing note 
+add reminder while creating a note 
+add color while creating a note 
+add color while in dialog box 
+add color in ,reminder,trash ,archive 
+add label --> checkbox , multiple checkboxes 
+delete label on note 
+if a new label added so update it in labels list
+move display componet when clicked on drawer 
+align icons of cards below the card proper as in keep
+if clicked on label list the notes labelled with that label
+image problem
+dashboard proper alignment
+close take a note when clicked outside ---> click away listener 
+ability to edit the note when clicked on the note anywhere 
+improve alignment of dialog box
+pie chart
+drag and drop 
+alignment in trash display ---alignment of icons 
+logout --->clearing local storage 
+test all div inside the component

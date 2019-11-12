@@ -6,6 +6,8 @@ import { IconsList } from './iconsList';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
 import CloseIcon from '@material-ui/icons/Close'
+import {deleteLabelOnNote} from '../services/services'
+
 //child components
 import { DialogNote } from './dialogNote'
 
@@ -26,7 +28,7 @@ const theme = createMuiTheme({
             "deleteIcon": {
                 "height": "15px"
             }
-        }
+        },
     }
 })
 
@@ -57,16 +59,24 @@ export class SingleNote extends Component {
         this.setState({ open: false });
     };
 
-    removingLabelOnNote = () => {
+    removingLabelOnNote = (event, index) => {
         //initiating removing label process on note 
 
+        let labelObject = {}
+        labelObject.noteId = this.props.data._id
+        labelObject.labelId = this.props.data.label[index]._id
+        console.log("\n\nlabel  --->", this.props.data.label[index]._id)
+        deleteLabelOnNote(labelObject).then((deletedLabelResponse) => {
+            console.log("\n\n\tAfter deleting label response")
+            this.props.refreshDisplay()
+        })
     }
     render() {
         return (
             <div id="NotesReceived">
                 <MuiThemeProvider theme={theme}>
                     {this.props.notesView ?
-                        <Card id="NoteDimensionsO" style={{ backgroundColor: this.props.data.color }}>
+                        <Card id="NoteDimensions" style={{ backgroundColor: this.props.data.color }}>
                             <div onClick={this.handleClickOpen} id="SingleNote">
                                 {this.props.data.title}<br />
                                 {this.props.data.description}</div>
@@ -77,13 +87,13 @@ export class SingleNote extends Component {
                                         label={label.labelName}
                                         variant="outlined"
                                         onClick={this.clickedLabel}
-                                        onDelete={this.removingLabelOnNote}
+                                        onDelete={() => this.removingLabelOnNote(index)}
                                         deleteIcon={<CloseIcon />}
                                     />
                                 </div>
                             ))}</div>
                             <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
-                        </Card> 
+                        </Card>
                         :
                         <Card id="NoteDimensions" style={{ backgroundColor: this.props.data.color }}>
                             <div onClick={this.handleClickOpen} id="SingleNote">
@@ -96,7 +106,7 @@ export class SingleNote extends Component {
                                         label={label.labelName}
                                         variant="outlined"
                                         onClick={this.clickedLabel}
-                                        onDelete={this.removingLabelOnNote}
+                                        onDelete={(event) => this.removingLabelOnNote(event, index)}
                                         deleteIcon={<CloseIcon />}
                                     />
                                 </div>

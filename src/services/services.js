@@ -129,3 +129,13 @@ export function addLabelOnNote(labelData){
         }
     })
 }
+
+export function deleteLabelOnNote(labelData){
+    const authenticationToken = localStorage.getItem('token')
+    console.log("\n\n\tIn services for deleting label on note API", authenticationToken)
+    return axios.post(url + "/deleteLabelOnNote",labelData,  {
+        headers: {
+            token: authenticationToken
+        }
+    })
+}

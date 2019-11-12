@@ -153,6 +153,7 @@ export class IconsList extends Component {
                     anchorEl={anchorEl}
                     open={this.state.childMenu}
                     onClose={this.closeMenu}
+                    
                 >
                     {this.state.labels.map((currentLabel, index) => (
                         <List onClick={(event) => this.addingLabelOnNote(event, index)} key={index}>
@@ -179,7 +180,7 @@ export class IconsList extends Component {
                         <div id="ReminderItems">Next week <span><Typography id="ForFontOther">  Mon, 8:00 AM</Typography></span></div>
                     </MenuItem>
                     <MenuItem id="ForFontOther">
-                        <div id="Remind"><MDtime/>  <span id="ForFontOther">Pick date & time</span> </div> 
+                        <div id="Remind"><span><MDtime/></span>  <span id="ForFontOther">Pick date & time</span> </div> 
                     </MenuItem>
                 </Menu>
             </div>
