@@ -101,11 +101,11 @@ export class Display extends Component {
             this.displayContent = this.state.notes.map((data, index) => {
                 //console.log("\n\n\tdata of notes -->",data)
                 return (
-                    <div> <SingleNote key={index}
+                    <div > <SingleNote key={index}
                         data={data}//props data sent to Single note component to access further 
                         refreshDisplay={this.allNotesDisplaying}
                         notesView={this.props.notesView}
-                    /></div>
+                        /></div>
                 )
             })
         }
@@ -157,13 +157,13 @@ export class Display extends Component {
             })
         }
         return (
-            <div>
+            <div >
                 {this.props.notesView ?
                     <div id="ContentO">
                         {this.displayContent}
                     </div>
                     :
-                    <div ><Masonry id="Content">
+                    <div id="cardsSettled"><Masonry id="Content">
                         {this.displayContent}</Masonry>
                     </div>}
             </div>

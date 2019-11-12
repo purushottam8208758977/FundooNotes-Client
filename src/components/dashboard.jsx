@@ -342,7 +342,7 @@ export class Dashboard extends Component {
                         trashArray={this.displayTrash} />
 
                     {this.state.enableSearching ?
-                        <div>
+                        <div  id="holdingCards">
                             <Display
                                 ref={this.CreatingNoteInstance}
                                 // fetchNotes={this.state.displayNotes}
