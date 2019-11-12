@@ -140,7 +140,7 @@ export class Display extends Component {
                     <SingleNote key={index}
                         data={data}//props data sent to Single note component to access further 
                         refreshDisplay={this.allNotesDisplaying}
-                        notesView={this.props.notesView}
+                        
                     />
                 )
             })

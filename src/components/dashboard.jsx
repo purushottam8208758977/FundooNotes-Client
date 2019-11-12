@@ -388,7 +388,7 @@ export class Dashboard extends Component {
                         :
                         <div id={movement} >
                             {/* Taking note component will render here   */}
-                            <TakeNote refresh={this.NoteDisplay} />
+                            <TakeNote refresh={this.NoteDisplay} /> 
                             {/* All note will be displayed here using the display component 3*/}
                             <Display
                                 ref={this.CreatingNoteInstance}

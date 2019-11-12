@@ -77,7 +77,7 @@ export class SingleNote extends Component {
             <div id="NotesReceived">
                 <MuiThemeProvider theme={theme}>
                     {this.props.notesView ?
-                        <Card id="NoteDimensions" style={{ backgroundColor: this.props.data.color }}>
+                        <Card id="NoteDimensionsO" style={{ backgroundColor: this.props.data.color }}>
                             <div onClick={this.handleClickOpen} id="SingleNote">
                                 {this.props.data.title}<br />
                                 {this.props.data.description}</div>
