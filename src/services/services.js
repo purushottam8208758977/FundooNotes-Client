@@ -139,3 +139,13 @@ export function deleteLabelOnNote(labelData){
         }
     })
 }
+
+export function searchInNotes(searchData){
+    const authenticationToken = localStorage.getItem('token')
+    console.log("\n\n\tIn services for searching in notes API", authenticationToken)
+    return axios.post(url + "/search",searchData,  {
+        headers: {
+            token: authenticationToken
+        }
+    })
+}

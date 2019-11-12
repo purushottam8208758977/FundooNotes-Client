@@ -16,7 +16,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import DoneAll from 'react-ionicons/lib/MdCheckmark'
 
 
-
 //child components
 import { TakeNote } from './TakeNote'
 import { Display } from './display'
@@ -210,11 +209,12 @@ export class Dashboard extends Component {
             displayReminders: false,
             displayArchives: false,
             displayTrash: false,
-            otherTitle:false,  // this will let the dom know that a new title has to be added 
+            otherTitle: false,  // this will let the dom know that a new title has to be added 
             loading: false,
             success: false,
             load: false,
-            titleArrayIndex: 0
+            titleArrayIndex: 0,
+            enableSearching: false
         }
         this.classes = useStyles.bind(this);
 
@@ -249,9 +249,10 @@ export class Dashboard extends Component {
         this.setState({
             displayNotes: true,
             displayReminders: false,
-            otherTitle:false,  // this will let the dom know that a title has to be only notes now
+            otherTitle: false,  // this will let the dom know that a title has to be only notes now
             displayArchives: false,
-            displayTrash: false
+            displayTrash: false,
+            enableSearching:false
         })
     }
     displayReminders = (booleanValue) => {//whether to display notes or not
@@ -260,9 +261,10 @@ export class Dashboard extends Component {
             displayNotes: false,
             displayReminders: true,
             titleArrayIndex: 0,
-            otherTitle:true,  // this will let the dom know that a new title has to be added 
+            otherTitle: true,  // this will let the dom know that a new title has to be added 
             displayArchives: false,
-            displayTrash: false
+            displayTrash: false,
+            enableSearching:false
         })
     }
     displayArchives = (booleanValue) => {//whether to display notes or not
@@ -270,7 +272,7 @@ export class Dashboard extends Component {
             displayNotes: false,
             displayReminders: false,
             titleArrayIndex: 1,
-            otherTitle:true,  // this will let the dom know that a new title has to be added 
+            otherTitle: true,  // this will let the dom know that a new title has to be added 
             displayArchives: true,
             displayTrash: false
         })
@@ -280,10 +282,15 @@ export class Dashboard extends Component {
             displayNotes: false,
             displayReminders: false,
             titleArrayIndex: 2,
-            otherTitle:true,  // this will let the dom know that a new title has to be added 
+            otherTitle: true,  // this will let the dom know that a new title has to be added 
             displayArchives: false,
             displayTrash: booleanValue
         })
+    }
+    searchNotes = (event) => {
+        //initiating searching notes process
+        console.log("\n\n\tsearching ....")
+        this.setState({ enableSearching: true })
     }
     render() {
 
@@ -303,6 +310,7 @@ export class Dashboard extends Component {
                             hiddenLabel
                             variant="filled"
                             placeholder="Search"
+                            onClick={(event) => this.searchNotes(event)}
                             InputProps={{ "disable-underline": true }, {
                                 endAdornment: (
                                     <InputAdornment position="10%">
@@ -332,20 +340,35 @@ export class Dashboard extends Component {
                         remindersArray={this.displayReminders}
                         archivesArray={this.displayArchives}
                         trashArray={this.displayTrash} />
-                    <div id="Two">
-                        {/* Taking note component will render here   */}
-                        <TakeNote refresh={this.NoteDisplay} />
-                        {/* All note will be displayed here using the display component 3*/}
-                        <Display
-                            ref={this.CreatingNoteInstance}
-                            fetchNotes={this.state.displayNotes}
-                            fetchReminders={this.state.displayReminders}
-                            fetchArchives={this.state.displayArchives}
-                            fetchTrash={this.state.displayTrash}
-                            loadingInitiated={this.displayLoader}
-                            notesView={this.state.toggle} />
-                    </div>
-                </MuiThemeProvider></div>
+
+                    {this.state.enableSearching ?
+                        <div>
+                            <Display
+                                ref={this.CreatingNoteInstance}
+                                // fetchNotes={this.state.displayNotes}
+                                // fetchReminders={this.state.displayReminders}
+                                // fetchArchives={this.state.displayArchives}
+                                // fetchTrash={this.state.displayTrash}
+                                 loadingInitiated={this.displayLoader}
+                                 notesView={this.state.toggle}
+                                 />
+                        </div>
+                        :
+                        <div id="Two">
+                            {/* Taking note component will render here   */}
+                            <TakeNote refresh={this.NoteDisplay} />
+                            {/* All note will be displayed here using the display component 3*/}
+                            <Display
+                                ref={this.CreatingNoteInstance}
+                                fetchNotes={this.state.displayNotes}
+                                fetchReminders={this.state.displayReminders}
+                                fetchArchives={this.state.displayArchives}
+                                fetchTrash={this.state.displayTrash}
+                                loadingInitiated={this.displayLoader}
+                                notesView={this.state.toggle} />
+                        </div>}
+
+                </MuiThemeProvider></div >
         )
     }
 }

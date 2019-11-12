@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { allNotes, allReminders, allArchives, allTrash } from '../services/services'
+import { allNotes, allReminders, allArchives, allTrash, searchInNotes } from '../services/services'
+import Masonry from 'react-masonry-component'
 
 //child component
 import { SingleNote } from './singleNote'
@@ -15,6 +16,7 @@ export class Display extends Component {
             archives: [],
             reminders: [],
             trash: [],
+            searchedNotes: [],
             openLoader: false
         }
     }
@@ -37,7 +39,7 @@ export class Display extends Component {
             setTimeout(() => {
                 this.setState({ openLoader: false })
                 this.props.loadingInitiated(false) //end loading
-            }, 1600);
+            }, 1200);
             //console.log("-->",this.notes)
         })
     }
@@ -51,7 +53,7 @@ export class Display extends Component {
             setTimeout(() => {
                 this.setState({ openLoader: false })
                 this.props.loadingInitiated(false) //end loading
-            }, 1600);
+            }, 1200);
         })
     }
     allArchivesDisplaying = () => {
@@ -64,7 +66,7 @@ export class Display extends Component {
             setTimeout(() => {
                 this.setState({ openLoader: false })
                 this.props.loadingInitiated(false) //end loading
-            }, 1600);
+            }, 1200);
         })
     }
     allTrashDisplaying = () => {
@@ -77,16 +79,29 @@ export class Display extends Component {
             setTimeout(() => {
                 this.setState({ openLoader: false })
                 this.props.loadingInitiated(false) //end loading
-            }, 1600);
+            }, 1000);
         })
         console.log("any...->")
+    }
+    allSearchedNotes = () => {
+        this.setState({ openLoader: true })
+        this.props.loadingInitiated(true) //start loading
+        searchInNotes().then((responseReceived) => {
+            console.log("\n\n\tAll searched notes received ---->", responseReceived.data.data)
+            this.setState({ searchedNotes: responseReceived.data.data })
+            //console.log("-->",this.archives)
+            setTimeout(() => {
+                this.setState({ openLoader: false })
+                this.props.loadingInitiated(false) //end loading
+            }, 1200);
+        })
     }
     render() {
         if (this.props.fetchNotes) {
             this.displayContent = this.state.notes.map((data, index) => {
                 //console.log("\n\n\tdata of notes -->",data)
                 return (
-                   <div> <SingleNote key={index}
+                    <div> <SingleNote key={index}
                         data={data}//props data sent to Single note component to access further 
                         refreshDisplay={this.allNotesDisplaying}
                         notesView={this.props.notesView}
@@ -117,7 +132,7 @@ export class Display extends Component {
                 )
             })
         }
-        else {//trash fetchtrash : true
+        else if (this.props.fetchTrash) {//trash fetchtrash : true
             this.displayContent = this.state.trash.map((data, index) => {
                 //console.log("\n\n\tdata of trash -->",data)
                 return (
@@ -129,6 +144,18 @@ export class Display extends Component {
                 )
             })
         }
+        else {
+            this.displayContent = this.state.searchedNotes.map((data, index) => {
+                //console.log("\n\n\tdata of trash -->",data)
+                return (
+                    <SingleNote key={index}
+                        data={data}//props data sent to Single note component to access further 
+                        refreshDisplay={this.allNotesDisplaying}
+                        notesView={this.props.notesView}
+                    />
+                )
+            })
+        }
         return (
             <div>
                 {this.props.notesView ?
@@ -136,8 +163,8 @@ export class Display extends Component {
                         {this.displayContent}
                     </div>
                     :
-                    <div id="Content">
-                        {this.displayContent}
+                    <div ><Masonry id="Content">
+                        {this.displayContent}</Masonry>
                     </div>}
             </div>
         )
