@@ -151,8 +151,8 @@ export class Display extends Component {
         return (
             <div >
                 {this.props.notesView ?
-                    <div id="ContentO">
-                        {this.displayContent}
+                    <div id="ContentO"><Masonry>
+                        {this.displayContent}</Masonry>
                     </div>
                     :
                     <div id="cardsSettled"><Masonry id="Content">
