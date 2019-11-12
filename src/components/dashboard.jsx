@@ -280,8 +280,7 @@ export class Dashboard extends Component {
             console.log("\n\n\tsearch value --->", this.state.search)
         }
         else {
-            this.setState({ search: event.target.value, enableSearching: false })
-
+            this.setState({ search: event.target.value, enableSearching: false ,displaySearch:[]})
         }
     }
 
