@@ -294,7 +294,7 @@ export class Dashboard extends Component {
             console.log("\n\n\t search object", searchObject)
             searchInNotes(searchObject).then((searchResponse) => {
                 console.log("\n\n\tResponse received", searchResponse.data.data)
-                 //this.setState({displaySearch:})
+                 this.setState({displaySearch: searchResponse.data.data})
             })
         }
 
@@ -342,17 +342,8 @@ export class Dashboard extends Component {
                             hiddenLabel
                             variant="filled"
                             placeholder="Search"
-                            // onClick={(event) => this.searchNotes(event)}
                             onChange={this.collectSearchQuery}
-                            // onKeyDown={function (e) {
-                            //     if (e.key === 'Enter') {
-                            //         console.log('start searching');
-                            //        {this.initiateSearching}
-                            //     }
-                            // }}
                             onKeyDown={this.initiateSearching}
-
-
                             value={this.state.search}
                             InputProps={{ "disable-underline": true }, {
                                 endAdornment: (

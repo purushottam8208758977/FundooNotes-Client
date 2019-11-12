@@ -132,20 +132,19 @@ export class Display extends Component {
                 )
             })
         }
-        // else if(this.props.search) {
-        //     console.log("\n\n\tIn display")
-        //     this.allSearchedNotes()
-        //     this.displayContent = this.state.searchedNotes.map((data, index) => {
-        //         //console.log("\n\n\tdata of trash -->",data)
-        //         return (
-        //             <SingleNote key={index}
-        //                 data={data}//props data sent to Single note component to access further 
-        //                 refreshDisplay={this.allNotesDisplaying}
-        //                 notesView={this.props.notesView}
-        //             />
-        //         )
-        //     })
-        // }
+        else if(this.props.searchNotes) {
+            console.log("\n\n\tIn display")
+            this.displayContent = this.props.searchNotes.map((data, index) => {
+                //console.log("\n\n\tdata of trash -->",data)
+                return (
+                    <SingleNote key={index}
+                        data={data}//props data sent to Single note component to access further 
+                        refreshDisplay={this.allNotesDisplaying}
+                        notesView={this.props.notesView}
+                    />
+                )
+            })
+        }
         else{
 
         }
