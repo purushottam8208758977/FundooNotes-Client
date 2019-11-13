@@ -10,6 +10,8 @@ import "toasted-notes/src/styles.css";
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
 
 //hitting api
 import { createNote } from '../services/services'
@@ -83,6 +85,10 @@ export class TakeNote extends Component {
         this.setState({anchorEl:null})
     }
 
+    closeTakeNote=()=>{
+        this.setState({toggle:false})
+        // this.creatingNote()
+    }
     creatingNote = () => {
         console.log("\n\nCreating a note ... data to be sent -->")
 
@@ -116,6 +122,8 @@ export class TakeNote extends Component {
         const open = Boolean(anchorEl)
         return (
             <div id="NoteDiv">
+              
+              <ClickAwayListener onClickAway={this.closeTakeNote}>
                 {this.state.toggle ?
                     <Card id="TakeN2" className={this.classes.card}>
                         <TextField
@@ -167,7 +175,7 @@ export class TakeNote extends Component {
                         />
                     </Card>
                 }
-
+</ClickAwayListener>
                 <Menu
                     anchorEl={anchorEl}
                     open={open}

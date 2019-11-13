@@ -9,7 +9,8 @@ import { updateNote, allLabels, addLabelOnNote } from '../services/services'
 import Tooltip from '@material-ui/core/Tooltip';
 import MDtime from 'react-ionicons/lib/MdTime'
 import { makeStyles } from '@material-ui/core/styles';
-import { createMuiTheme, MuiThemeProvider, withStyles } from '@material-ui/core' // overiding default css properties
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core' // overiding default css properties
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 //child components
 import { ColorPopover } from './colorPopover'

@@ -11,10 +11,18 @@ import KeepIcon from '../assets/keep.jpg'
 import '../Dashboard.css'
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
-import Grid from '@material-ui/core/Grid';
 import MenuIcon from '@material-ui/icons/Menu';
 import DoneAll from 'react-ionicons/lib/MdCheckmark'
 import { searchInNotes } from '../services/services'
+import Grid from '@material-ui/core/Grid';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+
+
+import Popper from '@material-ui/core/Popper';
+import Button from '@material-ui/core/Button';
+import Fade from '@material-ui/core/Fade';
+
+
 
 //child components
 import { TakeNote } from './TakeNote'
@@ -215,7 +223,10 @@ export class Dashboard extends Component {
             load: false,
             titleArrayIndex: 0,
             enableSearching: false,
-            search: ""
+            search: "",
+            anchorEl:null
+
+
         }
         this.classes = useStyles.bind(this);
 
@@ -223,7 +234,9 @@ export class Dashboard extends Component {
         this.CreatingNoteInstance = React.createRef()
     }
 
-   
+    closeLogOutPopUp = () => {
+        this.setState({ logOut: false })
+    }
 
     handleDrawerOpen = () => {
         //  this.setOpen(true);
@@ -234,11 +247,11 @@ export class Dashboard extends Component {
     };
     columnView = () => {
         console.log("\n\n\tColumn view--->", this.state.toggle)
-        this.setState({ toggle: true })
+        this.setState({ toggle: false })
     }
     rowView = () => {
         console.log("\n\n\tRow view--->", this.state.toggle)
-        this.setState({ toggle: false })
+        this.setState({ toggle: true })
     }
     NoteDisplay = () => {
         this.CreatingNoteInstance.current.allNotesDisplaying()
@@ -282,7 +295,7 @@ export class Dashboard extends Component {
             console.log("\n\n\tsearch value --->", this.state.search)
         }
         else {
-            this.setState({ search: event.target.value, enableSearching: false ,displaySearch:[]})
+            this.setState({ search: event.target.value, enableSearching: false, displaySearch: [] })
         }
     }
 
@@ -295,7 +308,7 @@ export class Dashboard extends Component {
             console.log("\n\n\t search object", searchObject)
             searchInNotes(searchObject).then((searchResponse) => {
                 console.log("\n\n\tResponse received", searchResponse.data.data)
-                 this.setState({displaySearch: searchResponse.data.data})
+                this.setState({ displaySearch: searchResponse.data.data })
             })
         }
 
@@ -320,21 +333,33 @@ export class Dashboard extends Component {
             displayTrash: booleanValue
         })
     }
+
+    loggingOut = (event) => {
+        //logging out from the account
+        console.log("\n\n\tLogging out ...")
+        this.setState({ openLog: !this.state.openLog,anchorEl:event.currentTarget})
+        console.log("\n\n\t state --->", this.state.openLog)
+    }
+
+    closeMenu = () => {
+        this.setState({ anchorEl: null, openLog: false })
+    }
     searchNotes = (event) => {
         //initiating searching notes process
         this.setState({ search: event.target.value, enableSearching: true })
         console.log("\n\n\tsearching ....")
     }
     render() {
-      let movement = this.state.open ? "movementOn" : "movementOff";
+        let movement = this.state.open ? "movementOn" : "movementOff";
+        const { anchorEl, openLog, placement } = this.state;
         return (
             <div className="MainDiv">
                 <MuiThemeProvider theme={theme}>
                     <Card className="CardL">
                         {this.state.toggle ?
-                            <img className="View" src={require('../assets/grid.svg')} alt="grid" onClick={this.rowView} />
-                            :
                             <img className="View" src={require('../assets/otherGrid.svg')} alt="grid" onClick={this.columnView} />
+                            :
+                            <img className="View" src={require('../assets/grid.svg')} alt="grid" onClick={this.rowView} />
                         }
                         <div className="MenuI" onClick={this.handleDrawerOpen}><MenuIcon /></div>
                         <TextField className="SearchBar"
@@ -364,7 +389,7 @@ export class Dashboard extends Component {
                             </div>
                         }
                         <div className="AlignMent">  <Grid container justify="flex-end" alignItems="flex-end">
-                            <Avatar style={{ cursor: "pointer" }} className={this.classes.orangeAvatar} src="https://fundooimages.s3.us-east-2.amazonaws.com/2019-11-04.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZ57TOXDSXSS7TFVP%2F20191109%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20191109T123353Z&X-Amz-Expires=900&X-Amz-Signature=9e579a30838a6be0fe589f1bdbaff6b82ff72fef84c66269b1c8f5a14fd992dc&X-Amz-SignedHeaders=host"></Avatar>
+                            <Avatar style={{ cursor: "pointer" }} onClick={(event) => this.loggingOut(event)} className={this.classes.orangeAvatar} src="https://fundooimages.s3.us-east-2.amazonaws.com/2019-11-04.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZ57TOXDSXSS7TFVP%2F20191109%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20191109T123353Z&X-Amz-Expires=900&X-Amz-Signature=9e579a30838a6be0fe589f1bdbaff6b82ff72fef84c66269b1c8f5a14fd992dc&X-Amz-SignedHeaders=host"></Avatar>
                         </Grid></div>
                         {this.state.load ?
                             <CircularIndeterminate />
@@ -388,7 +413,7 @@ export class Dashboard extends Component {
                         :
                         <div id={movement} >
                             {/* Taking note component will render here   */}
-                            <TakeNote refresh={this.NoteDisplay} /> 
+                            <TakeNote refresh={this.NoteDisplay} />
                             {/* All note will be displayed here using the display component 3*/}
                             <Display
                                 ref={this.CreatingNoteInstance}
@@ -400,6 +425,26 @@ export class Dashboard extends Component {
                                 notesView={this.state.toggle} />
                         </div>}
 
+
+                    <Popper open={openLog} anchorEl={anchorEl} placement={'bottom-left'} transition>
+                        {({ TransitionProps }) => (
+                            <Fade {...TransitionProps} timeout={100}>
+                                <Card id="LogOutMenu">
+                                  Work in progress !
+                                  <Avatar style={{ cursor: "pointer" }} onClick={(event) => this.loggingOut(event)} className={this.classes.orangeAvatar} src="https://fundooimages.s3.us-east-2.amazonaws.com/2019-11-04.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZ57TOXDSXSS7TFVP%2F20191109%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20191109T123353Z&X-Amz-Expires=900&X-Amz-Signature=9e579a30838a6be0fe589f1bdbaff6b82ff72fef84c66269b1c8f5a14fd992dc&X-Amz-SignedHeaders=host"></Avatar>
+
+                                  <Button>Sign out</Button>
+                                </Card>
+                            </Fade>
+                        )}
+                    </Popper>
+
+                    {/* <ClickAwayListener onClickAway={this.closeLogOutPopUp}> */}
+                    {/* {this.state.logOut ?
+                            <div><Card id="LogOutMenu">Work in progrork in progreork in progreork in progreork in progreork in progrees</Card></div>
+                            :
+                            <div></div>} */}
+                    {/* </ClickAwayListener> */}
                 </MuiThemeProvider></div >
         )
     }

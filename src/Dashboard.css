@@ -195,6 +195,11 @@ cursor: pointer;
     display:flex;
     justify-content: space-around;
 }
+#LogOutMenu{
+    display:flex;
+    flex-direction: column;
+    height:340px
+}
 #NoteDimensions{
     display: flex;
     flex-direction: column;
