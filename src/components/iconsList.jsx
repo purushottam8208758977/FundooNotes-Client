@@ -107,7 +107,7 @@ export class IconsList extends Component {
         }
     }
     settingReminder = (requestValue) => {
-        this.setState({ reminderMenu:false });
+       // this.setState({ reminderMenu:false });
         
         /** today current date with current system time */
         
@@ -240,16 +240,16 @@ export class IconsList extends Component {
                         <MenuItem id="ForFont">
                             Reminder :
                     </MenuItem>
-                        <MenuItem id="ForFontOther" onClick={this.settingReminder(1)}>
+                        <MenuItem id="ForFontOther" onClick={()=>this.settingReminder(1)}>
                             <div id="ReminderItems"> Later today <span><Typography id="ForFontOther"> 8.00 PM</Typography></span></div>
                         </MenuItem>
-                        <MenuItem id="ForFontOther" onClick={this.settingReminder(2)}>
+                        <MenuItem id="ForFontOther" onClick={()=>this.settingReminder(2)}>
                             <div id="ReminderItems"> Tommorrow <span><Typography id="ForFontOther"> 8.00 AM</Typography></span></div>
                         </MenuItem>
-                        <MenuItem id="ForFontOther" onClick={this.settingReminder(3)}>
+                        <MenuItem id="ForFontOther" onClick={()=>this.settingReminder(3)}>
                             <div id="ReminderItems">Next week <span><Typography id="ForFontOther">  Mon, 8:00 AM</Typography></span></div>
                         </MenuItem>
-                        <MenuItem id="ForFontOther" onClick={this.settingReminder(4)}>
+                        <MenuItem id="ForFontOther" onClick={()=>this.settingReminder(4)}>
                             <div id="Remind"><span><MDtime /></span>  <span id="ForFontOther">Pick date & time</span> </div>
                         </MenuItem>
                     </Menu>
