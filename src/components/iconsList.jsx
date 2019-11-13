@@ -5,7 +5,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { updateNote, allLabels, addLabelOnNote } from '../services/services'
+import { updateNote, allLabels, addLabelOnNote} from '../services/services'
 import Tooltip from '@material-ui/core/Tooltip';
 import MDtime from 'react-ionicons/lib/MdTime'
 import { makeStyles } from '@material-ui/core/styles';
@@ -106,6 +106,61 @@ export class IconsList extends Component {
 
         }
     }
+    settingReminder = (requestValue) => {
+        this.setState({ reminderMenu:false });
+        
+        /** today current date with current system time */
+        
+        var today = new Date();
+        let day = today.getDate(); /** day of current date */
+        let month = today.getMonth();/** month of current date */
+        let year = today.getFullYear();/** year of current date */
+        let reminderDate; /** common variable for collecting reminder time */
+
+        /** for reminder setting for today itself with 8 PM */
+        if (requestValue === 1) {
+            reminderDate = (new Date(year, month, day, 20, 0, 0)).toString();
+            console.log("today date", reminderDate);
+
+        } /** for reminder setting for tomorrow with time 8 AM */
+        else if (requestValue === 2) {
+            var tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 1);
+            tomorrow.setHours(8);
+            tomorrow.setMinutes(0);
+            tomorrow.setSeconds(0);
+            reminderDate = tomorrow.toString()
+            console.log("tomorrow date ", reminderDate);
+
+        } /** for reminder setting for next week with time 8 AM */
+        else if (requestValue === 3) {
+            var weekdayValue = today.getDay();/** week day value of current [0-sun,1-mon] */
+            let date = new Date(today.setDate(today.getDate() + weekdayValue + (weekdayValue === 0 ? -6 : 2)));
+            date.setHours(8);
+            date.setMinutes(0);
+            date.setSeconds(0);
+            reminderDate = date.toString();
+            console.log("next monday date", reminderDate);
+
+        } /** for reminder setting for user selected date and time*/
+        else {
+            let concatDate = this.state.userReminderDate + " " + this.state.userReminderTime;
+            let newDate = new Date(concatDate)
+            reminderDate = newDate.toString();
+            console.log("new date", reminderDate);
+        }
+
+        let noteRminderUpdate = {
+            updating:{reminder: reminderDate},
+            noteId:this.props.individualNoteData._id
+        }
+        updateNote(noteRminderUpdate).then((data) => {
+            console.log(data);
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
     openColorPallete = (event) => {
         console.log("\n\n\tOn color icon")
         this.ColorPopover.current.handlePopoverOpen(event)
@@ -185,21 +240,21 @@ export class IconsList extends Component {
                         <MenuItem id="ForFont">
                             Reminder :
                     </MenuItem>
-                        <MenuItem id="ForFontOther">
+                        <MenuItem id="ForFontOther" onClick={this.settingReminder(1)}>
                             <div id="ReminderItems"> Later today <span><Typography id="ForFontOther"> 8.00 PM</Typography></span></div>
                         </MenuItem>
-                        <MenuItem id="ForFontOther">
+                        <MenuItem id="ForFontOther" onClick={this.settingReminder(2)}>
                             <div id="ReminderItems"> Tommorrow <span><Typography id="ForFontOther"> 8.00 AM</Typography></span></div>
                         </MenuItem>
-                        <MenuItem id="ForFontOther">
+                        <MenuItem id="ForFontOther" onClick={this.settingReminder(3)}>
                             <div id="ReminderItems">Next week <span><Typography id="ForFontOther">  Mon, 8:00 AM</Typography></span></div>
                         </MenuItem>
-                        <MenuItem id="ForFontOther">
+                        <MenuItem id="ForFontOther" onClick={this.settingReminder(4)}>
                             <div id="Remind"><span><MDtime /></span>  <span id="ForFontOther">Pick date & time</span> </div>
                         </MenuItem>
                     </Menu>
-                    </MuiThemeProvider>
+                </MuiThemeProvider>
             </div>
-                )
-            }
+        )
+    }
 }

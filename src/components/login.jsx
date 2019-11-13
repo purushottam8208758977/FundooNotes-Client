@@ -101,6 +101,10 @@ export class Login extends Component {
         let path = '/home'
         this.props.history.push(path)
     }
+
+    componentDidMount(){
+        localStorage.clear()
+    }
     handleLogin = () => {
 
         this.setState({ toggleLoad: true })
