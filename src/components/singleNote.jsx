@@ -6,7 +6,7 @@ import { IconsList } from './iconsList';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
 import CloseIcon from '@material-ui/icons/Close'
-import {deleteLabelOnNote} from '../services/services'
+import { deleteLabelOnNote } from '../services/services'
 
 //child components
 import { DialogNote } from './dialogNote'
@@ -81,6 +81,13 @@ export class SingleNote extends Component {
                             <div onClick={this.handleClickOpen} id="SingleNote">
                                 {this.props.data.title}<br />
                                 {this.props.data.description}</div>
+                                
+                                {this.props.data.reminder != "" && <Chip
+                                className={this.classes.root}
+                                label={this.props.data.reminder}
+                                variant="outlined"
+                                deleteIcon={<CloseIcon />}
+                            />}
                             <div id="manageLabels"> {this.props.data.label.map((label, index) => (
                                 <div id="LabelOnNote" style={{ marginRight: "165px" }}>
                                     <Chip
@@ -100,6 +107,16 @@ export class SingleNote extends Component {
                             <div onClick={this.handleClickOpen} id="SingleNote">
                                 {this.props.data.title}<br />
                                 {this.props.data.description}</div>
+                            
+                            
+                            {this.props.data.reminder != "" && <Chip
+                                className={this.classes.root}
+                                label={this.props.data.reminder}
+                                variant="outlined"
+                                deleteIcon={<CloseIcon />}
+                            />}
+                           
+                           
                             <div id="manageLabels"> {this.props.data.label.map((label, index) => (
                                 <div id="LabelOnNote" style={{ marginRight: "165px" }}>
                                     <Chip

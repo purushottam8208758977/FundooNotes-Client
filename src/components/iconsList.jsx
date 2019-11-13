@@ -182,11 +182,9 @@ export class IconsList extends Component {
             console.log("\n\n\tResponse of adding label on note", reponseOfAddingLabel)
             this.refreshBoth()
         })
-
     }
     render() {
         const { anchorEl } = this.state;
-
         this.mappingLabels = this.state.labels.map((data, index) => {
             console.log("\n\n\tData to be sent to individual label", data)
             return (
@@ -223,7 +221,6 @@ export class IconsList extends Component {
                         anchorEl={anchorEl}
                         open={this.state.childMenu}
                         onClose={this.closeMenu}
-
                     >
                         {this.state.labels.map((currentLabel, index) => (
                             <List onClick={(event) => this.addingLabelOnNote(event, index)} key={index}>
