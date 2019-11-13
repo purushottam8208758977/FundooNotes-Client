@@ -205,7 +205,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const TITLE_ARRAY = ['Reminders', 'Archive', 'Trash']
+const TITLE_ARRAY = ['Reminders', 'Archive', 'Trash','Labels']
 const firstName=localStorage.getItem('firstName')
 const lastName=localStorage.getItem('lastName')
 const name=firstName+" "+lastName
@@ -271,7 +271,8 @@ export class Dashboard extends Component {
             otherTitle: false,  // this will let the dom know that a title has to be only notes now
             displayArchives: false,
             displayTrash: false,
-            enableSearching: false
+            enableSearching: false,
+            displayLabelledNotes:false
         })
     }
     displayReminders = (booleanValue) => {//whether to display notes or not
@@ -284,8 +285,8 @@ export class Dashboard extends Component {
             displayArchives: false,
             displayTrash: false,
             enableSearching: false,
-            search: "",
-            displaySearch: []
+            displayLabelledNotes:false
+
         })
     }
 
@@ -323,7 +324,9 @@ export class Dashboard extends Component {
             titleArrayIndex: 1,
             otherTitle: true,  // this will let the dom know that a new title has to be added 
             displayArchives: true,
-            displayTrash: false
+            displayTrash: false,
+            displayLabelledNotes:false
+
         })
     }
     displayTrash = (booleanValue) => {//whether to display notes or not
@@ -333,10 +336,22 @@ export class Dashboard extends Component {
             titleArrayIndex: 2,
             otherTitle: true,  // this will let the dom know that a new title has to be added 
             displayArchives: false,
-            displayTrash: booleanValue
+            displayTrash: booleanValue,
+            displayLabelledNotes:false
         })
     }
 
+    displayLabelledNotes=(labelName)=>{
+        this.setState({
+            displayNotes: false,
+            displayReminders: false,
+            titleArrayIndex: 3,
+            otherTitle: true,  // this will let the dom know that a new title has to be added 
+            displayArchives: false,
+            displayTrash: false,
+            displayLabelledNotes:labelName
+        })
+    }
     loggingOut = (event) => {
         //logging out from the account
         console.log("\n\n\tLogging out ...")
@@ -408,7 +423,8 @@ export class Dashboard extends Component {
                     <DrawerMade openingDrawer={this.state.open} notesArray={this.displayNotes}
                         remindersArray={this.displayReminders}
                         archivesArray={this.displayArchives}
-                        trashArray={this.displayTrash} />
+                        trashArray={this.displayTrash} 
+                        labelledNotesArray={this.displayLabelledNotes}/>
 
                     {this.state.enableSearching ?
                         <div id="holdingCards">
@@ -431,7 +447,8 @@ export class Dashboard extends Component {
                                 fetchArchives={this.state.displayArchives}
                                 fetchTrash={this.state.displayTrash}
                                 loadingInitiated={this.displayLoader}
-                                notesView={this.state.toggle} />
+                                notesView={this.state.toggle} 
+                                fetchLabelledNotes={this.state.displayLabelledNotes}/>
                         </div>}
 
 
@@ -448,12 +465,7 @@ export class Dashboard extends Component {
                         )}
                     </Popper>
 
-                    {/* <ClickAwayListener onClickAway={this.closeLogOutPopUp}> */}
-                    {/* {this.state.logOut ?
-                            <div><Card id="LogOutMenu">Work in progrork in progreork in progreork in progreork in progreork in progrees</Card></div>
-                            :
-                            <div></div>} */}
-                    {/* </ClickAwayListener> */}
+                   
                 </MuiThemeProvider></div >
         )
     }

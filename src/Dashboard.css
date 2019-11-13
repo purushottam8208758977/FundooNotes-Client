@@ -70,7 +70,9 @@ margin-top :-2%
 #holdingCards{
     margin-top :80px
 }
-
+#ReminderChip{
+    width:130px
+}
 #IconsList{
     display: flex;
     flex-direction: row;

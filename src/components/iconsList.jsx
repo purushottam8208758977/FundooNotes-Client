@@ -156,6 +156,9 @@ export class IconsList extends Component {
         }
         updateNote(noteRminderUpdate).then((data) => {
             console.log(data);
+            this.props.refreshing()
+            this.setState({ anchorEl: null }) // for closing the pop up of menu
+
         }).catch((err) => {
             console.log(err);
         })

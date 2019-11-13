@@ -34,6 +34,7 @@ const theme = createMuiTheme({
 })
 
 
+
 export class SingleNote extends Component {
 
     constructor() {
@@ -73,6 +74,17 @@ export class SingleNote extends Component {
         })
     }
     render() {
+        let reminderToDisplay = this.props.data.reminder
+        reminderToDisplay=reminderToDisplay.toString()
+        let words = reminderToDisplay.split(' ')
+        let displayingDate=words[1]+" "+words[2]+" "+words[4]
+        let todaysDate = new Date();
+        // console.log(Date.parse(todaysDate))
+        let parsedTodaysDate=Date.parse(todaysDate)
+        //console.log(Date.parse(this.props.data.reminder))  
+        let parsedReminder=Date.parse(this.props.data.reminder)
+        console.log(parsedReminder-parsedTodaysDate)
+        
         return (
             <div id="NotesReceived">
                 <MuiThemeProvider theme={theme}>
@@ -82,9 +94,9 @@ export class SingleNote extends Component {
                                 {this.props.data.title}<br />
                                 {this.props.data.description}</div>
                                 
-                                {this.props.data.reminder != "" && <Chip
+                                {this.props.data.reminder !== "" && <Chip
                                 className={this.classes.root}
-                                label={this.props.data.reminder}
+                                label={displayingDate}
                                 variant="outlined"
                                 deleteIcon={<CloseIcon />}
                             />}
@@ -109,12 +121,13 @@ export class SingleNote extends Component {
                                 {this.props.data.description}</div>
                             
                             
-                            {this.props.data.reminder != "" && <Chip
+                            <div id="ReminderChip">{this.props.data.reminder !== "" && <Chip
                                 className={this.classes.root}
-                                label={this.props.data.reminder}
+                                label={displayingDate}
                                 variant="outlined"
+                                onDelete={() => this.removingLabelOnNote()}
                                 deleteIcon={<CloseIcon />}
-                            />}
+                            />}</div>
                            
                            
                             <div id="manageLabels"> {this.props.data.label.map((label, index) => (

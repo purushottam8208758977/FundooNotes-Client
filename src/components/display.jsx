@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { allNotes, allReminders, allArchives, allTrash } from '../services/services'
+export function labelledNotes(labelName){
+import { allNotes, allReminders, allArchives, allTrash ,labelledNotes} from '../services/services'
 import Masonry from 'react-masonry-component'
 
 //child component
@@ -29,7 +30,6 @@ export class Display extends Component {
         this.allArchivesDisplaying()
         this.allTrashDisplaying()
     }
-
     allNotesDisplaying = () => {
         this.setState({ openLoader: true })
         this.props.loadingInitiated(true) //start loading
@@ -83,7 +83,6 @@ export class Display extends Component {
         })
         console.log("any...->")
     }
-    
     render() {
         if (this.props.fetchNotes) {
             this.displayContent = this.state.notes.map((data, index) => {
@@ -140,7 +139,6 @@ export class Display extends Component {
                     <SingleNote key={index}
                         data={data}//props data sent to Single note component to access further 
                         refreshDisplay={this.allNotesDisplaying}
-                        
                     />
                 )
             })

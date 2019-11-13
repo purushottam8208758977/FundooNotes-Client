@@ -138,10 +138,14 @@ export class DrawerMade extends Component {
     loadTrash = (booleanValue) => {
         this.props.trashArray(booleanValue)
     }
+    loadLabelledNotes=(labelName)=>{
+        console.log("labelName ",labelName)
+        this.props.labelledNotesArray(labelName)
+    }
     render() {
         this.mappingLabels = this.state.labels.map((data, index) => {
             return (
-                <IndividualLabel key={index}
+                <IndividualLabel key={index} labelName={this.loadLabelledNotes}
                     data={data}
                 />
             )
