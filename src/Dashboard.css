@@ -169,6 +169,9 @@ cursor: pointer;
     line-height: normal;
     color: rgb(60, 64, 67)
 }
+.HandleAvatar{
+
+}
 #dialog{
     display: flex;
     flex-direction: column;
@@ -198,7 +201,10 @@ cursor: pointer;
 #LogOutMenu{
     display:flex;
     flex-direction: column;
-    height:340px
+    justify-content: space-around;
+    height:80px;
+    border-radius: 15px;
+    padding-top: 3px;
 }
 #NoteDimensions{
     display: flex;
