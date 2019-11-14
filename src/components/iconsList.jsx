@@ -5,11 +5,13 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import { updateNote, allLabels, addLabelOnNote} from '../services/services'
+import { updateNote, allLabels, addLabelOnNote } from '../services/services'
 import Tooltip from '@material-ui/core/Tooltip';
 import MDtime from 'react-ionicons/lib/MdTime'
 import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core' // overiding default css properties
+import TextField from '@material-ui/core/TextField';
+import MenuList from '@material-ui/core/MenuList';
 
 //child components
 import { ColorPopover } from './colorPopover'
@@ -49,7 +51,10 @@ export class IconsList extends Component {
             colorPallete: false,// key to open color pallete
             childMenu: false, // childe menu which opens after parent menu closed 
             reminderMenu: false,
-            labels: []
+            labels: [],
+            userReminderTime: "",
+            userReminderDate: "",
+            reminderChildMenu:false
         }
         this.ColorPopover = React.createRef()
         this.classes = useStyles.bind(this);
@@ -106,10 +111,10 @@ export class IconsList extends Component {
         }
     }
     settingReminder = (requestValue) => {
-       // this.setState({ reminderMenu:false });
-        
+        // this.setState({ reminderMenu:false });
+
         /** today current date with current system time */
-        
+
         var today = new Date();
         let day = today.getDate(); /** day of current date */
         let month = today.getMonth();/** month of current date */
@@ -150,13 +155,14 @@ export class IconsList extends Component {
         }
 
         let noteRminderUpdate = {
-            updating:{reminder: reminderDate},
-            noteId:this.props.individualNoteData._id
+            updating: { reminder: reminderDate },
+            noteId: this.props.individualNoteData._id
         }
         updateNote(noteRminderUpdate).then((data) => {
             console.log(data);
             this.props.refreshing()
             this.setState({ anchorEl: null }) // for closing the pop up of menu
+            this.setState({reminderChildMenu:false,reminderMenu:false})
 
         }).catch((err) => {
             console.log(err);
@@ -184,6 +190,16 @@ export class IconsList extends Component {
             console.log("\n\n\tResponse of adding label on note", reponseOfAddingLabel)
             this.refreshBoth()
         })
+    }
+    openReminderChildMenu = () => {
+        this.setState({reminderChildMenu:true,reminderMenu:false})
+    }
+    handleDate = (event) => {
+        this.setState({ userReminderDate: event.target.value })
+    }
+
+    handleTime = (event) => {
+        this.setState({ userReminderTime: event.target.value })
     }
     render() {
         const { anchorEl } = this.state;
@@ -239,18 +255,49 @@ export class IconsList extends Component {
                         <MenuItem id="ForFont">
                             Reminder :
                     </MenuItem>
-                        <MenuItem id="ForFontOther" onClick={()=>this.settingReminder(1)}>
+                        <MenuItem id="ForFontOther" onClick={() => this.settingReminder(1)}>
                             <div id="ReminderItems"> Later today <span><Typography id="ForFontOther"> 8.00 PM</Typography></span></div>
                         </MenuItem>
-                        <MenuItem id="ForFontOther" onClick={()=>this.settingReminder(2)}>
+                        <MenuItem id="ForFontOther" onClick={() => this.settingReminder(2)}>
                             <div id="ReminderItems"> Tommorrow <span><Typography id="ForFontOther"> 8.00 AM</Typography></span></div>
                         </MenuItem>
-                        <MenuItem id="ForFontOther" onClick={()=>this.settingReminder(3)}>
+                        <MenuItem id="ForFontOther" onClick={() => this.settingReminder(3)}>
                             <div id="ReminderItems">Next week <span><Typography id="ForFontOther">  Mon, 8:00 AM</Typography></span></div>
                         </MenuItem>
-                        <MenuItem id="ForFontOther" onClick={()=>this.settingReminder(4)}>
+                        <MenuItem id="ForFontOther" onClick={this.openReminderChildMenu}>
                             <div id="Remind"><span><MDtime /></span>  <span id="ForFontOther">Pick date & time</span> </div>
                         </MenuItem>
+                    </Menu>
+
+                    <Menu
+                        anchorEl={anchorEl}
+                        open={this.state.reminderChildMenu}
+                        onClose={this.closeMenu}>
+                        <MenuList>
+                            <div id="dateTimeStyle">
+                                <TextField
+                                    label="Date"
+                                    type="date"
+                                    value={this.state.userReminderDate}
+                                    onChange={this.handleDate}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    label="Time"
+                                    type="time"
+                                    value={this.state.userReminderTime}
+                                    onChange={this.handleTime}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <Button variant="contained"
+                                    size="large"
+                                    onClick={this.settingReminder}>save</Button>
+                            </div>
+                        </MenuList>
                     </Menu>
                 </MuiThemeProvider>
             </div>

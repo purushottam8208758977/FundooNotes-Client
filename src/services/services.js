@@ -181,3 +181,13 @@ export function deleteLabel(labelObject){
         }
     })
 }
+
+export function uploadImage(file){
+    const authenticationToken = localStorage.getItem('token')
+    console.log(`\n\n\tIn services for uploading image`)
+    return axios.post(url + "/upload",file , {
+        headers: {
+            token: authenticationToken
+        }
+    })
+}

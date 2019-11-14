@@ -6,7 +6,7 @@ import { IconsList } from './iconsList';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
 import CloseIcon from '@material-ui/icons/Close'
-import { deleteLabelOnNote } from '../services/services'
+import { deleteLabelOnNote,updateNote } from '../services/services'
 
 //child components
 import { DialogNote } from './dialogNote'
@@ -73,6 +73,16 @@ export class SingleNote extends Component {
             this.props.refreshDisplay()
         })
     }
+    removingReminderOnNote=()=>{
+        let reminderObject = {}
+        reminderObject.noteId=this.props.data._id
+        reminderObject.updating={reminder:""}
+        updateNote(reminderObject).then((response)=>{
+            console.log(`\n\n\t Response --> ${response} `)
+            this.props.refreshDisplay()
+        })
+
+    }
     render() {
         let reminderToDisplay = this.props.data.reminder
         reminderToDisplay = reminderToDisplay.toString()
@@ -124,7 +134,7 @@ export class SingleNote extends Component {
                                     className={this.classes.root}
                                     label={displayingDate}
                                     variant="outlined"
-                                    onDelete={() => this.removingLabelOnNote()}
+                                    onDelete={() => this.removingReminderOnNote()}
                                     deleteIcon={<CloseIcon />}
                                 />}</div>
 

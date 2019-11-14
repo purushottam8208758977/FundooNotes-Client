@@ -188,7 +188,10 @@ cursor: pointer;
     flex-direction: column;
     transition: margin-left .13s cubic-bezier(0, 0, 0.1, 1) 0ms;
     }
-    
+ #UploadImage{
+     display:flex;
+     justify-content:center
+ }   
 #movementOn {
     display: flex;
     flex-direction: column;
@@ -204,9 +207,14 @@ cursor: pointer;
     display: flex;
     justify-content: center;
 }
-#profileName{
-    
-}
+
+#dateTimeStyle{
+    display: flex;
+    flex-direction:column ;
+    width: 250px;
+    height: 130px;
+    }    
+
 #LogOutMenu{
     display:flex;
     flex-direction: column;

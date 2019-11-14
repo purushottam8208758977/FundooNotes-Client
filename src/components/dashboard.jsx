@@ -13,7 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import MenuIcon from '@material-ui/icons/Menu';
 import DoneAll from 'react-ionicons/lib/MdCheckmark'
-import { searchInNotes } from '../services/services'
+import { searchInNotes, uploadImage } from '../services/services'
 import Grid from '@material-ui/core/Grid';
 
 
@@ -204,10 +204,10 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const TITLE_ARRAY = ['Reminders', 'Archive', 'Trash','Labels']
-const firstName=localStorage.getItem('firstName')
-const lastName=localStorage.getItem('lastName')
-const name=firstName+" "+lastName
+const TITLE_ARRAY = ['Reminders', 'Archive', 'Trash', 'Labels']
+const firstName = localStorage.getItem('firstName')
+const lastName = localStorage.getItem('lastName')
+const name = firstName + " " + lastName
 
 export class Dashboard extends Component {
     constructor() {
@@ -226,7 +226,7 @@ export class Dashboard extends Component {
             titleArrayIndex: 0,
             enableSearching: false,
             search: "",
-            anchorEl:null
+            anchorEl: null
 
 
         }
@@ -271,7 +271,7 @@ export class Dashboard extends Component {
             displayArchives: false,
             displayTrash: false,
             enableSearching: false,
-            displayLabelledNotes:false
+            displayLabelledNotes: false
         })
     }
     displayReminders = (booleanValue) => {//whether to display notes or not
@@ -284,7 +284,7 @@ export class Dashboard extends Component {
             displayArchives: false,
             displayTrash: false,
             enableSearching: false,
-            displayLabelledNotes:false
+            displayLabelledNotes: false
 
         })
     }
@@ -324,7 +324,7 @@ export class Dashboard extends Component {
             otherTitle: true,  // this will let the dom know that a new title has to be added 
             displayArchives: true,
             displayTrash: false,
-            displayLabelledNotes:false
+            displayLabelledNotes: false
         })
     }
     displayTrash = (booleanValue) => {//whether to display notes or not
@@ -335,10 +335,10 @@ export class Dashboard extends Component {
             otherTitle: true,  // this will let the dom know that a new title has to be added 
             displayArchives: false,
             displayTrash: booleanValue,
-            displayLabelledNotes:false
+            displayLabelledNotes: false
         })
     }
-    displayLabelledNotes=(labelName)=>{
+    displayLabelledNotes = (labelName) => {
         this.setState({
             displayNotes: false,
             displayReminders: false,
@@ -346,14 +346,14 @@ export class Dashboard extends Component {
             otherTitle: true,  // this will let the dom know that a new title has to be added 
             displayArchives: false,
             displayTrash: false,
-            displayLabelledNotes:labelName
+            displayLabelledNotes: labelName
         })
         this.CreatingNoteInstance.current.allLabelsListing(labelName)
     }
     loggingOut = (event) => {
         //logging out from the account
         console.log("\n\n\tLogging out ...")
-        this.setState({ openLog: !this.state.openLog,anchorEl:event.currentTarget})
+        this.setState({ openLog: !this.state.openLog, anchorEl: event.currentTarget })
         console.log("\n\n\t state --->", this.state.openLog)
     }
     closeMenu = () => {
@@ -364,16 +364,31 @@ export class Dashboard extends Component {
         this.setState({ search: event.target.value, enableSearching: true })
         console.log("\n\n\tsearching ....")
     }
-    clearLocalStorage=()=>{
+    clearLocalStorage = () => {
         console.log("\n\n\tClearing local storage ...")
         localStorage.clear()
         this.props.history.push('/')
     }
+    onFilesAdded = (event) => {
+        console.log("files collected -->", event.target.files[0])
+       
+        let fileData = new FormData();
+        fileData.append('file', event.target.files[0]);
+//        fileData.append('filename', this.fileName.value);
+
+        // let fileObject={}
+        // fileObject.file=event.target.files[0]
+       
+        uploadImage(fileData).then((imageResponse) => {
+            console.log("\n\n\tImage upload response --->",imageResponse.data.imgUrl)
+            localStorage.setItem()
+        })
+    }
     render() {
         let movement = this.state.open ? "movementOn" : "movementOff";
         const { anchorEl, openLog } = this.state;
-        const url=localStorage.getItem('profilePic')
-        console.log("url--->",url)
+        const url = localStorage.getItem('profilePic')
+        console.log("url--->", url)
         return (
             <div className="MainDiv">
                 <MuiThemeProvider theme={theme}>
@@ -384,7 +399,7 @@ export class Dashboard extends Component {
                             <img className="View" src={require('../assets/grid.svg')} alt="grid" onClick={this.rowView} />
                         }
                         <div className="MenuI" onClick={this.handleDrawerOpen}><MenuIcon /></div>
-                        <TextField 
+                        <TextField
                             id="filled-hidden-label"
                             className={clsx(this.classes.textField, this.classes.dense)}
                             hiddenLabel
@@ -393,7 +408,8 @@ export class Dashboard extends Component {
                             onChange={this.collectSearchQuery}
                             onKeyDown={this.initiateSearching}
                             value={this.state.search}
-                            InputProps={{ "disable-underline": true ,
+                            InputProps={{
+                                "disable-underline": true,
                                 endAdornment: (
                                     <InputAdornment position="10%">
                                         <IconButton>
@@ -421,8 +437,8 @@ export class Dashboard extends Component {
                     <DrawerMade openingDrawer={this.state.open} notesArray={this.displayNotes}
                         remindersArray={this.displayReminders}
                         archivesArray={this.displayArchives}
-                        trashArray={this.displayTrash} 
-                        labelledNotesArray={this.displayLabelledNotes}/>
+                        trashArray={this.displayTrash}
+                        labelledNotesArray={this.displayLabelledNotes} />
 
                     {this.state.enableSearching ?
                         <div id="holdingCards">
@@ -445,8 +461,8 @@ export class Dashboard extends Component {
                                 fetchArchives={this.state.displayArchives}
                                 fetchTrash={this.state.displayTrash}
                                 loadingInitiated={this.displayLoader}
-                                notesView={this.state.toggle} 
-                                fetchLabelledNotes={this.state.displayLabelledNotes}/>
+                                notesView={this.state.toggle}
+                                fetchLabelledNotes={this.state.displayLabelledNotes} />
                         </div>}
 
 
@@ -454,15 +470,24 @@ export class Dashboard extends Component {
                         {({ TransitionProps }) => (
                             <Fade {...TransitionProps} timeout={100}>
                                 <Card id="LogOutMenu">
-                                {/* <IconButton style={{ cursor: "pointer" }} src={url}></IconButton> */}
-                               <div id="profileName"> {name}</div>
-                                 <div id="wer"> <Button style={{width:"50%"}}onClick={this.clearLocalStorage}>Sign out</Button></div>
+
+                                    {/* <IconButton style={{ cursor: "pointer" }} src={url}></IconButton> */}
+                                    <div id="profileName"> {name}</div>
+                                    <div id="UploadImage"> <input
+                                        ref={this.fileInputRef}
+                                        className="FileInput"
+                                        type="file"
+                                        multiple
+                                        name="file"
+                                        onChange={(event) => this.onFilesAdded(event)}
+                                    /></div>
+                                    <div id="wer"> <Button style={{ width: "50%" }} onClick={this.clearLocalStorage}>Sign out</Button></div>
                                 </Card>
                             </Fade>
                         )}
                     </Popper>
 
-                   
+
                 </MuiThemeProvider></div >
         )
     }
