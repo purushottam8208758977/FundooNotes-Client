@@ -371,17 +371,19 @@ export class Dashboard extends Component {
     }
     onFilesAdded = (event) => {
         console.log("files collected -->", event.target.files[0])
-       
+
         let fileData = new FormData();
         fileData.append('file', event.target.files[0]);
-//        fileData.append('filename', this.fileName.value);
+        //        fileData.append('filename', this.fileName.value);
 
         // let fileObject={}
         // fileObject.file=event.target.files[0]
-       
+
         uploadImage(fileData).then((imageResponse) => {
-            console.log("\n\n\tImage upload response --->",imageResponse.data.imgUrl)
-            localStorage.setItem()
+            console.log("\n\n\tImage upload response --->", imageResponse.data.imgUrl)
+            localStorage.setItem('profilePic', imageResponse.data.imgUrl)
+            this.setState({anchorEl:null,openLog:false})
+            
         })
     }
     render() {
