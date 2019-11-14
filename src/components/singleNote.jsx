@@ -77,6 +77,7 @@ export class SingleNote extends Component {
         let reminderToDisplay = this.props.data.reminder
         reminderToDisplay=reminderToDisplay.toString()
         let words = reminderToDisplay.split(' ')
+        let timeString
         let displayingDate=words[1]+" "+words[2]+" "+words[4]
         //let todaysDate = new Date();
         // console.log(Date.parse(todaysDate))
@@ -115,12 +116,11 @@ export class SingleNote extends Component {
                             <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
                         </Card>
                         :
-                        <Card id="NoteDimensions" style={{ backgroundColor: this.props.data.color }}>
-                            <div onClick={this.handleClickOpen} id="SingleNote">
+                        <Card id="NoteDimensions"  style={{ backgroundColor: this.props.data.color }}>
+                            
+                            <div id="SingleNote" onClick={this.handleClickOpen}>
                                 {this.props.data.title}<br />
                                 {this.props.data.description}</div>
-                            
-                            
                             <div id="ReminderChip">{this.props.data.reminder !== "" && <Chip
                                 className={this.classes.root}
                                 label={displayingDate}

@@ -200,6 +200,13 @@ cursor: pointer;
     display:flex;
     justify-content: space-around;
 }
+#wer{
+    display: flex;
+    justify-content: center;
+}
+#profileName{
+    
+}
 #LogOutMenu{
     display:flex;
     flex-direction: column;

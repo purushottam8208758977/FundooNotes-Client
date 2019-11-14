@@ -454,9 +454,9 @@ export class Dashboard extends Component {
                         {({ TransitionProps }) => (
                             <Fade {...TransitionProps} timeout={100}>
                                 <Card id="LogOutMenu">
-                                <IconButton style={{ cursor: "pointer" }} src={url}></IconButton>
-                                {name}
-                                  <Button style={{width:"50%"}}onClick={this.clearLocalStorage}>Sign out</Button>
+                                {/* <IconButton style={{ cursor: "pointer" }} src={url}></IconButton> */}
+                               <div id="profileName"> {name}</div>
+                                 <div id="wer"> <Button style={{width:"50%"}}onClick={this.clearLocalStorage}>Sign out</Button></div>
                                 </Card>
                             </Fade>
                         )}
