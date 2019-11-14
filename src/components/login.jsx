@@ -121,11 +121,12 @@ export class Login extends Component {
                 if (responseReceived.data.success) {
 
 
-                    console.log("\n\n\t after login token", responseReceived.data.data)
+                    console.log("\n\n\t after login url", responseReceived.data.data)
                     localStorage.setItem('token', responseReceived.data.data.token)
                     //for logout menu
                     localStorage.setItem('firstName',responseReceived.data.data.firstName)
                     localStorage.setItem('lastName',responseReceived.data.data.lastName)
+                    localStorage.setItem('profilePic',responseReceived.data.data.url)
                     setTimeout(() => {
                         toaster.notify(responseReceived.data.message)
                         this.toDashboard()
