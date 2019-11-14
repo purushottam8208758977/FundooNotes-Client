@@ -5,9 +5,9 @@ add color while creating a note
 add color while in dialog box 
 add color in ,reminder,trash ,archive 
 add label --> checkbox , multiple checkboxes 
+align labels on card 
 if a new label added so update it in labels list 
 align icons of cards below the card proper as in keep
-if clicked on label list the notes labelled with that label
 image problem
 dashboard proper alignment
 ability to edit the note when clicked on the note anywhere 
@@ -18,3 +18,4 @@ firebase notification setup
 alignment in trash display ---alignment of icons 
 logout --->clearing local storage 
 test all div inside the component
+sonar qube

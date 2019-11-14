@@ -351,6 +351,7 @@ export class Dashboard extends Component {
             displayTrash: false,
             displayLabelledNotes:labelName
         })
+        this.CreatingNoteInstance.current.allLabelsListing(labelName)
     }
     loggingOut = (event) => {
         //logging out from the account

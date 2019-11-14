@@ -154,8 +154,8 @@ export function searchInNotes(searchData){
 
 export function labelledNotes(labelName){
     const authenticationToken = localStorage.getItem('token')
-    console.log(`\n\n\tIn services for loading all notes with label '${label}' ...\n\n\tToken-${authenticationToken}`)
-    return axios.get(url + "/labelledNotes",  {
+    console.log(`\n\n\tIn services for loading all notes with label '${labelName}' ...\n\n\tToken-${authenticationToken}`)
+    return axios.get(url + "/labelledNotes?labelName="+labelName,  {
         headers: {
             token: authenticationToken
         }

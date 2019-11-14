@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-export function labelledNotes(labelName){
 import { allNotes, allReminders, allArchives, allTrash ,labelledNotes} from '../services/services'
 import Masonry from 'react-masonry-component'
 
@@ -18,6 +17,7 @@ export class Display extends Component {
             reminders: [],
             trash: [],
             searchedNotes: [],
+            labelListing:[],
             openLoader: false
         }
     }
@@ -83,6 +83,17 @@ export class Display extends Component {
         })
         console.log("any...->")
     }
+    allLabelsListing=(labelName)=>{
+        
+        labelledNotes(labelName).then((listingResponse)=>{
+            console.log("\n\n\tListing response--->",listingResponse)
+            this.setState({labelListing:listingResponse.data.data})
+            setTimeout(() => {
+                this.setState({ openLoader: false })
+                this.props.loadingInitiated(false) //end loading
+            }, 1000);
+        })
+    }
     render() {
         if (this.props.fetchNotes) {
             this.displayContent = this.state.notes.map((data, index) => {
@@ -143,7 +154,17 @@ export class Display extends Component {
                 )
             })
         }
-        else{
+        else{ // fetchlabelledNotes 
+            console.log("\n\n\tIn display")
+            this.displayContent = this.state.labelListing.map((data, index) => {
+                //console.log("\n\n\tdata of trash -->",data)
+                return (
+                    <SingleNote key={index}
+                        data={data}//props data sent to Single note component to access further 
+                        refreshDisplay={this.allNotesDisplaying}
+                    />
+                )
+            })
 
         }
         return (
