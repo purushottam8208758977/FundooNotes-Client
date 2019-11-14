@@ -10,7 +10,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import CheckIcon from '@material-ui/icons/Check';
 import List from '@material-ui/core/List';
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
-import { createLabel } from '../services/services'
+import { createLabel,deleteLabel } from '../services/services'
 
 const theme = createMuiTheme({
     overrides: {
@@ -84,7 +84,12 @@ export class EditLabel extends Component {
             console.log(err)
         })
     }
-    delete
+    deleteLabel=(labelId)=>{
+        
+        deleteLabel({labelId:labelId}).then((response)=>{
+            console.log("\n\n\tReponse of deleting a label --->",response)
+        })
+    }
     render() {
         return (
             <MuiThemeProvider theme={theme}>
@@ -133,7 +138,7 @@ export class EditLabel extends Component {
                                             <img src={require('../assets/label.svg')} alt="label instance" ></img>
                                         </div>
                                         <div id="delete">
-                                            <DeleteIcon onClick={this.deleteLabel(text._id)}  fontSize="small" />
+                                            <DeleteIcon   fontSize="small" />
                                         </div>
                                     </ListItemIcon>
                                     <div>

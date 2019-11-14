@@ -171,3 +171,13 @@ export function createLabel(labelObject){
         }
     })
 }
+
+export function deleteLabel(labelObject){
+    const authenticationToken = localStorage.getItem('token')
+    console.log(`\n\n\tIn services for deleting a label`)
+    return axios.post(url + "/deleteLabel", labelObject, {
+        headers: {
+            token: authenticationToken
+        }
+    })
+}

@@ -78,12 +78,12 @@ export class SingleNote extends Component {
         reminderToDisplay=reminderToDisplay.toString()
         let words = reminderToDisplay.split(' ')
         let displayingDate=words[1]+" "+words[2]+" "+words[4]
-        let todaysDate = new Date();
+        //let todaysDate = new Date();
         // console.log(Date.parse(todaysDate))
-        let parsedTodaysDate=Date.parse(todaysDate)
+       // let parsedTodaysDate=Date.parse(todaysDate)
         //console.log(Date.parse(this.props.data.reminder))  
-        let parsedReminder=Date.parse(this.props.data.reminder)
-        console.log(parsedReminder-parsedTodaysDate)
+        //let parsedReminder=Date.parse(this.props.data.reminder)
+        //console.log(parsedReminder-parsedTodaysDate)
         
         return (
             <div id="NotesReceived">

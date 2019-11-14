@@ -413,7 +413,7 @@ export class Dashboard extends Component {
                             </div>
                         }
                         <div className="AlignMent">  <Grid container justify="flex-end" alignItems="flex-end">
-                            <Avatar style={{ cursor: "pointer" }} onClick={(event) => this.loggingOut(event)} className={this.classes.orangeAvatar} src="https://fundooimages.s3.us-east-2.amazonaws.com/2019-11-04.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZ57TOXDSXSS7TFVP%2F20191109%2Fus-east-2%2Fs3%2Faws4_request&X-Amz-Date=20191109T123353Z&X-Amz-Expires=900&X-Amz-Signature=9e579a30838a6be0fe589f1bdbaff6b82ff72fef84c66269b1c8f5a14fd992dc&X-Amz-SignedHeaders=host"></Avatar>
+                            <Avatar style={{ cursor: "pointer" }} onClick={(event) => this.loggingOut(event)} className={this.classes.orangeAvatar} src="https://fundooimages.s3.amazonaws.com/s.jpeg"></Avatar>
                         </Grid></div>
                         {this.state.load ?
                             <CircularIndeterminate />
