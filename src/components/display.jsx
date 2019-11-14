@@ -168,7 +168,8 @@ export class Display extends Component {
 
         }
         return (
-            <div >
+            <div>
+            
                 {this.props.notesView ?
                     <div id="ContentO"><Masonry>
                         {this.displayContent}</Masonry>
@@ -177,6 +178,7 @@ export class Display extends Component {
                     <div id="cardsSettled"><Masonry id="Content">
                         {this.displayContent}</Masonry>
                     </div>}
+                   
             </div>
         )
     }
