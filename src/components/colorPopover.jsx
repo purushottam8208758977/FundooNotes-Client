@@ -142,7 +142,7 @@ export class ColorPopover extends Component {
                     >
                         {colorsPallete.map((choice, index) => (
                             <Tooltip title={choice.colorName}>
-                                <IconButton onClick={(event) => this.changingColorOfNote(event, index)} style={{ margin: "2px", borderRadius: "40px", backgroundColor: choice.colorCode }} onClick={(event) => this.changingColorOfNote(event, index)} key={index}
+                                <IconButton onClick={(event) => this.changingColorOfNote(event, index)} style={{ margin: "2px", borderRadius: "40px", backgroundColor: choice.colorCode }}  key={index}
                                     id="dropMenu">
                                 </IconButton>
                             </Tooltip>

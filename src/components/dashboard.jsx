@@ -15,7 +15,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import DoneAll from 'react-ionicons/lib/MdCheckmark'
 import { searchInNotes } from '../services/services'
 import Grid from '@material-ui/core/Grid';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 
 import Popper from '@material-ui/core/Popper';
@@ -376,7 +375,7 @@ export class Dashboard extends Component {
     }
     render() {
         let movement = this.state.open ? "movementOn" : "movementOff";
-        const { anchorEl, openLog, placement } = this.state;
+        const { anchorEl, openLog } = this.state;
         return (
             <div className="MainDiv">
                 <MuiThemeProvider theme={theme}>
@@ -387,7 +386,7 @@ export class Dashboard extends Component {
                             <img className="View" src={require('../assets/grid.svg')} alt="grid" onClick={this.rowView} />
                         }
                         <div className="MenuI" onClick={this.handleDrawerOpen}><MenuIcon /></div>
-                        <TextField className="SearchBar"
+                        <TextField 
                             id="filled-hidden-label"
                             className={clsx(this.classes.textField, this.classes.dense)}
                             hiddenLabel
@@ -396,7 +395,7 @@ export class Dashboard extends Component {
                             onChange={this.collectSearchQuery}
                             onKeyDown={this.initiateSearching}
                             value={this.state.search}
-                            InputProps={{ "disable-underline": true }, {
+                            InputProps={{ "disable-underline": true ,
                                 endAdornment: (
                                     <InputAdornment position="10%">
                                         <IconButton>

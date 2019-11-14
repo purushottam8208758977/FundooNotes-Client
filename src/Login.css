@@ -86,7 +86,7 @@
     left: 50%;
 }
 
-.Loader{
+#Loader{
     position: absolute;
     top: -345%;
     left:-20%;

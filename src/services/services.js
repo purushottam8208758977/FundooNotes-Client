@@ -161,3 +161,13 @@ export function labelledNotes(labelName){
         }
     })
 }
+
+export function createLabel(labelObject){
+    const authenticationToken = localStorage.getItem('token')
+    console.log(`\n\n\tIn services for creating a label`)
+    return axios.post(url + "/createLabel", labelObject, {
+        headers: {
+            token: authenticationToken
+        }
+    })
+}

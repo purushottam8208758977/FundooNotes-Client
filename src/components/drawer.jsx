@@ -22,6 +22,7 @@ import { allLabels } from '../services/services'
 
 //child componenet
 import { IndividualLabel } from './individualLabel'
+import {EditLabel} from './editLabel'
 
 const drawerWidth = 240;
 const useStyles = makeStyles(theme => ({
@@ -176,6 +177,7 @@ export class DrawerMade extends Component {
                         <Divider /><br />
                         <label id="ForLabel">LABELS</label><br />
                         {this.mappingLabels}
+                    <EditLabel labellsArray={this.state.labels} getLabel={this.loadLabels}/>
                         <Divider />
                         <ListItem button key="Archive" onClick={() => this.loadArchives(true)} >
                             <ListItemIcon>

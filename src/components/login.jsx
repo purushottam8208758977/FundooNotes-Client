@@ -11,7 +11,6 @@ import '../Login.css'
 // import Loader from 'react-loader-spinner'
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-import { log } from 'util';
 /**
  * @description - This prop is a inbuilt prop we are modifying it
  */
@@ -213,7 +212,7 @@ export class Login extends Component {
                                     margin="normal"
                                     variant="outlined" /> <br />
                                 {this.state.toggleLoad ?
-                                    <div className={this.classes.root} className="Loader">
+                                    <div className={this.classes.root} id="Loader">
                                         <LinearProgress />
                                     </div>
                                     :
