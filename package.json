@@ -12,6 +12,7 @@
     "mdbreact": "^4.21.1",
     "react": "^16.10.2",
     "react-avatar": "^3.7.0",
+    "react-beautiful-dnd": "^12.1.1",
     "react-dom": "^16.10.2",
     "react-drag-and-drop": "^3.0.0",
     "react-icons": "^3.7.0",

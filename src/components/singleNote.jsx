@@ -6,7 +6,7 @@ import { IconsList } from './iconsList';
 import Dialog from '@material-ui/core/Dialog';
 import Chip from '@material-ui/core/Chip';
 import CloseIcon from '@material-ui/icons/Close'
-import { deleteLabelOnNote,updateNote } from '../services/services'
+import { deleteLabelOnNote, updateNote } from '../services/services'
 
 //child components
 import { DialogNote } from './dialogNote'
@@ -73,11 +73,11 @@ export class SingleNote extends Component {
             this.props.refreshDisplay()
         })
     }
-    removingReminderOnNote=()=>{
+    removingReminderOnNote = () => {
         let reminderObject = {}
-        reminderObject.noteId=this.props.data._id
-        reminderObject.updating={reminder:""}
-        updateNote(reminderObject).then((response)=>{
+        reminderObject.noteId = this.props.data._id
+        reminderObject.updating = { reminder: "" }
+        updateNote(reminderObject).then((response) => {
             console.log(`\n\n\t Response --> ${response} `)
             this.props.refreshDisplay()
         })
@@ -125,6 +125,10 @@ export class SingleNote extends Component {
                             <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
                         </Card>
                         :
+                        // <Draggable
+                        //     draggableId={this.props.hero.id}
+                        //     index={this.props.index}
+                        // >
                             <Card id="NoteDimensions" style={{ backgroundColor: this.props.data.color }}>
 
                                 <div id="SingleNote" onClick={this.handleClickOpen}>
@@ -152,15 +156,16 @@ export class SingleNote extends Component {
                                     </div>
                                 ))}</div>
                                 <IconsList individualNoteData={this.props.data} refreshing={this.handleRefresh} />
-                            </Card>
-                        }
-
-                    <Dialog
-                        open={this.state.open}
-                        onClose={this.handleClose}
-                    >
-                        <DialogNote dialogData={this.props.data} closeDialog={this.handleClose} refreshAfterEditing={this.handleRefresh} />
-                    </Dialog>
+                            </Card>}
+                            {/* </Draggable> */}
+                            
+                      
+                        <Dialog
+                            open={this.state.open}
+                            onClose={this.handleClose}
+                        >
+                            <DialogNote dialogData={this.props.data} closeDialog={this.handleClose} refreshAfterEditing={this.handleRefresh} />
+                        </Dialog>
                 </MuiThemeProvider>
             </div >
         )
