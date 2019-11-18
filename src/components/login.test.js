@@ -21,13 +21,25 @@ describe("checking component", () => {
 })
 
 describe('Login component', () => {
+    it('Checking number of constructors ', () => {
+        const wrapper = mount(<Login />);
+        expect(wrapper.find(Login)).to.have.lengthOf(1);
+    })
+    
     it('Checks the class U instances', () => {
         const wrapper = shallow(<Login />);
         expect(wrapper.find('.U')).to.have.lengthOf(3);
     })
-    it('Checking number of constructors ', () => {
-        const wrapper = mount(<Login />);
-        expect(wrapper.find(Login)).to.have.lengthOf(1);
+    
+    
+    it('Checks the class N instances', () => {
+        const wrapper = shallow(<Login />);
+        expect(wrapper.find('.N')).to.have.lengthOf(2);
+    })
+    
+    it('Checks the class F instances', () => {
+        const wrapper = shallow(<Login />);
+        expect(wrapper.find('.F')).to.have.lengthOf(3);
     })
     
     it('Existence of a CSS class',()=>{
