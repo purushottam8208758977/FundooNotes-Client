@@ -15,6 +15,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import DoneAll from 'react-ionicons/lib/MdCheckmark'
 import { searchInNotes, uploadImage } from '../services/services'
 import Grid from '@material-ui/core/Grid';
+import { askForPermissioToReceiveNotifications } from '../push-notifications'
 
 
 import Popper from '@material-ui/core/Popper';
@@ -489,7 +490,7 @@ export class Dashboard extends Component {
                         )}
                     </Popper>
 
-
+                    <div id="FIREBASE" onClick={askForPermissioToReceiveNotifications}>FIREBASE</div>            
                 </MuiThemeProvider></div >
         )
     }

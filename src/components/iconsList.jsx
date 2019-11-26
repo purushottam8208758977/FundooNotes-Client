@@ -25,7 +25,7 @@ const theme = createMuiTheme({
     overrides: {
         "MuiButton": {
             "root": {
-                minWidth: "55px"
+                minWidth: "0px"
             }
         }
     }
@@ -54,7 +54,8 @@ export class IconsList extends Component {
             labels: [],
             userReminderTime: "",
             userReminderDate: "",
-            reminderChildMenu:false
+            reminderChildMenu:false,
+            disabled:false
         }
         this.ColorPopover = React.createRef()
         this.classes = useStyles.bind(this);
@@ -201,6 +202,9 @@ export class IconsList extends Component {
     handleTime = (event) => {
         this.setState({ userReminderTime: event.target.value })
     }
+    activateInput=()=>{
+        this.setState({disabled: !this.state.disabled})
+    }
     render() {
         const { anchorEl } = this.state;
         this.mappingLabels = this.state.labels.map((data, index) => {
@@ -218,7 +222,11 @@ export class IconsList extends Component {
                         <Tooltip title="Reminder"><Button onClick={(event) => this.openReminderMenu(event)}><img src={require('../assets/reminder.svg')} alt="reminder pic"></img> </Button></Tooltip>
                         <Tooltip title="Change color"><Button onClick={(event) => this.openColorPallete(event)}><img src={require('../assets/pallete.svg')} alt="pallete pic"></img></Button></Tooltip>
                         <Tooltip title="Archive"><Button onClick={this.archiveTheNote}> <img src={require('../assets/archive.svg')} alt="archive pic "></img> </Button></Tooltip>
+                        <Tooltip title="Add image"><Button onClick={this.activateInput} > <img src={require('../assets/image.svg')} alt="add pic " /></Button></Tooltip>
                         <Tooltip title="More"><Button onClick={(event) => this.handleMenu(event)}><MoreVertIcon></MoreVertIcon></Button></Tooltip>
+                        <input id="hide" type="file" size="60" 
+                        disabled = {(this.state.disabled)? "disabled" : ""}
+                        />
                     </div>
                     {/* PARENT MENU */}
                     <Menu

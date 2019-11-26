@@ -33,11 +33,14 @@ margin-top :-2%
     justify-content: space-between;
     width: 100%;
 }
+#hide[type="file"]{
+    display:none
+}
 #Icons{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 86%;
+    justify-content: space-around;
+    width: 100%;
 }
 #Two{
     display: flex;
@@ -51,6 +54,13 @@ margin-top :-2%
     margin-top: 6%;
 
 }
+#FIREBASE{
+    font-family: Roboto, RobotoDraft, Arial, sans-serif;
+    font-size:12px;
+    position: absolute;
+    top:95%;
+    right:2%
+    }
 #ContentO{
     display: flex;
     flex-direction: column;
@@ -234,6 +244,8 @@ cursor: pointer;
     min-height: 100px;
     font-family:"Google Sans", Roboto, Arial, sans-serif;
     line-height: 24px;
+    /* z-index: 4001;
+    transition-delay: initial; */
 }
 #NoteDimensionsO{
     margin-left: 7%;
